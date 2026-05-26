@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>기초 영어 · Basic English for Korean Speakers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       SETUP MODAL — First Visit
+  ═══════════════════════════════════════════ -->
+  <div id="setup-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      
+      <h2 class="modal-title">기초 영어에<br>오신 것을 환영합니다</h2>
+      <p class="modal-subtitle">Welcome to Basic English for Korean Speakers</p>
+      <p class="modal-desc">
+        학습을 시작하기 전에 이름을 알려주세요.<br>
+        <em>Before we begin, please tell us your name.</em>
+      </p>
+      <div class="form-field">
+        <label for="name-input">이름 / Your Name</label>
+        <input type="text" id="name-input" placeholder="이름을 입력하세요..." maxlength="40" autocomplete="off">
+      </div>
+      <button class="btn-begin" id="begin-btn">시작하기 &nbsp;·&nbsp; Begin</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SITE HEADER
+  ═══════════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="header-lattice" aria-hidden="true"></div>
+    <div class="header-inner">
+      <div class="site-logo">
+        <div class="logo-glyph">文</div>
+        <div class="logo-words">
+          <span class="logo-ko">기초 영어</span>
+          <span class="logo-en">Basic English for Korean Speakers</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <span class="welcome-msg">
+          어서 오세요,&nbsp;<strong id="header-name">학생</strong>님
+        </span>
+        <div class="progress-badge" title="Weeks completed">
+          <span id="header-progress">0</span><span>/10</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════
+       HERO SECTION
+  ═══════════════════════════════════════════ -->
+  <section class="hero-section">
+    <div class="hero-deco" aria-hidden="true">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="hero-circle">
+        <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.3"/>
+        <circle cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.2"/>
+        <path d="M100 20 L100 180 M20 100 L180 100 M29 29 L171 171 M171 29 L29 171" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
+      </svg>
+    </div>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="hero-eyebrow">2025 여름 영어 과정 · Summer English Course</div>
+        <h1 class="hero-title">
+          영어의 첫걸음,<br>
+          <span>한 주씩 함께</span>
+        </h1>
+        <p class="hero-desc">
+          10주 동안 알파벳부터 실용 회화까지.<br>
+          <em>10 weeks — from alphabet to real conversation.</em>
+        </p>
+        <a href="#course-schedule" class="hero-cta">과정 보기 · View Schedule</a>
+      </div>
+      <div class="hero-numbers">
+        <div class="hero-stat">
+          <span class="stat-big">10</span>
+          <span class="stat-small">주 Weeks</span>
+        </div>
+        <div class="hero-divider" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="stat-big">50+</span>
+          <span class="stat-small">활동 Activities</span>
+        </div>
+        <div class="hero-divider" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="stat-big">300+</span>
+          <span class="stat-small">단어 Words</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       COURSE SCHEDULE
+  ═══════════════════════════════════════════ -->
+  <main class="course-main" id="course-schedule">
+    <div class="container">
+      <div class="section-head">
+        <h2>과정 일정 <span>· Course Schedule</span></h2>
+        <div class="overall-progress">
+          <div class="progress-track">
+            <div class="progress-fill" id="overall-bar" style="width:0%"></div>
+          </div>
+          <span id="overall-label">0% 완료 · Complete</span>
+        </div>
+      </div>
+      <div class="weeks-grid" id="weeks-grid">
+        <!-- Generated dynamically by app.js -->
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT THE COURSE
+  ═══════════════════════════════════════════ -->
+  <section class="about-section">
+    <div class="container">
+      <div class="section-head centered">
+        <h2>이 과정에 대해 <span>· About This Course</span></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-block">
+          <h3>학습 목표<br><em>Learning Goals</em></h3>
+          <p>기초 영어 회화 능력을 키워 일상 생활에서 자신 있게 영어를 사용할 수 있도록 합니다.</p>
+          <p class="about-en">Build foundational English communication skills for confident everyday use.</p>
+        </div>
+        <div class="about-block">
+          <h3>학습 방법<br><em>How We Learn</em></h3>
+          <p>실용적인 어휘, 게임, 대화 연습, 그리고 선생님과 함께하는 활동으로 자연스럽게 배웁니다.</p>
+          <p class="about-en">Games, dialogue, vocabulary, and teacher-guided activities for natural learning.</p>
+        </div>
+        <div class="about-block">
+          <h3>나만의 기록<br><em>Your Progress</em></h3>
+          <p>모든 연습 결과가 자동 저장되어 나의 성장 과정을 언제든 확인할 수 있습니다.</p>
+          <p class="about-en">All exercises save automatically so you can track your growth each week.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       MY PROGRESS PANEL
+  ═══════════════════════════════════════════ -->
+  <section class="my-progress-section">
+    <div class="container">
+      <div class="progress-card">
+        <div class="progress-card-left">
+          <h3>나의 학습 기록</h3>
+          <p><em>My Learning Record</em></p>
+          <p id="progress-student-name-display" class="progress-student-name"></p>
+        </div>
+        <div class="progress-flowers" id="progress-flowers">
+          <!-- Flowers rendered by JS for each week -->
+        </div>
+        <div class="progress-card-right">
+          <button class="btn-reset" id="reset-btn">기록 초기화 · Reset</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-lattice" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="footer-glyph">文</span>
+        <div>
+          <strong>기초 영어 · Basic English for Korean Speakers</strong>
+          <p>한국어를 모국어로 하는 성인 학습자를 위해 설계되었습니다.</p>
+          <p><em>Designed for Korean-speaking adult learners of English.</em></p>
+        </div>
+      </div>
+      <div class="footer-weeks">
+        <p>10주 과정 · 2025년 6월 — 8월</p>
+        <p><em>10-Week Course · June — August 2025</em></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

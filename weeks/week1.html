@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 1 — 소개 + 알파벳 + 발음 | 영어의 문</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<header class="week-page-header">
+  <div class="week-header-pattern" aria-hidden="true"></div>
+  <div class="week-header-inner">
+    <a href="../index.html" class="week-back-link">← 과정 목록으로 / Back to Course</a>
+    <div class="week-number-badge">Week 01 &nbsp;·&nbsp; 06월 01일</div>
+    <h1 class="week-page-title">소개 + 알파벳 + 발음</h1>
+    <p class="week-page-subtitle">Introductions + Alphabet + Phonics</p>
+    <div id="w1-student-name" style="color:rgba(255,255,255,0.6);font-size:0.88rem;margin-top:0.5rem;"></div>
+  </div>
+</header>
+
+<!-- TAB NAVIGATION -->
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchSection('alpha',this)">
+      <span class="tab-icon">🔤</span><span class="tab-ko">알파벳</span><span class="tab-en">Alphabet</span>
+    </button>
+    <button class="tab-btn" onclick="switchSection('phonics',this)">
+      <span class="tab-icon">🗣️</span><span class="tab-ko">발음</span><span class="tab-en">Phonics</span>
+    </button>
+    <button class="tab-btn" onclick="switchSection('vocab',this)">
+      <span class="tab-icon">💬</span><span class="tab-ko">인사말</span><span class="tab-en">Greetings</span>
+    </button>
+    <button class="tab-btn" onclick="switchSection('intro',this)">
+      <span class="tab-icon">✍️</span><span class="tab-ko">자기소개</span><span class="tab-en">About Me</span>
+    </button>
+    <button class="tab-btn" onclick="switchSection('game',this)">
+      <span class="tab-icon">🎮</span><span class="tab-ko">게임</span><span class="tab-en">Game</span>
+    </button>
+    <button class="tab-btn" onclick="switchSection('dialogue',this)">
+      <span class="tab-icon">🎭</span><span class="tab-ko">대화 연습</span><span class="tab-en">Dialogue</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══ SECTION A: ALPHABET ═══ -->
+<section class="lesson-section active" id="sec-alpha">
+  <div class="section-banner">
+    <span class="section-num">Section A</span>
+    <h2>영어 알파벳</h2>
+    <span class="section-sub">The English Alphabet — 26 글자</span>
+    <div class="section-tip">
+      각 글자를 클릭하면 발음을 들을 수 있어요! 두 번 클릭하면 ✓로 익힘 표시가 돼요.<br>
+      <em>Click a letter to hear it! Double-click to mark it as learned ✓.</em><br><br>
+      ⚠️ 주황색 테두리 = 한국어 학습자가 특히 주의해야 할 소리<br>
+      <em>⚠️ Gold border = sounds that need extra attention for Korean speakers (F, L, R, V)</em>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem;">
+      <h3>🔤 알파벳 탐험기 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Alphabet Explorer</span></h3>
+      <div class="progress-counter" id="alpha-progress-badge">0 / 26 익힘</div>
+    </div>
+    <div class="alphabet-grid" id="alphabet-grid"></div>
+    <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--mist);display:flex;gap:0.75rem;flex-wrap:wrap;">
+      <button class="btn-secondary" onclick="markAllLearned()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">✓ 모두 익힘 / Mark All</button>
+      <button class="btn-secondary" onclick="resetAlpha()" style="font-size:0.82rem;padding:0.5rem 1.25rem;color:var(--text-light);border-color:var(--stone);">↺ 초기화 / Reset</button>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <h3>📝 그룹별 연습 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Group Practice</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1rem;">
+      각 그룹을 소리 내어 읽고 공책에 써 보세요.<br>
+      <em>Say each group aloud and write them in your notebook — uppercase and lowercase both!</em>
+    </p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+      <div style="background:var(--paper-warm);border-radius:var(--radius-md);padding:1rem;border:1px solid var(--mist);">
+        <div style="font-size:0.7rem;font-weight:700;color:var(--cobalt);letter-spacing:0.1em;margin-bottom:0.5rem;">모음 VOWELS</div>
+        <div style="font-family:var(--font-serif);font-size:1.8rem;letter-spacing:0.15em;color:var(--cobalt-dark);">A E I O U</div>
+        <div style="font-size:0.75rem;color:var(--text-light);margin-top:4px;">에이 · 이 · 아이 · 오 · 유</div>
+      </div>
+      <div style="background:var(--paper-warm);border-radius:var(--radius-md);padding:1rem;border:1px solid var(--mist);">
+        <div style="font-size:0.7rem;font-weight:700;color:var(--crimson);letter-spacing:0.1em;margin-bottom:0.5rem;">주의 TRICKY SOUNDS</div>
+        <div style="font-family:var(--font-serif);font-size:1.8rem;letter-spacing:0.15em;color:var(--crimson);">F L R V</div>
+        <div style="font-size:0.75rem;color:var(--text-light);margin-top:4px;">에프 · 엘 · 알 · 브이</div>
+      </div>
+      <div style="background:var(--paper-warm);border-radius:var(--radius-md);padding:1rem;border:1px solid var(--mist);">
+        <div style="font-size:0.7rem;font-weight:700;color:var(--gold);letter-spacing:0.1em;margin-bottom:0.5rem;">자음 CONSONANTS</div>
+        <div style="font-family:var(--font-serif);font-size:1.3rem;letter-spacing:0.06em;color:var(--ink);">B C D G H J K M N P S T W</div>
+        <div style="font-size:0.72rem;color:var(--text-light);margin-top:4px;">비 씨 디 지 에이치 제이 케이...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION B: PHONICS ═══ -->
+<section class="lesson-section" id="sec-phonics">
+  <div class="section-banner">
+    <span class="section-num">Section B</span>
+    <h2>발음 연습</h2>
+    <span class="section-sub">Phonics — Sounds Unique to English</span>
+    <div class="section-tip">
+      클릭하면 단어 발음을 들을 수 있어요. 원어민의 발음을 잘 듣고 따라 해 보세요!<br>
+      <em>Click any word to hear it spoken. Listen carefully and try to mimic the pronunciation!</em>
+    </div>
+  </div>
+  <div class="phonics-section-grid" id="phonics-grid"></div>
+  <div class="exercise-card" style="margin-top:1.5rem;">
+    <h3>🎯 발음 챌린지 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Pronunciation Challenge</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1.25rem;">
+      선생님이 아래 단어 중 하나를 말해요. 올바른 것을 클릭하세요!<br>
+      <em>Your teacher says one of the words below. Click the correct spelling!</em>
+    </p>
+    <div id="challenge-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;"></div>
+  </div>
+</section>
+
+<!-- ═══ SECTION C: GREETINGS FLASHCARDS ═══ -->
+<section class="lesson-section" id="sec-vocab">
+  <div class="section-banner">
+    <span class="section-num">Section C</span>
+    <h2>인사말 카드</h2>
+    <span class="section-sub">Greeting Flashcards — 20 Essential Words</span>
+    <div class="section-tip">
+      카드를 클릭하면 뒤집어져요. ✓ 알아요를 누르면 다음 카드로 넘어가요!<br>
+      <em>Click the card to flip it. Press ✓ Know It to advance. Practice both directions!</em>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+    <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+      <span style="font-size:0.82rem;color:var(--text-light);">카드 모드:</span>
+      <button class="btn-card-action btn-flip" id="mode-en-ko" onclick="setCardMode('en-ko')" style="padding:0.4rem 1rem;font-size:0.8rem;border-color:var(--cobalt);color:var(--cobalt);">영→한 En→Ko</button>
+      <button class="btn-card-action btn-flip" id="mode-ko-en" onclick="setCardMode('ko-en')" style="padding:0.4rem 1rem;font-size:0.8rem;">한→영 Ko→En</button>
+    </div>
+    <div class="progress-counter" id="vocab-progress-badge">0 / 20 익힘</div>
+  </div>
+
+  <div class="flashcard-deck">
+    <div class="flashcard-container" id="flashcard" onclick="flipCard()">
+      <div class="flashcard-inner" id="flashcard-inner">
+        <div class="card-face card-front">
+          <span class="card-hint">클릭하면 뒤집어요 · Tap to flip</span>
+          <span class="card-main-text" id="card-front-text">Hello</span>
+          <span class="card-pron" id="card-pron-text">hel-OH</span>
+        </div>
+        <div class="card-face card-back">
+          <span class="card-hint">뜻 · Meaning</span>
+          <span class="card-main-text" id="card-back-text">안녕하세요</span>
+          <span class="card-example" id="card-example-text">"Hello! My name is Ji-ho."</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-nav">
+    <button class="btn-card-action btn-practice" onclick="markCard('practice')">↩ 더 연습 / Practice More</button>
+    <button class="btn-card-action btn-flip" onclick="prevCard()">← 이전</button>
+    <span class="card-counter" id="card-counter">1 / 20</span>
+    <button class="btn-card-action btn-flip" onclick="nextCard()">다음 →</button>
+    <button class="btn-card-action btn-know" onclick="markCard('know')">✓ 알아요! / Know It</button>
+  </div>
+  <div style="text-align:center;margin-top:1rem;">
+    <button class="btn-card-action btn-speak" onclick="speakCurrentCard()" style="padding:0.5rem 1.5rem;">🔊 발음 듣기 / Hear Pronunciation</button>
+  </div>
+
+  <div class="exercise-card" style="margin-top:2rem;">
+    <h3>📋 전체 단어 목록 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Full Vocabulary List</span></h3>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--cobalt);">
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">ENGLISH</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">한국어</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">발음</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">🔊</th>
+          </tr>
+        </thead>
+        <tbody id="vocab-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION D: INTRODUCTION BUILDER ═══ -->
+<section class="lesson-section" id="sec-intro">
+  <div class="section-banner">
+    <span class="section-num">Section D</span>
+    <h2>자기소개 만들기</h2>
+    <span class="section-sub">Introduction Builder — Tell Us About Yourself!</span>
+    <div class="section-tip">
+      아래 빈칸을 채워서 나만의 영어 자기소개를 완성하세요! 완성 후 소리 내어 읽어보세요.<br>
+      <em>Fill in the blanks to build your own English introduction! Then speak it aloud.</em>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;" class="intro-layout">
+    <div class="exercise-card">
+      <h3>✍️ 나에 대해 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">About Me</span></h3>
+      <div class="intro-form">
+        <div class="intro-field">
+          <label>이름 · My name is... <em>(영어 이름 or 한국 이름)</em></label>
+          <input type="text" id="intro-name" placeholder="e.g. Ji-ho, Min-jun, Sarah..." maxlength="30" oninput="updateIntroPreview()">
+        </div>
+        <div class="intro-field">
+          <label>도시 · I am from... <em>(출신 도시)</em></label>
+          <select id="intro-city" onchange="updateIntroPreview()">
+            <option value="">-- 선택 / Select city --</option>
+          </select>
+        </div>
+        <div class="intro-field">
+          <label>나이 · I am ___ years old <em>(나이)</em></label>
+          <input type="number" id="intro-age" placeholder="e.g. 35" min="18" max="99" oninput="updateIntroPreview()">
+        </div>
+        <div class="intro-field">
+          <label>직업 · I am a... <em>(직업)</em></label>
+          <select id="intro-job" onchange="updateIntroPreview()">
+            <option value="">-- 선택 / Select job --</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:0.78rem;font-weight:700;color:var(--cobalt-dark);letter-spacing:0.08em;margin-bottom:0.5rem;text-transform:uppercase;">👁️ 미리보기 / Preview</div>
+      <div class="intro-preview" id="intro-preview">
+        <span style="color:rgba(255,255,255,0.35);font-style:italic;font-size:0.95rem;">왼쪽 칸을 채우면 여기에 나타나요!<br><em>Fill in the form to see your introduction!</em></span>
+      </div>
+      <div class="intro-actions">
+        <button class="btn-primary" onclick="speakIntro()">🔊 내 소개 읽기 / Speak It</button>
+        <button class="btn-secondary" onclick="saveIntro()">💾 저장 / Save</button>
+      </div>
+      <div id="intro-saved-msg" style="display:none;margin-top:0.75rem;padding:0.75rem 1rem;background:rgba(126,179,168,0.12);border:1px solid var(--celadon);border-radius:var(--radius-md);font-size:0.85rem;color:var(--celadon);text-align:center;">
+        ✓ 저장되었습니다! / Saved!
+      </div>
+    </div>
+  </div>
+
+  <div class="exercise-card" style="margin-top:2rem;">
+    <h3>📖 자기소개 예시 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Sample Introductions — Read Aloud!</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1.25rem;">
+      🔊 을 눌러 예시 소개를 듣고 소리 내어 따라 말해보세요!<br>
+      <em>Press 🔊 to hear each example, then repeat it aloud.</em>
+    </p>
+    <div style="display:grid;gap:1rem;" id="sample-intros"></div>
+  </div>
+</section>
+
+<!-- ═══ SECTION E: MATCHING GAME ═══ -->
+<section class="lesson-section" id="sec-game">
+  <div class="section-banner">
+    <span class="section-num">Section E</span>
+    <h2>단어 맞추기 게임</h2>
+    <span class="section-sub">Word Matching Game — 단어 짝 찾기!</span>
+    <div class="section-tip">
+      영어 단어를 클릭하고, 맞는 한국어 뜻을 클릭하세요! 짝이 맞으면 사라져요.<br>
+      <em>Click an English word, then click its Korean meaning! Matched pairs disappear.</em>
+    </div>
+  </div>
+
+  <div class="match-score-bar">
+    <div class="match-score">
+      <span class="score-num" id="match-correct">0</span>
+      <span class="score-label">정답 / Correct</span>
+    </div>
+    <div style="width:1px;height:40px;background:var(--mist);"></div>
+    <div class="match-score">
+      <span class="score-num" id="match-wrong" style="color:var(--crimson);">0</span>
+      <span class="score-label">오답 / Wrong</span>
+    </div>
+    <div style="width:1px;height:40px;background:var(--mist);"></div>
+    <div class="match-score">
+      <span class="score-num" id="match-remaining">10</span>
+      <span class="score-label">남은 짝 / Left</span>
+    </div>
+    <button class="btn-secondary" onclick="initMatchGame()" style="margin-left:auto;font-size:0.82rem;padding:0.5rem 1.25rem;">🔄 다시 / New Game</button>
+  </div>
+
+  <div class="match-columns">
+    <div>
+      <div class="match-col-header">🇺🇸 ENGLISH</div>
+      <div id="match-col-en"></div>
+    </div>
+    <div>
+      <div class="match-col-header">🇰🇷 한국어</div>
+      <div id="match-col-ko"></div>
+    </div>
+  </div>
+
+  <div class="match-celebration" id="match-celebration">
+    <div style="font-size:3rem;margin-bottom:1rem;">🎉</div>
+    <h3>축하합니다! Congratulations!</h3>
+    <p style="color:var(--text-mid);margin:0.75rem 0;">
+      모든 짝을 찾았어요! 정말 잘 하셨습니다!<br>
+      <em>You matched all the pairs! Excellent work!</em>
+    </p>
+    <div style="font-family:var(--font-serif);font-size:1.1rem;color:var(--cobalt);margin:1rem 0;" id="match-final-score"></div>
+    <button class="btn-primary" onclick="initMatchGame()">🔄 다시 하기 / Play Again</button>
+  </div>
+</section>
+
+<!-- ═══ SECTION F: DIALOGUE LAB ═══ -->
+<section class="lesson-section" id="sec-dialogue">
+  <div class="section-banner">
+    <span class="section-num">Section F</span>
+    <h2>대화 연습</h2>
+    <span class="section-sub">Dialogue Practice Lab — with Teacher</span>
+    <div class="section-tip">
+      선생님과 함께 또는 짝과 함께 대화를 연습해요! 역할을 바꿔가며 반복 연습하세요.<br>
+      <em>Practice with your teacher or a partner! Switch roles for extra practice.</em>
+    </div>
+  </div>
+
+  <div style="margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+    <div class="teacher-badge">👩‍🏫 선생님 감독 구역 · Teacher Supervised</div>
+  </div>
+
+  <div id="dialogue-cards-container"></div>
+
+  <div class="exercise-card" style="margin-top:1.5rem;">
+    <h3>🎲 역할극 활동 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Role-Play Activities</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1.25rem;">
+      선생님이 활동을 선택하고 학생들이 앞에 나와 연습합니다.<br>
+      <em>Teacher selects one activity. Students come forward to practice.</em>
+    </p>
+    <div style="display:grid;gap:0.875rem;">
+      <div style="background:var(--paper-warm);border-radius:var(--radius-md);padding:1rem;border-left:4px solid var(--cobalt);display:flex;gap:0.75rem;">
+        <span style="font-size:1.5rem;">🎤</span>
+        <div>
+          <strong style="color:var(--ink);display:block;margin-bottom:3px;">활동 1: 클래스 인사하기 / Class Greetings</strong>
+          <p style="font-size:0.85rem;color:var(--text-mid);">학생들이 돌아가며 "Hello! My name is ____. Nice to meet you!"라고 말해요.</p>
+          <p style="font-size:0.8rem;color:var(--text-light);">Students take turns: "Hello! My name is ____. Nice to meet you!"</p>
+        </div>
+      </div>
+      <div style="background:var(--paper-warm);border-radius:var(--radius-md);padding:1rem;border-left:4px solid var(--gold);display:flex;gap:0.75rem;">
+        <span style="font-size:1.5rem;">🤝</span>
+        <div>
+          <strong style="color:var(--ink);display:block;margin-bottom:3px;">활동 2: 짝 인터뷰 / Partner Interview</strong>
+          <p style="font-size:0.85rem;color:var(--text-mid);">짝에게 묻고 답해요: "What is your name? Where are you from? How are you?"</p>
+          <p style="font-size:0.8rem;color:var(--text-light);">Ask and answer: "What is your name? Where are you from? How are you?"</p>
+        </div>
+      </div>
+      <div style="background:var(--paper-warm);border-radius:var(--radius-md);padding:1rem;border-left:4px solid var(--celadon);display:flex;gap:0.75rem;">
+        <span style="font-size:1.5rem;">🎵</span>
+        <div>
+          <strong style="color:var(--ink);display:block;margin-bottom:3px;">활동 3: 알파벳 노래 / Alphabet Song</strong>
+          <p style="font-size:0.85rem;color:var(--text-mid);">선생님을 따라 알파벳 노래를 불러요! 가나다라 노래 리듬이랑 비슷해요!</p>
+          <p style="font-size:0.8rem;color:var(--text-light);">Sing the alphabet song with your teacher! (Similar rhythm to 가나다라!)</p>
+        </div>
+      </div>
+      <div style="background:var(--paper-warm);border-radius:var(--radius-md);padding:1rem;border-left:4px solid var(--crimson);display:flex;gap:0.75rem;">
+        <span style="font-size:1.5rem;">🃏</span>
+        <div>
+          <strong style="color:var(--ink);display:block;margin-bottom:3px;">활동 4: 인사 빙고 / Greeting Bingo</strong>
+          <p style="font-size:0.85rem;color:var(--text-mid);">3×3 빙고 카드에 오늘 배운 단어를 적고, 선생님이 한국어로 말하면 영어를 찾아 지워요!</p>
+          <p style="font-size:0.8rem;color:var(--text-light);">Fill a 3×3 bingo grid with today's words. Teacher says Korean — you cross off the English!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercise-card" style="margin-top:1.5rem;">
+    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
+      <span style="font-size:1.25rem;">📝</span>
+      <h3 style="margin:0;">선생님 관찰 메모 <em style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Teacher Notes</em></h3>
+    </div>
+    <p style="font-size:0.85rem;color:var(--text-mid);margin-bottom:0.75rem;">
+      오늘 잘한 학생, 발음 주의 사항, 다음 수업을 위한 메모를 남기세요.<br>
+      <em>Note students who excelled, pronunciation issues, and reminders for next class.</em>
+    </p>
+    <textarea class="teacher-notes-area" id="teacher-notes" placeholder="오늘 수업 메모... / Today's class notes..." rows="5"></textarea>
+    <div style="margin-top:0.75rem;display:flex;gap:0.75rem;align-items:center;">
+      <button class="btn-secondary" onclick="saveTeacherNotes()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">💾 저장 / Save Notes</button>
+      <span id="notes-saved-msg" style="display:none;font-size:0.8rem;color:var(--celadon);">✓ 저장됨 / Saved</span>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLETE WEEK BANNER -->
+<div class="complete-week-bar">
+  <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:1rem;">
+    오늘 수업이 모두 끝났나요? 완료 버튼을 눌러 Week 1을 기록하세요!<br>
+    <em>Finished everything for today? Mark Week 1 as complete!</em>
+  </p>
+  <button class="btn-complete-week" onclick="completeWeek1()">🌸 Week 1 완료! / Mark Complete</button>
+  <div id="completion-msg" style="display:none;margin-top:1rem;font-family:var(--font-serif);font-size:1.1rem;color:var(--cobalt);">
+    🎉 훌륭합니다! Week 1을 완료했어요!<br>
+    <a href="../index.html" style="color:var(--cobalt);font-size:0.88rem;">← 홈으로 / Back to Home</a>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script>
+'use strict';
+
+// ─── State ───────────────────────────────────────
+let alphaLearned     = new Set();
+let cardIndex        = 0;
+let cardMode         = 'en-ko';
+let cardFlipped      = false;
+let cardKnown        = new Set();
+let matchSelected    = null;
+let matchCorrect     = 0;
+let matchWrong       = 0;
+let phonicsPracticed = new Set();
+
+// ─── Boot ────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    StudentDB.load();
+    const name = StudentDB.get('name');
+    const el = document.getElementById('w1-student-name');
+    if (el && name) el.textContent = '학생: ' + name + '  ·  Student: ' + name;
+    restoreState();
+  } catch(e) {}
+
+  buildAlphabetGrid();
+  buildPhonicsSection();
+  buildVocabTable();
+  buildIntroForm();
+  buildSampleIntros();
+  buildDialogueCards();
+  initMatchGame();
+  updateCard();
+});
+
+// ─── Tab Navigation ──────────────────────────────
+function switchSection(id, btn) {
+  document.querySelectorAll('.lesson-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  var sec = document.getElementById('sec-' + id);
+  if (sec) sec.classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── ALPHABET ────────────────────────────────────
+function buildAlphabetGrid() {
+  var grid = document.getElementById('alphabet-grid');
+  if (!grid || !COURSE_DATA.week1.alphabet) return;
+  grid.innerHTML = '';
+  COURSE_DATA.week1.alphabet.forEach(function(letter, i) {
+    var tile = document.createElement('div');
+    tile.className = 'alpha-tile' + (letter.tricky ? ' tricky' : '') + (alphaLearned.has(i) ? ' learned' : '');
+    tile.dataset.idx = i;
+    tile.dataset.lastClick = '0';
+    tile.innerHTML =
+      '<span class="alpha-check">✓</span>' +
+      (letter.tricky ? '<span class="alpha-tricky-badge">⚠️</span>' : '') +
+      '<span class="alpha-upper">' + letter.upper + '</span>' +
+      '<span class="alpha-lower">' + letter.lower + '</span>' +
+      '<span class="alpha-name">' + letter.name + '</span>' +
+      '<span class="alpha-example">' + letter.example + '<br><small style="color:var(--text-light)">' + letter.exKo + '</small></span>';
+    tile.addEventListener('click', function() { clickAlphaTile(tile, letter, i); });
+    grid.appendChild(tile);
+  });
+  updateAlphaProgress();
+}
+
+function clickAlphaTile(tile, letter, idx) {
+  Speaker.speakLetter(letter.name + '... ' + letter.example, null);
+  tile.classList.add('speaking');
+  setTimeout(function() { tile.classList.remove('speaking'); }, 700);
+  var now = Date.now();
+  if (now - parseInt(tile.dataset.lastClick) < 450) {
+    toggleAlphaLearned(tile, idx);
+  }
+  tile.dataset.lastClick = now;
+}
+
+function toggleAlphaLearned(tile, idx) {
+  if (alphaLearned.has(idx)) { alphaLearned.delete(idx); tile.classList.remove('learned'); }
+  else { alphaLearned.add(idx); tile.classList.add('learned'); }
+  updateAlphaProgress();
+  saveAlphaState();
+}
+
+function updateAlphaProgress() {
+  var b = document.getElementById('alpha-progress-badge');
+  if (b) b.textContent = alphaLearned.size + ' / 26 익힘';
+}
+
+function markAllLearned() {
+  COURSE_DATA.week1.alphabet.forEach(function(_, i) { alphaLearned.add(i); });
+  document.querySelectorAll('.alpha-tile').forEach(function(t) { t.classList.add('learned'); });
+  updateAlphaProgress(); saveAlphaState();
+}
+
+function resetAlpha() {
+  alphaLearned.clear();
+  document.querySelectorAll('.alpha-tile').forEach(function(t) { t.classList.remove('learned'); });
+  updateAlphaProgress(); saveAlphaState();
+}
+
+function saveAlphaState() {
+  try { StudentDB.saveExercise(1, 'alphabet', { learned: Array.from(alphaLearned), count: alphaLearned.size }); } catch(e) {}
+}
+
+// ─── PHONICS ─────────────────────────────────────
+function buildPhonicsSection() {
+  var grid = document.getElementById('phonics-grid');
+  var challengeGrid = document.getElementById('challenge-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  COURSE_DATA.week1.phonics.forEach(function(section) {
+    var pairsHtml = section.pairs.map(function(p) {
+      var safeWord = p.word.replace(/'/g,"");
+      return '<div class="phonics-pair-row">' +
+        '<button class="word-btn real-word" onclick="handlePhonicsWord(\'' + safeWord + '\',\'' + section.id + '\',this)">' +
+        '<span class="speak-icon">🔊</span> ' + p.word + '</button>' +
+        '<span class="pair-tip">' + p.ko + '</span></div>';
+    }).join('');
+
+    var card = document.createElement('div');
+    card.className = 'phonics-card';
+    card.innerHTML =
+      '<div class="phonics-card-header"><h3>' + section.title + '</h3>' +
+      '<div class="ph-sub">' + section.titleEn + '</div></div>' +
+      '<div class="phonics-tip-box">' + section.tipKo + '<em>' + section.tipEn + '</em></div>' +
+      '<div class="phonics-pairs">' + pairsHtml + '</div>';
+    grid.appendChild(card);
+  });
+
+  if (!challengeGrid) return;
+  var challenges = [
+    { prompt:'물고기',  options:['fish','pish'],   answer:'fish'  },
+    { prompt:'매우',    options:['berry','very'],  answer:'very'  },
+    { prompt:'쌀',     options:['lice','rice'],   answer:'rice'  },
+    { prompt:'이것',   options:['dis','this'],    answer:'this'  },
+    { prompt:'사랑',   options:['love','rove'],   answer:'love'  },
+    { prompt:'감사',   options:['tank','thank'],  answer:'thank' }
+  ];
+  challengeGrid.innerHTML = '';
+  challenges.forEach(function(ch, ci) {
+    var card = document.createElement('div');
+    card.className = 'exercise-card';
+    card.style.padding = '1rem';
+    var optBtns = ch.options.map(function(opt) {
+      return '<button class="word-btn" onclick="checkChallenge(this,\'' + ch.answer + '\',\'' + opt + '\')" style="flex:1;justify-content:center;">' + opt + '</button>';
+    }).join('');
+    card.innerHTML =
+      '<div style="font-size:0.72rem;font-weight:700;color:var(--text-light);letter-spacing:0.08em;margin-bottom:0.5rem;">문제 ' + (ci+1) + '</div>' +
+      '<div style="font-size:1.25rem;font-weight:700;color:var(--ink);margin-bottom:0.75rem;">' + ch.prompt + '</div>' +
+      '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;">' + optBtns + '</div>' +
+      '<div class="ch-result" style="display:none;margin-top:0.5rem;font-size:0.82rem;font-weight:700;"></div>';
+    challengeGrid.appendChild(card);
+  });
+}
+
+function handlePhonicsWord(word, sectionId, btn) {
+  Speaker.speakWord(word, btn);
+  phonicsPracticed.add(sectionId + '_' + word);
+  try { StudentDB.saveExercise(1, 'phonics', { practiced: Array.from(phonicsPracticed) }); } catch(e) {}
+}
+
+function checkChallenge(btn, correct, chosen) {
+  var container = btn.parentElement;
+  var resultEl  = container.nextElementSibling;
+  container.querySelectorAll('.word-btn').forEach(function(b) { b.disabled = true; });
+  if (chosen === correct) {
+    btn.style.borderColor = 'var(--celadon)'; btn.style.color = 'var(--celadon)';
+    if (resultEl) { resultEl.textContent = '✓ 정답! / Correct!'; resultEl.style.color = 'var(--celadon)'; resultEl.style.display = 'block'; }
+    Speaker.speakWord(correct);
+  } else {
+    btn.style.borderColor = 'var(--crimson)'; btn.style.color = 'var(--crimson)';
+    container.querySelectorAll('.word-btn').forEach(function(b) {
+      if (b.textContent.trim() === correct) { b.style.borderColor = 'var(--celadon)'; b.style.color = 'var(--celadon)'; }
+    });
+    if (resultEl) { resultEl.textContent = '✗ 정답: ' + correct + ' / Answer: ' + correct; resultEl.style.color = 'var(--crimson)'; resultEl.style.display = 'block'; }
+  }
+}
+
+// ─── FLASHCARDS ──────────────────────────────────
+function buildVocabTable() {
+  var tbody = document.getElementById('vocab-table-body');
+  if (!tbody) return;
+  COURSE_DATA.week1.vocabulary.forEach(function(word) {
+    var safeEn = word.en.replace(/'/g,'');
+    var tr = document.createElement('tr');
+    tr.style.borderBottom = '1px solid var(--mist)';
+    tr.innerHTML =
+      '<td style="padding:0.55rem 0.75rem;font-weight:600;color:var(--ink);">' + word.en + '</td>' +
+      '<td style="padding:0.55rem 0.75rem;color:var(--text-mid);">' + word.ko + '</td>' +
+      '<td style="padding:0.55rem 0.75rem;color:var(--cobalt-light);font-style:italic;font-size:0.85em;">' + word.pron + '</td>' +
+      '<td style="padding:0.55rem 0.75rem;"><button onclick="Speaker.speakWord(\'' + safeEn + '\',this)" style="border:1px solid var(--mist);background:none;border-radius:100px;padding:3px 10px;cursor:pointer;font-size:0.8rem;color:var(--cobalt);">🔊</button></td>';
+    tbody.appendChild(tr);
+  });
+}
+
+function setCardMode(mode) {
+  cardMode = mode; cardFlipped = false;
+  var fc = document.getElementById('flashcard');
+  if (fc) fc.classList.remove('flipped');
+  updateCard();
+}
+
+function updateCard() {
+  var vocab = COURSE_DATA.week1.vocabulary;
+  if (!vocab || !vocab.length) return;
+  var word = vocab[cardIndex];
+  var ft = document.getElementById('card-front-text');
+  var pt = document.getElementById('card-pron-text');
+  var bt = document.getElementById('card-back-text');
+  var et = document.getElementById('card-example-text');
+  var ct = document.getElementById('card-counter');
+  var pb = document.getElementById('vocab-progress-badge');
+  if (cardMode === 'en-ko') {
+    if (ft) ft.textContent = word.en;
+    if (pt) pt.textContent = word.pron;
+    if (bt) bt.textContent = word.ko;
+  } else {
+    if (ft) ft.textContent = word.ko;
+    if (pt) pt.textContent = '';
+    if (bt) bt.textContent = word.en;
+  }
+  if (et) et.textContent = '"' + word.example + '"';
+  if (ct) ct.textContent = (cardIndex + 1) + ' / ' + vocab.length;
+  if (pb) pb.textContent = cardKnown.size + ' / ' + vocab.length + ' 익힘';
+}
+
+function flipCard() {
+  cardFlipped = !cardFlipped;
+  var fc = document.getElementById('flashcard');
+  if (fc) fc.classList.toggle('flipped', cardFlipped);
+}
+
+function nextCard() {
+  cardFlipped = false;
+  var fc = document.getElementById('flashcard');
+  if (fc) fc.classList.remove('flipped');
+  cardIndex = (cardIndex + 1) % COURSE_DATA.week1.vocabulary.length;
+  updateCard();
+}
+
+function prevCard() {
+  cardFlipped = false;
+  var fc = document.getElementById('flashcard');
+  if (fc) fc.classList.remove('flipped');
+  var len = COURSE_DATA.week1.vocabulary.length;
+  cardIndex = (cardIndex - 1 + len) % len;
+  updateCard();
+}
+
+function markCard(status) {
+  if (status === 'know') {
+    cardKnown.add(cardIndex);
+    try { StudentDB.saveExercise(1, 'flashcards', { known: Array.from(cardKnown), total: COURSE_DATA.week1.vocabulary.length }); } catch(e) {}
+  }
+  nextCard();
+}
+
+function speakCurrentCard() {
+  var word = COURSE_DATA.week1.vocabulary[cardIndex];
+  if (word) Speaker.speakWord(word.en);
+}
+
+// ─── INTRODUCTION BUILDER ────────────────────────
+function buildIntroForm() {
+  var citySelect = document.getElementById('intro-city');
+  var jobSelect  = document.getElementById('intro-job');
+  if (!citySelect || !jobSelect) return;
+  var intro = COURSE_DATA.week1.intro;
+  intro.cities.forEach(function(c) {
+    var opt = document.createElement('option');
+    opt.value = c; opt.textContent = c; citySelect.appendChild(opt);
+  });
+  intro.jobs.forEach(function(j) {
+    var opt = document.createElement('option');
+    opt.value = j; opt.textContent = j; jobSelect.appendChild(opt);
+  });
+  try {
+    var saved = StudentDB.getExercise(1, 'intro');
+    if (saved) {
+      if (saved.name) document.getElementById('intro-name').value = saved.name;
+      if (saved.city) document.getElementById('intro-city').value = saved.city;
+      if (saved.age)  document.getElementById('intro-age').value  = saved.age;
+      if (saved.job)  document.getElementById('intro-job').value  = saved.job;
+      updateIntroPreview();
+    }
+  } catch(e) {}
+}
+
+function updateIntroPreview() {
+  var name = (document.getElementById('intro-name') || {}).value || '';
+  var city = (document.getElementById('intro-city') || {}).value || '';
+  var age  = (document.getElementById('intro-age')  || {}).value || '';
+  var job  = (document.getElementById('intro-job')  || {}).value || '';
+  var preview = document.getElementById('intro-preview');
+  if (!preview) return;
+  name = name.trim(); age = age.trim();
+  if (!name && !city && !age && !job) {
+    preview.innerHTML = '<span style="color:rgba(255,255,255,0.35);font-style:italic;">왼쪽 칸을 채우면 여기에 나타나요!</span>';
+    return;
+  }
+  function span(v) {
+    return v ? '<em>' + v + '</em>' : '<em style="color:rgba(255,255,255,0.3);border-bottom:1px dashed rgba(255,255,255,0.3);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</em>';
+  }
+  preview.innerHTML =
+    'Hello! My name is ' + span(name) + '.<br>' +
+    'I am from ' + span(city) + ', Korea.<br>' +
+    'I am ' + span(age) + ' years old.<br>' +
+    'I am a ' + span(job) + '.<br>' +
+    'Nice to meet you!';
+}
+
+function buildIntroText() {
+  var name = ((document.getElementById('intro-name') || {}).value || 'a student').trim();
+  var city = (document.getElementById('intro-city') || {}).value || 'Korea';
+  var age  = ((document.getElementById('intro-age')  || {}).value || '').trim() || 'unknown';
+  var job  = (document.getElementById('intro-job')  || {}).value || 'a learner';
+  return 'Hello! My name is ' + name + '. I am from ' + city + ', Korea. I am ' + age + ' years old. I am a ' + job + '. Nice to meet you!';
+}
+
+function speakIntro() { Speaker.speakText(buildIntroText()); }
+
+function saveIntro() {
+  var name = ((document.getElementById('intro-name') || {}).value || '').trim();
+  var city = (document.getElementById('intro-city') || {}).value || '';
+  var age  = ((document.getElementById('intro-age')  || {}).value || '').trim();
+  var job  = (document.getElementById('intro-job')  || {}).value || '';
+  try { StudentDB.saveExercise(1, 'intro', { name: name, city: city, age: age, job: job, text: buildIntroText() }); } catch(e) {}
+  var msg = document.getElementById('intro-saved-msg');
+  if (msg) { msg.style.display = 'block'; setTimeout(function() { msg.style.display = 'none'; }, 3000); }
+}
+
+function buildSampleIntros() {
+  var container = document.getElementById('sample-intros');
+  if (!container) return;
+  var samples = [
+    { emoji:'👩‍💼', name:'Ji-young', age:'thirty-eight', city:'Seoul',  job:'teacher', ko:'서울 · 38세 · 선생님' },
+    { emoji:'👨‍🍳', name:'Min-su',   age:'forty-five',  city:'Busan',  job:'chef',    ko:'부산 · 45세 · 요리사' },
+    { emoji:'👩‍⚕️', name:'Soo-jin', age:'thirty-two',  city:'Daegu',  job:'nurse',   ko:'대구 · 32세 · 간호사' }
+  ];
+  samples.forEach(function(s) {
+    var text = 'Hello! My name is ' + s.name + '. I am from ' + s.city + ', Korea. I am ' + s.age + ' years old. I am a ' + s.job + '. Nice to meet you!';
+    var safeText = text.replace(/'/g,'');
+    var div = document.createElement('div');
+    div.style.cssText = 'background:var(--paper-warm);border-radius:var(--radius-md);padding:1.25rem;border:1px solid var(--mist);';
+    div.innerHTML =
+      '<div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">' +
+      '<span style="font-size:1.8rem;">' + s.emoji + '</span>' +
+      '<div><strong style="color:var(--ink);">' + s.name + '</strong>' +
+      '<span style="font-size:0.75rem;color:var(--text-light);display:block;">' + s.ko + '</span></div>' +
+      '<button onclick="Speaker.speakText(\'' + safeText + '\')" class="btn-card-action btn-speak" style="margin-left:auto;padding:0.4rem 0.9rem;font-size:0.78rem;">🔊</button></div>' +
+      '<p style="font-family:var(--font-serif);font-size:1rem;line-height:2.1;color:var(--ink);">' +
+      'Hello! My name is <strong>' + s.name + '</strong>.<br>' +
+      'I am from <strong>' + s.city + '</strong>, Korea.<br>' +
+      'I am <strong>' + s.age + '</strong> years old.<br>' +
+      'I am a <strong>' + s.job + '</strong>.<br>' +
+      'Nice to meet you!</p>';
+    container.appendChild(div);
+  });
+}
+
+// ─── MATCHING GAME ───────────────────────────────
+function shuffle(arr) {
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+  return arr;
+}
+
+function initMatchGame() {
+  matchSelected = null; matchCorrect = 0; matchWrong = 0;
+  var pairs = COURSE_DATA.week1.matchPairs;
+  var data = pairs.map(function(p, i) { return { en: p.en, ko: p.ko, id: i }; });
+  var enList = shuffle(data.slice());
+  var koList = shuffle(data.slice());
+
+  document.getElementById('match-correct').textContent   = '0';
+  document.getElementById('match-wrong').textContent     = '0';
+  document.getElementById('match-remaining').textContent = pairs.length;
+  document.getElementById('match-celebration').classList.remove('show');
+
+  var enCol = document.getElementById('match-col-en');
+  var koCol = document.getElementById('match-col-ko');
+  if (!enCol || !koCol) return;
+  enCol.innerHTML = ''; koCol.innerHTML = '';
+
+  enList.forEach(function(item) {
+    var btn = document.createElement('button');
+    btn.className = 'match-word-btn';
+    btn.textContent = item.en;
+    btn.dataset.id = item.id; btn.dataset.type = 'en';
+    btn.onclick = function() { handleMatchClick(btn, 'en'); };
+    enCol.appendChild(btn);
+  });
+  koList.forEach(function(item) {
+    var btn = document.createElement('button');
+    btn.className = 'match-word-btn';
+    btn.textContent = item.ko;
+    btn.dataset.id = item.id; btn.dataset.type = 'ko';
+    btn.onclick = function() { handleMatchClick(btn, 'ko'); };
+    koCol.appendChild(btn);
+  });
+}
+
+function handleMatchClick(btn, type) {
+  if (btn.classList.contains('matched') || btn.disabled) return;
+
+  if (!matchSelected) {
+    document.querySelectorAll('.match-word-btn.selected').forEach(function(b) { b.classList.remove('selected'); });
+    btn.classList.add('selected');
+    matchSelected = btn;
+    return;
+  }
+  if (matchSelected === btn) { btn.classList.remove('selected'); matchSelected = null; return; }
+  if (matchSelected.dataset.type === type) {
+    matchSelected.classList.remove('selected');
+    btn.classList.add('selected');
+    matchSelected = btn;
+    return;
+  }
+
+  var isMatch = matchSelected.dataset.id === btn.dataset.id;
+  if (isMatch) {
+    matchCorrect++;
+    [matchSelected, btn].forEach(function(b) {
+      b.classList.remove('selected'); b.classList.add('matched'); b.disabled = true;
+    });
+    var word = COURSE_DATA.week1.matchPairs[parseInt(btn.dataset.id)];
+    if (word) Speaker.speakWord(word.en);
+    var remaining = document.querySelectorAll('.match-word-btn:not(.matched)').length / 2;
+    document.getElementById('match-remaining').textContent = Math.round(remaining);
+    if (matchCorrect >= COURSE_DATA.week1.matchPairs.length) setTimeout(showMatchCelebration, 500);
+  } else {
+    matchWrong++;
+    var ms = matchSelected; var bn = btn;
+    [ms, bn].forEach(function(b) {
+      b.classList.remove('selected'); b.classList.add('wrong');
+      setTimeout(function() { b.classList.remove('wrong'); }, 500);
+    });
+  }
+  matchSelected = null;
+  document.getElementById('match-correct').textContent = matchCorrect;
+  document.getElementById('match-wrong').textContent   = matchWrong;
+  try { StudentDB.saveExercise(1, 'matching', { correct: matchCorrect, wrong: matchWrong }); } catch(e) {}
+}
+
+function showMatchCelebration() {
+  var cel = document.getElementById('match-celebration');
+  var scoreEl = document.getElementById('match-final-score');
+  if (cel) cel.classList.add('show');
+  if (scoreEl) scoreEl.textContent = '정답: ' + matchCorrect + '개  ·  오답: ' + matchWrong + '개';
+  Speaker.speakText('Congratulations! Excellent work!');
+}
+
+// ─── DIALOGUE LAB ─────────────────────────────────
+function buildDialogueCards() {
+  var container = document.getElementById('dialogue-cards-container');
+  if (!container || !COURSE_DATA.week1.dialogues) return;
+  container.innerHTML = '';
+
+  COURSE_DATA.week1.dialogues.forEach(function(dlg) {
+    var allLines = dlg.lines.map(function(l) { return l.en; }).join('. ');
+    var safeAll  = allLines.replace(/'/g,'');
+    var linesHtml = dlg.lines.map(function(line) {
+      var isStudent = (line.speaker === 'B' || line.speaker === 'S');
+      return '<div class="dialogue-line">' +
+        '<span class="dl-speaker" style="color:' + (isStudent ? 'var(--cobalt)' : 'var(--crimson)') + ';">' + line.speaker + '</span>' +
+        '<div class="dl-bubble' + (isStudent ? ' b-student' : '') + '">' +
+        '<span class="dl-text">' + line.en + '</span>' +
+        '<span class="dl-ko">' + line.ko + '</span></div></div>';
+    }).join('');
+
+    var card = document.createElement('div');
+    card.className = 'dialogue-scenario';
+    card.innerHTML =
+      '<div class="scenario-header">' +
+      '<span class="scenario-icon">' + dlg.icon + '</span>' +
+      '<div><span class="scenario-title">' + dlg.titleKo + '</span>' +
+      '<span class="scenario-sub">' + dlg.titleEn + '</span></div>' +
+      '<button onclick="Speaker.speakText(\'' + safeAll + '\')" class="btn-card-action btn-speak" style="margin-left:auto;padding:0.4rem 1rem;font-size:0.8rem;">🔊 전체 듣기</button>' +
+      '</div>' +
+      '<div class="dialogue-lines">' + linesHtml + '</div>' +
+      '<div style="background:rgba(43,93,160,0.06);border-radius:var(--radius-md);padding:0.875rem;font-size:0.82rem;color:var(--text-mid);">' +
+      '💡 <strong>연습 팁:</strong> 역할을 바꾸며 반복 연습하세요! 빈칸(_____)에 여러분의 정보를 넣어 보세요!<br>' +
+      '<em>Switch roles each round! Fill any blanks (_____) with your own details.</em></div>';
+    container.appendChild(card);
+  });
+}
+
+// ─── TEACHER NOTES ────────────────────────────────
+function saveTeacherNotes() {
+  var notes = (document.getElementById('teacher-notes') || {}).value || '';
+  try { StudentDB.saveExercise(1, 'teacher_notes', { notes: notes }); } catch(e) {}
+  var msg = document.getElementById('notes-saved-msg');
+  if (msg) { msg.style.display = 'inline'; setTimeout(function() { msg.style.display = 'none'; }, 2500); }
+}
+
+// ─── COMPLETE WEEK ────────────────────────────────
+function completeWeek1() {
+  try { StudentDB.completeWeek(1); } catch(e) {}
+  var btn = document.querySelector('.btn-complete-week');
+  var msg = document.getElementById('completion-msg');
+  if (btn) btn.style.display = 'none';
+  if (msg) msg.style.display = 'block';
+  Speaker.speakText('Congratulations! You completed Week 1. Excellent work!');
+}
+
+// ─── RESTORE STATE ────────────────────────────────
+function restoreState() {
+  try {
+    var alphaSaved = StudentDB.getExercise(1, 'alphabet');
+    if (alphaSaved && alphaSaved.learned) alphaSaved.learned.forEach(function(i) { alphaLearned.add(i); });
+    var fcSaved = StudentDB.getExercise(1, 'flashcards');
+    if (fcSaved && fcSaved.known) fcSaved.known.forEach(function(i) { cardKnown.add(i); });
+    var notesSaved = StudentDB.getExercise(1, 'teacher_notes');
+    if (notesSaved && notesSaved.notes) {
+      var ta = document.getElementById('teacher-notes');
+      if (ta) ta.value = notesSaved.notes;
+    }
+  } catch(e) {}
+}
+</script>
+</body>
+</html>

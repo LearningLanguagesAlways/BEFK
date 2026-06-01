@@ -20,7 +20,7 @@ const COURSE_DATA = {
       titleKo: "복습 + 문장 구조 + 대명사 + 어휘",
       titleEn: "Review + Sentence Structure + Pronouns + Vocab",
       topics: ["복습", "문장 구조", "대명사"],
-      file: "weeks/week2.html", active: false
+      file: "weeks/week2.html", active: true
     },
     {
       number: 3, date: "06/15",
@@ -306,6 +306,127 @@ const COURSE_DATA = {
       { en:"how",       ko:"어떻게",    pron:"HOW",         example:"How are you today?",                    exKo:"오늘 어떻게 지내세요?" }
     ]
 
+
   } // end week1
+
+  /* ═══════════════════════════════════════════════
+     WEEK 2 — Review + Sentence Structure + Pronouns + Vocab
+     Scope: Intermediate learner
+  ═══════════════════════════════════════════════ */
+  ,week2: {
+
+    vocabulary: [
+      { en:"sentence",  ko:"문장",            example:"Please write a complete sentence.",          exKo:"완전한 문장을 써 주세요." },
+      { en:"subject",   ko:"주어",            example:"Every English sentence needs a subject.",    exKo:"영어 문장에는 항상 주어가 필요해요." },
+      { en:"verb",      ko:"동사",            example:"'Work' and 'study' are verbs.",              exKo:"'일하다'와 '공부하다'는 동사예요." },
+      { en:"object",    ko:"목적어",          example:"In 'I like coffee,' coffee is the object.",  exKo:"'I like coffee'에서 coffee가 목적어예요." },
+      { en:"pronoun",   ko:"대명사",          example:"He, she, and they are pronouns.",            exKo:"He, she, they는 대명사예요." },
+      { en:"always",    ko:"항상",            example:"I always drink coffee in the morning.",      exKo:"저는 항상 아침에 커피를 마셔요." },
+      { en:"usually",   ko:"보통",            example:"She usually drives to work.",                exKo:"그녀는 보통 운전해서 출근해요." },
+      { en:"sometimes", ko:"때때로",          example:"We sometimes eat at Korean restaurants.",    exKo:"저희는 때때로 한식당에서 먹어요." },
+      { en:"often",     ko:"자주",            example:"He often calls his family in Korea.",        exKo:"그는 자주 한국 가족에게 전화해요." },
+      { en:"never",     ko:"절대로",          example:"I never miss my English class.",             exKo:"저는 절대로 영어 수업에 빠지지 않아요." },
+      { en:"work",      ko:"일하다 / 직장",   example:"Where do you work? I work in Atlanta.",     exKo:"어디서 일하세요? 저는 애틀랜타에서 일해요." },
+      { en:"schedule",  ko:"일정",            example:"What is your schedule this week?",          exKo:"이번 주 일정이 어떻게 되세요?" },
+      { en:"meeting",   ko:"회의",            example:"I have a meeting at nine o'clock.",         exKo:"저는 9시에 회의가 있어요." },
+      { en:"busy",      ko:"바쁜",            example:"I am very busy on Mondays.",                exKo:"저는 월요일마다 매우 바빠요." },
+      { en:"tired",     ko:"피곤한",          example:"She is tired after a long day at work.",    exKo:"그녀는 긴 하루 일과 후에 피곤해요." },
+      { en:"drive",     ko:"운전하다",        example:"He drives to Norcross every morning.",      exKo:"그는 매일 아침 노크로스로 운전해요." },
+      { en:"explain",   ko:"설명하다",        example:"Can you explain that again, please?",       exKo:"다시 설명해 주시겠어요?" },
+      { en:"agree",     ko:"동의하다",        example:"I agree with you. That is a good idea.",    exKo:"동의해요. 좋은 생각이에요." },
+      { en:"need",      ko:"필요하다",        example:"We need more time to finish this.",         exKo:"이걸 끝내려면 시간이 더 필요해요." },
+      { en:"help",      ko:"돕다 / 도움",     example:"Can you help me? I do not understand.",     exKo:"도와주시겠어요? 이해가 안 돼요." },
+      { en:"because",   ko:"왜냐하면",        example:"I study hard because I want to improve.",   exKo:"실력을 키우고 싶기 때문에 열심히 공부해요." },
+      { en:"but",       ko:"그런데 / 하지만", example:"I want to go, but I am too busy.",          exKo:"가고 싶은데 너무 바빠요." },
+      { en:"so",        ko:"그래서",          example:"She was tired, so she went home early.",    exKo:"그녀는 피곤해서 일찍 집에 갔어요." },
+      { en:"ready",     ko:"준비된",          example:"Are you ready to start?",                  exKo:"시작할 준비가 됐나요?" },
+      { en:"every day", ko:"매일",            example:"I practice English every day.",             exKo:"저는 매일 영어를 연습해요." }
+    ],
+
+    pronouns: [
+      { subject:"I",    object:"me",   possAdj:"my",    possPron:"mine",   ko:"나/저" },
+      { subject:"you",  object:"you",  possAdj:"your",  possPron:"yours",  ko:"당신/너" },
+      { subject:"he",   object:"him",  possAdj:"his",   possPron:"his",    ko:"그" },
+      { subject:"she",  object:"her",  possAdj:"her",   possPron:"hers",   ko:"그녀" },
+      { subject:"it",   object:"it",   possAdj:"its",   possPron:"its",    ko:"그것" },
+      { subject:"we",   object:"us",   possAdj:"our",   possPron:"ours",   ko:"우리" },
+      { subject:"they", object:"them", possAdj:"their", possPron:"theirs", ko:"그들" }
+    ],
+
+    scramble: [
+      { ko:"저는 매일 영어를 공부해요.", correct:["I","study","English","every","day"], hint:"S + V + O + Frequency adverb" },
+      { ko:"그녀는 병원에서 일하지 않아요.", correct:["She","does","not","work","at","the","hospital"], hint:"She/He/It + does not + base verb" },
+      { ko:"오늘 회의가 있어요?", correct:["Do","you","have","a","meeting","today"], hint:"Do/Does + S + V?" },
+      { ko:"그는 어디서 일해요?", correct:["Where","does","he","work"], hint:"Wh- word + does + S + V?" },
+      { ko:"저는 피곤했어요, 그래서 일찍 집에 갔어요.", correct:["I","was","tired","so","I","went","home","early"], hint:"Use 'so' to connect cause and result" },
+      { ko:"당신의 도움이 필요해요.", correct:["I","need","your","help"], hint:"S + V + possessive adjective + noun" },
+      { ko:"그녀는 보통 오전 8시에 애틀랜타로 운전해서 출근해요.", correct:["She","usually","drives","to","Atlanta","at","eight","in","the","morning"], hint:"Frequency adverb (usually) comes before the main verb" }
+    ],
+
+    errorCorrection: [
+      { wrong:"Korean food I like very much.",  right:"I like Korean food very much.",     rule:"영어 어순: 주어 + 동사 + 목적어 (SOV가 아닌 SVO)  /  English is SVO, not SOV like Korean." },
+      { wrong:"Is very busy today.",            right:"She is very busy today.",           rule:"영어는 주어를 생략할 수 없어요!  /  English always requires a subject — you cannot drop it!" },
+      { wrong:"Give the document to I.",        right:"Give the document to me.",          rule:"전치사 뒤에는 목적격 대명사  /  After prepositions use object pronouns: to me, with him, for her." },
+      { wrong:"You are from where?",            right:"Where are you from?",              rule:"의문사는 문장 맨 앞에 와요  /  Question words (where, what, how) always come first." },
+      { wrong:"This is she bag.",               right:"This is her bag.",                 rule:"명사 앞에는 소유 형용사  /  Before a noun use possessive adjectives: my, your, his, her, our, their." }
+    ],
+
+    pronounFill: [
+      { sentence:"___ am a student at the English school.",          options:["I","Me","My"],       answer:"I",    hint:"주어 자리  /  Subject position" },
+      { sentence:"Ji-young is my teacher. ___ is very kind.",        options:["He","She","They"],   answer:"She",  hint:"Ji-young은 여성이에요  /  Ji-young is female" },
+      { sentence:"My husband works late. I call ___ every evening.", options:["he","him","his"],    answer:"him",  hint:"동사 뒤 목적격  /  Object pronoun after the verb" },
+      { sentence:"Please give the form to ___.",                     options:["I","me","my"],       answer:"me",   hint:"'to' 뒤에는 목적격  /  After 'to' use object pronoun" },
+      { sentence:"___ teacher explains everything clearly.",         options:["Our","We","Us"],     answer:"Our",  hint:"명사 앞 소유격  /  Possessive adjective before noun" },
+      { sentence:"Do you know Ji-ho and Min-jun? ___ are my coworkers.", options:["He","She","They"], answer:"They", hint:"두 사람 이상 → they  /  More than one person → they" },
+      { sentence:"I cannot find ___ phone. Have you seen it?",       options:["I","me","my"],       answer:"my",   hint:"'phone' 앞 소유격  /  Possessive adjective before 'phone'" },
+      { sentence:"The children are hungry. Can you help ___?",       options:["they","them","their"],answer:"them", hint:"'help' 뒤 목적격  /  Object pronoun after verb" },
+      { sentence:"Su-jin is tired today. ___ does not want to work.",options:["He","She","It"],     answer:"She",  hint:"Su-jin은 여성  /  Su-jin is female" },
+      { sentence:"___ all study English together every week.",       options:["We","Us","Our"],     answer:"We",   hint:"주어 자리 주격  /  Subject position — subject pronoun" }
+    ],
+
+    dialogues: [
+      {
+        titleKo:"직장 동료 소개받기",
+        titleEn:"Being Introduced to a Coworker",
+        lines:[
+          { speaker:"M", en:"Ji-ho, this is Sarah. She works in our accounting department.", ko:"지호 씨, 사라예요. 우리 회계팀에서 일해요." },
+          { speaker:"J", en:"Hi Sarah! Nice to meet you. How long have you worked here?",    ko:"안녕하세요, 사라 씨! 반가워요. 여기서 얼마나 일하셨어요?" },
+          { speaker:"S", en:"I have worked here for three years. And you? Is this your first week?", ko:"3년 됐어요. 지호 씨는요? 첫 주예요?" },
+          { speaker:"J", en:"Yes, it is! I am still learning the schedule.",                 ko:"네, 맞아요! 아직 일정을 익히는 중이에요." },
+          { speaker:"S", en:"Do not worry. Our team always helps new employees.",            ko:"걱정 마세요. 저희 팀은 항상 새 직원을 도와요." },
+          { speaker:"J", en:"That is so kind. Thank you, Sarah!",                           ko:"정말 친절하시네요. 감사합니다, 사라 씨!" }
+        ]
+      },
+      {
+        titleKo:"일정에 대해 이야기하기",
+        titleEn:"Talking About Your Weekly Schedule",
+        lines:[
+          { speaker:"A", en:"You look tired today. Are you okay?",                          ko:"오늘 피곤해 보여요. 괜찮아요?" },
+          { speaker:"B", en:"I am okay, just busy. I usually work until seven on Tuesdays.",ko:"괜찮아요, 그냥 바빠요. 화요일에는 보통 7시까지 일해요." },
+          { speaker:"A", en:"That is a long day. Do you always drive home?",                ko:"하루가 기네요. 항상 운전해서 귀가하나요?" },
+          { speaker:"B", en:"Yes. I drive from Atlanta to Norcross. It takes about forty minutes.", ko:"네. 애틀랜타에서 노크로스까지 운전해요. 40분쯤 걸려요." },
+          { speaker:"A", en:"What does your schedule look like tomorrow?",                  ko:"내일 일정은 어때요?" },
+          { speaker:"B", en:"I have a meeting in the morning, but I am free after lunch.",  ko:"오전에 회의가 있는데, 점심 이후에는 시간이 있어요." },
+          { speaker:"A", en:"Perfect. Can we meet at two o'clock?",                        ko:"좋아요. 2시에 만날 수 있어요?" },
+          { speaker:"B", en:"Yes, I am ready. See you tomorrow!",                          ko:"네, 준비됐어요. 내일 봐요!" }
+        ]
+      },
+      {
+        titleKo:"커뮤니티 센터에서 도움 요청하기",
+        titleEn:"Asking for Help at the Community Center",
+        lines:[
+          { speaker:"Y", en:"Excuse me. Can you help me? I need to fill out this form.",    ko:"실례합니다. 도와주시겠어요? 이 양식을 작성해야 해요." },
+          { speaker:"S", en:"Of course! What part do you not understand?",                  ko:"물론이죠! 어느 부분을 이해 못 하시겠어요?" },
+          { speaker:"Y", en:"It asks for my employer. What does that mean?",               ko:"'employer'를 묻는데요. 그게 무슨 뜻이에요?" },
+          { speaker:"S", en:"Your employer is the company or person you work for.",         ko:"'employer'는 당신이 일하는 회사나 고용주예요." },
+          { speaker:"Y", en:"Oh, I understand now. So I write the name of my company?",    ko:"아, 이제 이해했어요. 그럼 회사 이름을 쓰면 되나요?" },
+          { speaker:"S", en:"Exactly! And in the next line, write your job title.",         ko:"맞아요! 그 다음 줄에는 직책을 쓰세요." },
+          { speaker:"Y", en:"Thank you so much. You explained it very clearly.",            ko:"정말 감사합니다. 정말 명확하게 설명해 주셨어요." },
+          { speaker:"S", en:"You are welcome. Do not hesitate to ask if you need more help.", ko:"천만에요. 더 도움이 필요하면 주저 말고 물어보세요." }
+        ]
+      }
+    ]
+
+  } // end week2
 
 }; // end COURSE_DATA

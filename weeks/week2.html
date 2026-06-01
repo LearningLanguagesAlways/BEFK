@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 2 — 문장 구조 + 대명사 | 기초 영어</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    /* ── Week 2 local styles ──────────────────── */
+    .svo-diagram { display:grid; gap:1.5rem; margin:1.5rem 0; }
+    .svo-row { display:flex; align-items:stretch; gap:0; border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-sm); }
+    .svo-lang { font-size:0.72rem; font-weight:700; letter-spacing:0.08em; writing-mode:vertical-rl; text-orientation:mixed; padding:0 0.6rem; display:flex; align-items:center; justify-content:center; min-width:36px; }
+    .svo-lang.korean { background:var(--cobalt-dark); color:rgba(255,255,255,0.9); }
+    .svo-lang.english { background:var(--celadon); color:var(--ink); }
+    .svo-cells { display:flex; flex:1; }
+    .svo-cell { flex:1; padding:0.875rem 0.5rem; text-align:center; border-right:1px solid rgba(255,255,255,0.15); }
+    .svo-cell:last-child { border-right:none; }
+    .svo-cell.s-cell { background:rgba(43,93,160,0.12); }
+    .svo-cell.v-cell { background:rgba(192,57,43,0.10); }
+    .svo-cell.o-cell { background:rgba(200,131,42,0.10); }
+    .svo-word { font-family:var(--font-serif); font-size:1.15rem; font-weight:700; color:var(--ink); display:block; margin-bottom:4px; }
+    .svo-label { font-size:0.65rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-light); display:block; }
+    .svo-arrow { display:flex; align-items:center; justify-content:center; padding:0 0.5rem; font-size:1.4rem; color:var(--stone); background:var(--paper-warm); }
+    .pattern-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; margin:1.25rem 0; }
+    .pattern-card { border-radius:var(--radius-md); padding:1.25rem; border:1.5px solid var(--mist); background:var(--white); }
+    .pattern-card h4 { font-family:var(--font-serif); font-size:0.95rem; font-weight:700; margin-bottom:0.5rem; }
+    .pattern-card .formula { font-size:0.78rem; color:var(--cobalt); background:rgba(43,93,160,0.08); border-radius:var(--radius-sm); padding:0.4rem 0.75rem; margin-bottom:0.75rem; font-weight:600; letter-spacing:0.02em; }
+    .pattern-card .example { font-family:var(--font-serif); font-size:1rem; color:var(--ink); margin-bottom:4px; }
+    .pattern-card .ex-ko { font-size:0.8rem; color:var(--text-light); font-style:italic; }
+    .pattern-card button { margin-top:0.625rem; padding:0.3rem 0.875rem; border:1px solid var(--mist); background:none; border-radius:100px; font-size:0.78rem; color:var(--cobalt); cursor:pointer; }
+    .pattern-card button:hover { background:var(--cobalt); color:var(--white); border-color:var(--cobalt); }
+
+    .pronoun-table { width:100%; border-collapse:collapse; font-size:0.9rem; margin:1rem 0; }
+    .pronoun-table th { background:var(--cobalt-dark); color:var(--white); padding:0.65rem 0.875rem; text-align:left; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; }
+    .pronoun-table td { padding:0.625rem 0.875rem; border-bottom:1px solid var(--mist); vertical-align:middle; }
+    .pronoun-table tr:last-child td { border-bottom:none; }
+    .pronoun-table tr:nth-child(even) td { background:var(--paper-warm); }
+    .pronoun-table .pron-btn { background:none; border:1.5px solid var(--mist); border-radius:var(--radius-sm); padding:0.3rem 0.75rem; font-family:var(--font-serif); font-size:0.95rem; font-weight:700; color:var(--cobalt-dark); cursor:pointer; transition:all 0.15s; }
+    .pronoun-table .pron-btn:hover { background:var(--cobalt); color:var(--white); border-color:var(--cobalt); }
+    .pronoun-table .pron-btn.speaking { background:var(--cobalt); color:var(--white); border-color:var(--cobalt); }
+    .pronoun-table .ko-cell { font-size:0.82rem; color:var(--text-light); }
+
+    .fill-exercise { display:flex; flex-direction:column; gap:1rem; }
+    .fill-item { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:1rem 1.25rem; }
+    .fill-item .fill-sentence { font-family:var(--font-serif); font-size:1.02rem; color:var(--ink); margin-bottom:0.625rem; }
+    .fill-options { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.5rem; }
+    .fill-opt-btn { padding:0.4rem 1rem; border:2px solid var(--mist); border-radius:100px; background:var(--paper); font-family:var(--font-sans); font-size:0.88rem; font-weight:600; color:var(--ink); cursor:pointer; transition:all 0.15s; }
+    .fill-opt-btn:hover:not(:disabled) { border-color:var(--cobalt-light); color:var(--cobalt); }
+    .fill-opt-btn.correct { border-color:var(--celadon); background:rgba(126,179,168,0.12); color:var(--celadon); }
+    .fill-opt-btn.wrong   { border-color:var(--crimson);  background:rgba(192,57,43,0.08);  color:var(--crimson); }
+    .fill-hint { font-size:0.78rem; color:var(--text-light); font-style:italic; display:none; }
+    .fill-item.revealed .fill-hint { display:block; }
+
+    .error-items { display:flex; flex-direction:column; gap:1rem; }
+    .error-item { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:1.25rem; }
+    .error-wrong { font-family:var(--font-serif); font-size:1rem; color:var(--crimson); margin-bottom:0.5rem; position:relative; padding-left:1.5rem; }
+    .error-wrong::before { content:'x'; position:absolute; left:0; font-weight:700; font-size:0.85rem; }
+    .error-right { font-family:var(--font-serif); font-size:1rem; color:var(--celadon); margin-bottom:0.5rem; position:relative; padding-left:1.5rem; display:none; }
+    .error-right::before { content:'v'; position:absolute; left:0; font-weight:700; font-size:0.85rem; }
+    .error-rule { font-size:0.82rem; color:var(--text-mid); font-style:italic; display:none; padding:0.5rem 0.75rem; background:rgba(43,93,160,0.06); border-radius:var(--radius-sm); }
+    .error-item.revealed .error-right,
+    .error-item.revealed .error-rule { display:block; }
+    .btn-reveal { margin-top:0.625rem; padding:0.4rem 1rem; border:1.5px solid var(--cobalt-light); border-radius:100px; background:none; font-size:0.8rem; font-weight:700; color:var(--cobalt); cursor:pointer; transition:all 0.15s; }
+    .btn-reveal:hover { background:var(--cobalt); color:var(--white); }
+
+    .scramble-area { border-radius:var(--radius-lg); border:2px solid var(--mist); padding:1.5rem; background:var(--paper-warm); margin:1rem 0; }
+    .scramble-ko { font-family:var(--font-serif); font-size:1.05rem; color:var(--cobalt-dark); margin-bottom:0.5rem; }
+    .scramble-hint { font-size:0.8rem; color:var(--text-light); font-style:italic; margin-bottom:1rem; }
+    .scramble-answer-row { min-height:52px; background:var(--white); border:2px dashed var(--mist); border-radius:var(--radius-md); padding:0.625rem; display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem; }
+    .scramble-answer-row.correct { border-color:var(--celadon); border-style:solid; background:rgba(126,179,168,0.08); }
+    .scramble-answer-row.wrong   { border-color:var(--crimson);  border-style:solid; }
+    .word-chip { display:inline-block; padding:0.35rem 0.875rem; border-radius:100px; font-family:var(--font-sans); font-size:0.92rem; font-weight:600; cursor:pointer; transition:all 0.15s; user-select:none; }
+    .word-chip.available { background:var(--cobalt-dark); color:var(--white); }
+    .word-chip.available:hover { background:var(--cobalt); transform:translateY(-2px); }
+    .word-chip.placed { background:var(--celadon); color:var(--white); }
+    .word-chip.placed:hover { background:var(--crimson); }
+    .scramble-nav { display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; margin-top:0.75rem; }
+    .scramble-counter { font-size:0.85rem; color:var(--text-light); font-weight:600; }
+
+    .review-quiz { display:grid; gap:1rem; }
+    .rq-item { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:1rem 1.25rem; }
+    .rq-prompt { font-family:var(--font-serif); font-size:1.02rem; color:var(--ink); margin-bottom:0.75rem; }
+    .rq-blank { display:inline-block; border-bottom:2px solid var(--cobalt); min-width:80px; color:transparent; }
+    .rq-input { border:2px solid var(--mist); border-radius:var(--radius-sm); padding:0.35rem 0.75rem; font-family:var(--font-serif); font-size:0.95rem; color:var(--ink); outline:none; width:140px; transition:border-color 0.2s; }
+    .rq-input:focus { border-color:var(--cobalt); }
+    .rq-input.correct { border-color:var(--celadon); background:rgba(126,179,168,0.1); color:var(--celadon); }
+    .rq-input.wrong   { border-color:var(--crimson);  background:rgba(192,57,43,0.06);  color:var(--crimson); }
+    .rq-feedback { font-size:0.8rem; margin-top:0.4rem; font-style:italic; display:none; }
+    .rq-item.checked .rq-feedback { display:block; }
+    .rq-ko { font-size:0.82rem; color:var(--text-light); margin-top:0.25rem; }
+
+    @media(max-width:600px) {
+      .svo-row { flex-direction:column; }
+      .svo-lang { writing-mode:horizontal-tb; min-width:auto; padding:0.4rem 1rem; }
+      .svo-cells { flex-direction:column; }
+      .svo-cell { border-right:none; border-bottom:1px solid rgba(255,255,255,0.15); }
+      .pronoun-table { font-size:0.82rem; }
+      .pronoun-table th, .pronoun-table td { padding:0.5rem 0.5rem; }
+      .intro-layout { grid-template-columns:1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── PAGE HEADER ─────────────────────────────── -->
+<header class="week-page-header">
+  <div class="week-header-pattern" aria-hidden="true"></div>
+  <div class="week-header-inner">
+    <a href="../index.html" class="week-back-link">← 과정 목록으로 / Back to Course</a>
+    <div class="week-number-badge">Week 02 &nbsp;·&nbsp; 06월 08일</div>
+    <h1 class="week-page-title">복습 + 문장 구조 + 대명사</h1>
+    <p class="week-page-subtitle">Review + Sentence Structure + Pronouns + Vocabulary</p>
+    <div id="w2-student-name" style="color:rgba(255,255,255,0.6);font-size:0.88rem;margin-top:0.5rem;"></div>
+  </div>
+</header>
+
+<!-- ── TAB NAVIGATION ──────────────────────────── -->
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchSection('review',this)">
+      <span class="tab-ko">복습</span><span class="tab-en">Review</span>
+    </button>
+    <button class="tab-btn" onclick="switchSection('structure',this)">
+      <span class="tab-ko">문장 구조</span><span class="tab-en">Sentences</span>
+    </button>
+    <button class="tab-btn" onclick="switchSection('pronouns',this)">
+      <span class="tab-ko">대명사</span><span class="tab-en">Pronouns</span>
+    </button>
+    <button class="tab-btn" onclick="switchSection('vocab',this)">
+      <span class="tab-ko">어휘</span><span class="tab-en">Vocabulary</span>
+    </button>
+    <button class="tab-btn" onclick="switchSection('game',this)">
+      <span class="tab-ko">문장 만들기</span><span class="tab-en">Build It</span>
+    </button>
+    <button class="tab-btn" onclick="switchSection('dialogue',this)">
+      <span class="tab-ko">대화 연습</span><span class="tab-en">Dialogue</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══ SECTION A: REVIEW ═══════════════════════ -->
+<section class="lesson-section active" id="sec-review">
+  <div class="section-banner">
+    <span class="section-num">Section A</span>
+    <h2>Week 1 복습</h2>
+    <span class="section-sub">Week 1 Review — How much do you remember?</span>
+    <div class="section-tip">
+      빈칸에 알맞은 단어를 입력하고 Check를 눌러 확인하세요.<br>
+      <em>Type the missing word in each blank and press Check to see your score.</em>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem;">
+      <h3>Week 1 빈칸 채우기 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Fill in the Blank</span></h3>
+      <div class="progress-counter" id="review-score-badge">0 / 8 정답</div>
+    </div>
+    <div class="review-quiz" id="review-quiz"></div>
+    <div style="margin-top:1.25rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="checkAllReview()">확인하기 / Check All</button>
+      <button class="btn-secondary" onclick="resetReview()">다시 하기 / Reset</button>
+    </div>
+  </div>
+
+  <div class="exercise-card" style="margin-top:1.25rem;">
+    <h3>Week 1 핵심 정리 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Quick Reference</span></h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:0.75rem;">
+      <div style="background:var(--paper-warm);border-radius:var(--radius-md);padding:1rem;border:1px solid var(--mist);">
+        <div style="font-size:0.7rem;font-weight:700;color:var(--cobalt);letter-spacing:0.1em;margin-bottom:0.5rem;">모음 VOWELS</div>
+        <div style="font-family:var(--font-serif);font-size:1.6rem;letter-spacing:0.15em;color:var(--cobalt-dark);">A E I O U</div>
+      </div>
+      <div style="background:var(--paper-warm);border-radius:var(--radius-md);padding:1rem;border:1px solid var(--mist);">
+        <div style="font-size:0.7rem;font-weight:700;color:var(--crimson);letter-spacing:0.1em;margin-bottom:0.5rem;">주의 소리 TRICKY</div>
+        <div style="font-family:var(--font-serif);font-size:1.6rem;letter-spacing:0.15em;color:var(--crimson);">F L R V TH</div>
+      </div>
+      <div style="background:var(--paper-warm);border-radius:var(--radius-md);padding:1rem;border:1px solid var(--mist);">
+        <div style="font-size:0.7rem;font-weight:700;color:var(--gold);letter-spacing:0.1em;margin-bottom:0.5rem;">인사말 GREETINGS</div>
+        <div style="font-size:0.88rem;color:var(--ink);line-height:1.8;">Hello · Goodbye<br>Thank you · Sorry<br>Nice to meet you</div>
+      </div>
+      <div style="background:var(--paper-warm);border-radius:var(--radius-md);padding:1rem;border:1px solid var(--mist);">
+        <div style="font-size:0.7rem;font-weight:700;color:var(--celadon);letter-spacing:0.1em;margin-bottom:0.5rem;">자기소개 INTRO</div>
+        <div style="font-size:0.88rem;color:var(--ink);line-height:1.8;">My name is ___.<br>I am from ___.<br>I am a ___.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION B: SENTENCE STRUCTURE ════════════ -->
+<section class="lesson-section" id="sec-structure">
+  <div class="section-banner">
+    <span class="section-num">Section B</span>
+    <h2>영어 문장 구조</h2>
+    <span class="section-sub">English Sentence Structure — The Most Important Difference from Korean</span>
+    <div class="section-tip">
+      한국어는 주어 + 목적어 + 동사 (SOV) 순서지만, 영어는 주어 + 동사 + 목적어 (SVO) 순서예요.<br>
+      <em>Korean uses Subject + Object + Verb order. English uses Subject + Verb + Object. This is the key difference!</em>
+    </div>
+  </div>
+
+  <!-- SVO Diagram -->
+  <div class="exercise-card">
+    <h3>어순 비교 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Word Order Comparison</span></h3>
+    <div class="svo-diagram">
+      <div class="svo-row">
+        <div class="svo-lang korean">한국어 KO</div>
+        <div class="svo-cells">
+          <div class="svo-cell s-cell"><span class="svo-word">저는</span><span class="svo-label">Subject 주어</span></div>
+          <div class="svo-arrow">+</div>
+          <div class="svo-cell o-cell"><span class="svo-word">영어를</span><span class="svo-label">Object 목적어</span></div>
+          <div class="svo-arrow">+</div>
+          <div class="svo-cell v-cell"><span class="svo-word">공부해요</span><span class="svo-label">Verb 동사</span></div>
+        </div>
+      </div>
+      <div class="svo-row">
+        <div class="svo-lang english">ENG</div>
+        <div class="svo-cells">
+          <div class="svo-cell s-cell"><span class="svo-word">I</span><span class="svo-label">Subject 주어</span></div>
+          <div class="svo-arrow">+</div>
+          <div class="svo-cell v-cell"><span class="svo-word">study</span><span class="svo-label">Verb 동사</span></div>
+          <div class="svo-arrow">+</div>
+          <div class="svo-cell o-cell"><span class="svo-word">English</span><span class="svo-label">Object 목적어</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="background:rgba(192,57,43,0.07);border-left:4px solid var(--crimson);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:0.75rem 1rem;font-size:0.88rem;color:var(--text-mid);margin-top:0.75rem;">
+      <strong>중요:</strong> 영어에서는 동사가 항상 목적어 앞에 와요. 절대로 목적어를 먼저 쓰지 마세요!<br>
+      <em><strong>Key rule:</strong> In English the verb always comes before the object. Never put the object first!</em>
+    </div>
+  </div>
+
+  <!-- Four sentence patterns -->
+  <div class="exercise-card" style="margin-top:1.25rem;">
+    <h3>4가지 문장 유형 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Four Essential Sentence Patterns</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1.25rem;">
+      이 네 가지 패턴을 익히면 대부분의 일상 대화가 가능해요.<br>
+      <em>Master these four patterns and you can handle most everyday conversations.</em>
+    </p>
+    <div class="pattern-grid">
+      <div class="pattern-card" style="border-top:4px solid var(--cobalt);">
+        <h4 style="color:var(--cobalt);">1. 긍정문 Statement</h4>
+        <div class="formula">S + V + O</div>
+        <div class="example">I study English every day.</div>
+        <div class="ex-ko">저는 매일 영어를 공부해요.</div>
+        <div class="example" style="margin-top:0.5rem;">She works in Atlanta.</div>
+        <div class="ex-ko">그녀는 애틀랜타에서 일해요.</div>
+        <button onclick="Speaker.speakText('I study English every day. She works in Atlanta.')">&#9654; 듣기</button>
+      </div>
+      <div class="pattern-card" style="border-top:4px solid var(--crimson);">
+        <h4 style="color:var(--crimson);">2. 부정문 Negative</h4>
+        <div class="formula">S + do not / does not + V</div>
+        <div class="example">I do not understand.</div>
+        <div class="ex-ko">저는 이해하지 못해요.</div>
+        <div class="example" style="margin-top:0.5rem;">He does not drive to work.</div>
+        <div class="ex-ko">그는 운전해서 출근하지 않아요.</div>
+        <button onclick="Speaker.speakText('I do not understand. He does not drive to work.')">&#9654; 듣기</button>
+      </div>
+      <div class="pattern-card" style="border-top:4px solid var(--gold);">
+        <h4 style="color:var(--gold);">3. Yes/No 질문 Yes/No Question</h4>
+        <div class="formula">Do / Does + S + V + O ?</div>
+        <div class="example">Do you speak English?</div>
+        <div class="ex-ko">영어를 하세요?</div>
+        <div class="example" style="margin-top:0.5rem;">Does she have a meeting today?</div>
+        <div class="ex-ko">그녀는 오늘 회의가 있어요?</div>
+        <button onclick="Speaker.speakText('Do you speak English? Does she have a meeting today?')">&#9654; 듣기</button>
+      </div>
+      <div class="pattern-card" style="border-top:4px solid var(--celadon);">
+        <h4 style="color:var(--celadon);">4. Wh- 질문 Wh-Question</h4>
+        <div class="formula">Wh- + do / does + S + V ?</div>
+        <div class="example">Where do you work?</div>
+        <div class="ex-ko">어디서 일하세요?</div>
+        <div class="example" style="margin-top:0.5rem;">What does she need?</div>
+        <div class="ex-ko">그녀는 무엇이 필요해요?</div>
+        <button onclick="Speaker.speakText('Where do you work? What does she need?')">&#9654; 듣기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Correction -->
+  <div class="exercise-card" style="margin-top:1.25rem;">
+    <h3>오류 수정 연습 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Error Correction — Common Korean Learner Mistakes</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1.25rem;">
+      아래 문장들은 한국어를 모국어로 하는 학습자들이 자주 틀리는 표현이에요. 무엇이 잘못됐는지 생각해 보고 정답을 확인하세요.<br>
+      <em>These are mistakes Korean speakers commonly make. Think about what is wrong, then reveal the answer.</em>
+    </p>
+    <div class="error-items" id="error-items"></div>
+  </div>
+</section>
+
+<!-- ═══ SECTION C: PRONOUNS ═══════════════════════ -->
+<section class="lesson-section" id="sec-pronouns">
+  <div class="section-banner">
+    <span class="section-num">Section C</span>
+    <h2>영어 대명사</h2>
+    <span class="section-sub">English Pronouns — Four Types You Need to Know</span>
+    <div class="section-tip">
+      한국어에서는 대명사 대신 이름을 자주 사용하지만, 영어에서는 대명사를 꼭 써야 해요.<br>
+      <em>Korean often uses names instead of pronouns, but English requires pronouns. You cannot drop them!</em>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <h3>대명사 표 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Pronoun Reference Table</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1rem;">
+      각 대명사를 클릭하면 발음을 들을 수 있어요.<br>
+      <em>Click any pronoun to hear it spoken aloud.</em>
+    </p>
+    <div style="overflow-x:auto;">
+      <table class="pronoun-table" id="pronoun-table">
+        <thead>
+          <tr>
+            <th>한국어 Korean</th>
+            <th>주격 Subject <span style="font-weight:400;opacity:0.7;">"I work"</span></th>
+            <th>목적격 Object <span style="font-weight:400;opacity:0.7;">"Help me"</span></th>
+            <th>소유 형용사 Poss. Adj. <span style="font-weight:400;opacity:0.7;">"My bag"</span></th>
+            <th>소유 대명사 Poss. Pron. <span style="font-weight:400;opacity:0.7;">"It is mine"</span></th>
+          </tr>
+        </thead>
+        <tbody id="pronoun-tbody"></tbody>
+      </table>
+    </div>
+    <div style="margin-top:1rem;padding:0.875rem 1rem;background:rgba(200,131,42,0.08);border-left:4px solid var(--gold);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:0.85rem;color:var(--text-mid);">
+      <strong>핵심 규칙:</strong> he / she / it 뒤에 오는 동사에는 반드시 -s를 붙여요!<br>
+      <em><strong>Key rule:</strong> Verbs after he / she / it always add -s: he work<strong>s</strong>, she drive<strong>s</strong>, it take<strong>s</strong></em>
+    </div>
+  </div>
+
+  <div class="exercise-card" style="margin-top:1.25rem;">
+    <h3>대명사 빈칸 채우기 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Pronoun Fill-in Exercises — 10 Questions</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1.25rem;">
+      정답을 클릭하세요. 힌트는 문장 아래에 나타나요.<br>
+      <em>Click the correct pronoun. A hint appears below each sentence after you answer.</em>
+    </p>
+    <div class="fill-exercise" id="pronoun-fill-exercise"></div>
+    <div style="margin-top:1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <div class="progress-counter" id="pf-score-badge">0 / 10 정답</div>
+      <button class="btn-secondary" onclick="resetPronounFill()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">다시 하기 / Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION D: VOCABULARY ════════════════════ -->
+<section class="lesson-section" id="sec-vocab">
+  <div class="section-banner">
+    <span class="section-num">Section D</span>
+    <h2>이번 주 어휘</h2>
+    <span class="section-sub">Week 2 Vocabulary — 25 Intermediate Words</span>
+    <div class="section-tip">
+      카드를 클릭해 뒤집고, 영어와 한국어 방향 모두 연습하세요.<br>
+      <em>Click the card to flip it. Practice both English-to-Korean and Korean-to-English directions.</em>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+    <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+      <span style="font-size:0.78rem;font-weight:700;color:var(--text-light);letter-spacing:0.04em;">방향 / MODE:</span>
+      <button class="btn-card-action btn-flip" id="mode-en-ko" onclick="setCardMode('en-ko')" style="padding:0.4rem 1rem;font-size:0.8rem;border-color:var(--cobalt);color:var(--cobalt);">영 &rarr; 한</button>
+      <button class="btn-card-action btn-flip" id="mode-ko-en" onclick="setCardMode('ko-en')" style="padding:0.4rem 1rem;font-size:0.8rem;">한 &rarr; 영</button>
+    </div>
+    <div class="progress-counter" id="vocab-progress-badge">0 / 25 익힘</div>
+  </div>
+
+  <div class="flashcard-deck">
+    <div class="flashcard-container" id="flashcard" onclick="flipCard()">
+      <div class="flashcard-inner" id="flashcard-inner">
+        <div class="card-face card-front">
+          <span class="card-hint">클릭하면 뒤집어요 · Click to flip</span>
+          <span class="card-main-text" id="card-front-text">always</span>
+          <span class="card-pron" id="card-pron-text"></span>
+        </div>
+        <div class="card-face card-back">
+          <span class="card-hint">뜻 · Meaning</span>
+          <span class="card-main-text" id="card-back-text">항상</span>
+          <span class="card-example" id="card-example-text"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-nav">
+    <button class="btn-card-action btn-practice" onclick="markCard('practice')">&larr; 더 연습</button>
+    <button class="btn-card-action btn-flip" onclick="prevCard()">&larr; 이전</button>
+    <span class="card-counter" id="card-counter">1 / 25</span>
+    <button class="btn-card-action btn-flip" onclick="nextCard()">다음 &rarr;</button>
+    <button class="btn-card-action btn-know" onclick="markCard('know')">&#10003; 알아요!</button>
+  </div>
+  <div style="text-align:center;margin-top:1rem;">
+    <button class="btn-card-action btn-speak" onclick="speakCurrentCard()" style="padding:0.5rem 1.5rem;">&#9654; 발음 듣기</button>
+  </div>
+
+  <div class="exercise-card" style="margin-top:2rem;">
+    <h3>전체 단어 목록 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Full Vocabulary List</span></h3>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--cobalt);">
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">ENGLISH</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">한국어</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">예문 / Example</th>
+            <th style="padding:0.6rem 0.75rem;"></th>
+          </tr>
+        </thead>
+        <tbody id="vocab-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION E: SENTENCE BUILDER GAME ═════════ -->
+<section class="lesson-section" id="sec-game">
+  <div class="section-banner">
+    <span class="section-num">Section E</span>
+    <h2>문장 만들기</h2>
+    <span class="section-sub">Sentence Scramble — Put the Words in Correct English Order</span>
+    <div class="section-tip">
+      단어 칩을 클릭해서 올바른 영어 순서로 문장을 만드세요. 놓은 단어를 다시 클릭하면 취소돼요.<br>
+      <em>Click word chips to build the correct English sentence. Click a placed word to remove it.</em>
+    </div>
+  </div>
+
+  <div class="match-score-bar">
+    <div class="match-score"><span class="score-num" id="scr-correct">0</span><span class="score-label">정답 Correct</span></div>
+    <div style="width:1px;height:40px;background:var(--mist);"></div>
+    <div class="match-score"><span class="score-num" id="scr-wrong" style="color:var(--crimson);">0</span><span class="score-label">오답 Wrong</span></div>
+    <div style="width:1px;height:40px;background:var(--mist);"></div>
+    <div class="match-score"><span class="score-num" id="scr-remain">7</span><span class="score-label">남음 Left</span></div>
+    <button class="btn-secondary" onclick="initScramble()" style="margin-left:auto;font-size:0.82rem;padding:0.5rem 1.25rem;">&#8635; 다시 시작</button>
+  </div>
+
+  <div class="scramble-area" id="scramble-area">
+    <div id="scramble-ko" class="scramble-ko"></div>
+    <div id="scramble-hint" class="scramble-hint"></div>
+    <div class="scramble-answer-row" id="scramble-answer"></div>
+    <div style="font-size:0.75rem;font-weight:700;color:var(--text-light);letter-spacing:0.06em;margin-bottom:0.5rem;">단어 선택 / WORD BANK</div>
+    <div id="scramble-chips" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;"></div>
+    <div class="scramble-nav">
+      <button class="btn-primary" onclick="checkScramble()">확인 / Check</button>
+      <button class="btn-secondary" onclick="clearScramble()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">지우기 / Clear</button>
+      <span class="scramble-counter" id="scramble-counter">1 / 7</span>
+    </div>
+    <div id="scramble-result" style="margin-top:0.875rem;display:none;font-family:var(--font-serif);font-size:0.95rem;padding:0.75rem 1rem;border-radius:var(--radius-sm);"></div>
+  </div>
+
+  <div class="match-celebration" id="scramble-celebration">
+    <div style="font-size:2rem;margin-bottom:0.75rem;">&#11088;</div>
+    <h3>훌륭합니다! Excellent Work!</h3>
+    <p style="color:var(--text-mid);margin:0.75rem 0;">모든 문장을 완성했어요!<br><em>You completed all sentences!</em></p>
+    <div style="font-family:var(--font-serif);font-size:1.1rem;color:var(--cobalt);margin:1rem 0;" id="scramble-final"></div>
+    <button class="btn-primary" onclick="initScramble()">&#8635; 다시 하기 / Play Again</button>
+  </div>
+</section>
+
+<!-- ═══ SECTION F: DIALOGUE LAB ══════════════════ -->
+<section class="lesson-section" id="sec-dialogue">
+  <div class="section-banner">
+    <span class="section-num">Section F</span>
+    <h2>대화 연습</h2>
+    <span class="section-sub">Dialogue Practice — Real Conversations Using This Week's Grammar</span>
+    <div class="section-tip">
+      이번 주에 배운 문장 구조와 대명사를 대화에서 찾아보세요. 밑줄 친 부분을 집중해서 보세요.<br>
+      <em>Find this week's sentence patterns and pronouns in each dialogue. Pay attention to underlined parts.</em>
+    </div>
+  </div>
+
+  <div style="margin-bottom:1.5rem;">
+    <div class="teacher-badge">&#128203; 선생님 감독 구역 · Teacher Supervised</div>
+  </div>
+
+  <div id="dialogue-cards-w2"></div>
+
+  <!-- Extended Dialogue 4 -->
+  <div class="dialogue-scenario" style="margin-top:1.25rem;">
+    <div class="scenario-header">
+      <span class="scenario-icon" style="font-size:1.5rem;">&#127981;</span>
+      <div><span class="scenario-title">은행에서</span><span class="scenario-sub">At the Bank — Formal English</span></div>
+      <button onclick="Speaker.speakText('Good afternoon. How can I help you today? Good afternoon. I would like to open a bank account. Of course. Do you have your ID and a proof of address? Yes, I have my passport and my utility bill. Perfect. What is your current address? I live at 123 Maple Street in Norcross, Georgia. And do you work here in Gwinnett County? Yes, I do. I work at a restaurant in Norcross. Great. I will need your employer information as well. Can you explain what information you need? I need the name of your employer and their phone number. I understand. I have that information here.')" class="btn-card-action btn-speak" style="margin-left:auto;padding:0.4rem 1rem;font-size:0.8rem;">&#9654; 전체 듣기</button>
+    </div>
+    <div style="background:rgba(43,93,160,0.06);border-radius:var(--radius-md);padding:0.75rem 1rem;margin-bottom:1rem;font-size:0.82rem;color:var(--cobalt-dark);">
+      <strong>Focus:</strong> Notice how the banker uses <em>Do you have</em>, <em>What is</em>, <em>Can you</em> — all four sentence patterns from Section B!
+    </div>
+    <div class="dialogue-lines">
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--crimson);">B</span><div class="dl-bubble"><span class="dl-text">Good afternoon. How can I help you today?</span><span class="dl-ko">안녕하세요. 오늘 어떻게 도와드릴까요?</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--cobalt);">C</span><div class="dl-bubble b-student"><span class="dl-text">Good afternoon. I would like to open a bank account.</span><span class="dl-ko">안녕하세요. 은행 계좌를 개설하고 싶어요.</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--crimson);">B</span><div class="dl-bubble"><span class="dl-text">Of course. Do you have your ID and a proof of address?</span><span class="dl-ko">물론이죠. 신분증과 주소 증명서가 있으신가요?</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--cobalt);">C</span><div class="dl-bubble b-student"><span class="dl-text">Yes, I have <span class="dl-blank">my</span> passport and <span class="dl-blank">my</span> utility bill.</span><span class="dl-ko">네, 여권과 공과금 청구서가 있어요.</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--crimson);">B</span><div class="dl-bubble"><span class="dl-text">What is your current address?</span><span class="dl-ko">현재 주소가 어떻게 되세요?</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--cobalt);">C</span><div class="dl-bubble b-student"><span class="dl-text">I live at 123 Maple Street in Norcross, Georgia.</span><span class="dl-ko">저는 조지아주 노크로스 메이플 스트리트 123번지에 살아요.</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--crimson);">B</span><div class="dl-bubble"><span class="dl-text">And do you work here in Gwinnett County?</span><span class="dl-ko">귀넷 카운티에서 일하시나요?</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--cobalt);">C</span><div class="dl-bubble b-student"><span class="dl-text">Yes, <span class="dl-blank">I</span> do. <span class="dl-blank">I</span> work at a restaurant in Norcross.</span><span class="dl-ko">네, 맞아요. 저는 노크로스의 식당에서 일해요.</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--crimson);">B</span><div class="dl-bubble"><span class="dl-text">Great. I will need your employer information as well. Can you explain what information you need?</span><span class="dl-ko">좋아요. 고용주 정보도 필요해요. 어떤 정보가 필요한지 설명해 주시겠어요?</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--cobalt);">C</span><div class="dl-bubble b-student"><span class="dl-text">I understand. I have that information here.</span><span class="dl-ko">이해했어요. 그 정보를 여기 가져왔어요.</span></div></div>
+    </div>
+    <div style="background:rgba(43,93,160,0.06);border-radius:var(--radius-md);padding:0.875rem;font-size:0.82rem;color:var(--text-mid);">
+      &#128161; 밑줄 친 단어들은 이번 주 대명사예요: my, I. 대화 후 역할을 바꿔 다시 연습하세요!<br>
+      <em>The underlined words are this week's pronouns: my, I. After practicing, switch roles and try again!</em>
+    </div>
+  </div>
+
+  <!-- Extended Dialogue 5 -->
+  <div class="dialogue-scenario" style="margin-top:1.25rem;">
+    <div class="scenario-header">
+      <span class="scenario-icon" style="font-size:1.5rem;">&#128241;</span>
+      <div><span class="scenario-title">친구와 전화 통화</span><span class="scenario-sub">Phone Call with a Friend — Casual English</span></div>
+      <button onclick="Speaker.speakText('Hey! Are you busy right now? No, I just got home. I am a little tired but okay. How are you? I am good. I need your help. What is wrong? I do not understand this letter from my landlord. Can you help me read it? Of course! Send me a photo. I will explain it to you. Thank you so much. You are always so helpful. No problem. That is what friends are for. See you soon!')" class="btn-card-action btn-speak" style="margin-left:auto;padding:0.4rem 1rem;font-size:0.8rem;">&#9654; 전체 듣기</button>
+    </div>
+    <div style="background:rgba(200,131,42,0.08);border-radius:var(--radius-md);padding:0.75rem 1rem;margin-bottom:1rem;font-size:0.82rem;color:var(--text-mid);">
+      <strong>Focus:</strong> This is casual English between friends. Notice how short and direct the sentences are — S + V + O, every time!
+    </div>
+    <div class="dialogue-lines">
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--crimson);">A</span><div class="dl-bubble"><span class="dl-text">Hey! Are you busy right now?</span><span class="dl-ko">야! 지금 바빠?</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--cobalt);">B</span><div class="dl-bubble b-student"><span class="dl-text">No, I just got home. I am a little tired, but okay. How are you?</span><span class="dl-ko">아니, 방금 집에 왔어. 조금 피곤하지만 괜찮아. 너는?</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--crimson);">A</span><div class="dl-bubble"><span class="dl-text">I am good. I need your help. What is wrong? I do not understand this letter from my landlord.</span><span class="dl-ko">나는 괜찮아. 도움이 필요해. 왜요? 집주인한테서 온 이 편지를 이해 못 하겠어.</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--cobalt);">B</span><div class="dl-bubble b-student"><span class="dl-text">Can you help me read it?</span><span class="dl-ko">읽는 것 좀 도와줄 수 있어?</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--crimson);">A</span><div class="dl-bubble"><span class="dl-text">Of course! Send me a photo. I will explain it to you.</span><span class="dl-ko">물론이지! 사진 보내줘. 내가 설명해 줄게.</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--cobalt);">B</span><div class="dl-bubble b-student"><span class="dl-text">Thank you so much. You are always so helpful.</span><span class="dl-ko">정말 고마워. 넌 항상 이렇게 도움이 돼.</span></div></div>
+      <div class="dialogue-line"><span class="dl-speaker" style="color:var(--crimson);">A</span><div class="dl-bubble"><span class="dl-text">No problem. That is what friends are for!</span><span class="dl-ko">별거 아니야. 친구 좋으라고 있는 거지!</span></div></div>
+    </div>
+    <div style="background:rgba(43,93,160,0.06);border-radius:var(--radius-md);padding:0.875rem;font-size:0.82rem;color:var(--text-mid);">
+      &#128161; 이 대화에서 you, your, me, I, it 을 찾아보세요! 역할을 바꿔 다시 연습하세요.<br>
+      <em>Find you, your, me, I, it in this dialogue! Switch roles and practice again.</em>
+    </div>
+  </div>
+
+  <!-- Teacher Notes -->
+  <div class="exercise-card" style="margin-top:1.5rem;">
+    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
+      <span style="font-size:1.1rem;">&#128221;</span>
+      <h3 style="margin:0;">선생님 관찰 메모 <em style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Teacher Notes</em></h3>
+    </div>
+    <textarea class="teacher-notes-area" id="teacher-notes" placeholder="오늘 수업 메모... / Today's class notes..." rows="5"></textarea>
+    <div style="margin-top:0.75rem;display:flex;gap:0.75rem;align-items:center;">
+      <button class="btn-secondary" onclick="saveTeacherNotes()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">저장 / Save Notes</button>
+      <span id="notes-saved-msg" style="display:none;font-size:0.8rem;color:var(--celadon);">&#10003; 저장됨</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMPLETE WEEK ──────────────────────────── -->
+<div class="complete-week-bar">
+  <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:1rem;">
+    오늘 수업이 모두 끝났나요? Week 2를 완료로 표시하세요!<br>
+    <em>Done for today? Mark Week 2 as complete!</em>
+  </p>
+  <button class="btn-complete-week" onclick="completeWeek2()">Week 2 완료 / Mark Complete</button>
+  <div id="completion-msg" style="display:none;margin-top:1rem;font-family:var(--font-serif);font-size:1.1rem;color:var(--cobalt);">
+    훌륭합니다! Week 2를 완료했어요!<br>
+    <a href="../index.html" style="color:var(--cobalt);font-size:0.88rem;">&larr; 홈으로 / Back to Home</a>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script>
+'use strict';
+
+// ── State ──────────────────────────────────────
+var cardIndex   = 0;
+var cardMode    = 'en-ko';
+var cardFlipped = false;
+var cardKnown   = new Set();
+var pfScore     = 0;
+var pfAnswered  = 0;
+var rvScore     = 0;
+var scrIndex    = 0;
+var scrCorrect  = 0;
+var scrWrong    = 0;
+var scrPlaced   = [];
+var scrAvail    = [];
+
+// ── Boot ───────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    StudentDB.load();
+    var name = StudentDB.get('name');
+    var el = document.getElementById('w2-student-name');
+    if (el && name) el.textContent = '학생: ' + name + '  ·  Student: ' + name;
+    restoreState();
+  } catch(e) {}
+
+  buildReviewQuiz();
+  buildErrorItems();
+  buildPronounTable();
+  buildPronounFill();
+  buildVocabTable();
+  buildDialogueCards();
+  initScramble();
+  updateCard();
+});
+
+// ── Tab Navigation ─────────────────────────────
+function switchSection(id, btn) {
+  document.querySelectorAll('.lesson-section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  var sec = document.getElementById('sec-' + id);
+  if (sec) sec.classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── REVIEW QUIZ ────────────────────────────────
+var reviewQs = [
+  { prompt: 'My ___ is Kim Ji-ho.',                    answer: 'name',       ko: '제 이름은 김지호예요.' },
+  { prompt: 'I am ___ South Korea.',                   answer: 'from',       ko: '저는 한국에서 왔어요.' },
+  { prompt: 'Nice to ___ you! I am happy to be here.', answer: 'meet',       ko: '만나서 반가워요!' },
+  { prompt: 'A, E, I, O, U are ___.',                  answer: 'vowels',     ko: 'A, E, I, O, U는 모음이에요.' },
+  { prompt: "Sorry, I don't ___. Please say that again.", answer: 'understand', ko: '죄송합니다, 이해가 안 돼요.' },
+  { prompt: 'Please ___ after me: Hello!',             answer: 'repeat',     ko: '저를 따라 말해 주세요: Hello!' },
+  { prompt: 'I am a ___ at the English school.',       answer: 'student',    ko: '저는 영어 학교의 학생이에요.' },
+  { prompt: "The 'e' in 'love' is ___.",               answer: 'silent',     ko: "'love'의 'e'는 묵음이에요." }
+];
+
+function buildReviewQuiz() {
+  var container = document.getElementById('review-quiz');
+  if (!container) return;
+  container.innerHTML = '';
+  reviewQs.forEach(function(q, i) {
+    var div = document.createElement('div');
+    div.className = 'rq-item';
+    div.dataset.idx = i;
+    div.innerHTML =
+      '<div class="rq-prompt">' + q.prompt.replace('___', '<input class="rq-input" id="rq-' + i + '" placeholder="..." autocomplete="off" spellcheck="false">') + '</div>' +
+      '<div class="rq-ko">' + q.ko + '</div>' +
+      '<div class="rq-feedback" id="rq-fb-' + i + '"></div>';
+    container.appendChild(div);
+    var inp = div.querySelector('.rq-input');
+    if (inp) inp.addEventListener('keydown', function(e){ if(e.key==='Enter') checkAllReview(); });
+  });
+}
+
+function checkAllReview() {
+  rvScore = 0;
+  reviewQs.forEach(function(q, i) {
+    var inp = document.getElementById('rq-' + i);
+    var fb  = document.getElementById('rq-fb-' + i);
+    var item = inp ? inp.closest('.rq-item') : null;
+    if (!inp) return;
+    var val = inp.value.trim().toLowerCase();
+    if (val === q.answer.toLowerCase()) {
+      rvScore++;
+      inp.classList.remove('wrong'); inp.classList.add('correct');
+      if (fb) { fb.textContent = '정답! / Correct!'; fb.style.color = 'var(--celadon)'; }
+    } else {
+      inp.classList.remove('correct'); inp.classList.add('wrong');
+      if (fb) { fb.textContent = '정답: ' + q.answer + ' / Answer: ' + q.answer; fb.style.color = 'var(--crimson)'; }
+    }
+    if (item) item.classList.add('checked');
+  });
+  var badge = document.getElementById('review-score-badge');
+  if (badge) badge.textContent = rvScore + ' / ' + reviewQs.length + ' 정답';
+  try { StudentDB.saveExercise(2, 'review', { score: rvScore }); } catch(e) {}
+}
+
+function resetReview() {
+  reviewQs.forEach(function(q, i) {
+    var inp = document.getElementById('rq-' + i);
+    var fb  = document.getElementById('rq-fb-' + i);
+    if (inp) { inp.value = ''; inp.classList.remove('correct','wrong'); }
+    if (fb)  { fb.textContent = ''; }
+    var item = inp ? inp.closest('.rq-item') : null;
+    if (item) item.classList.remove('checked');
+  });
+  var badge = document.getElementById('review-score-badge');
+  if (badge) badge.textContent = '0 / 8 정답';
+}
+
+// ── ERROR CORRECTION ───────────────────────────
+function buildErrorItems() {
+  var container = document.getElementById('error-items');
+  if (!container || !COURSE_DATA.week2) return;
+  container.innerHTML = '';
+  COURSE_DATA.week2.errorCorrection.forEach(function(item, i) {
+    var div = document.createElement('div');
+    div.className = 'error-item';
+    div.innerHTML =
+      '<div class="error-wrong">' + item.wrong + '</div>' +
+      '<div class="error-right">' + item.right + '</div>' +
+      '<div class="error-rule">' + item.rule + '</div>' +
+      '<div style="display:flex;gap:0.5rem;margin-top:0.75rem;">' +
+        '<button class="btn-reveal" onclick="revealError(this)">정답 확인 / Reveal Answer</button>' +
+        '<button class="btn-card-action btn-speak" onclick="Speaker.speakText(\'' + item.right.replace(/'/g,'') + '\')" style="padding:0.35rem 0.875rem;font-size:0.8rem;">&#9654; 듣기</button>' +
+      '</div>';
+    container.appendChild(div);
+  });
+}
+
+function revealError(btn) {
+  var item = btn.closest('.error-item');
+  if (item) { item.classList.add('revealed'); btn.disabled = true; }
+}
+
+// ── PRONOUN TABLE ──────────────────────────────
+function buildPronounTable() {
+  var tbody = document.getElementById('pronoun-tbody');
+  if (!tbody || !COURSE_DATA.week2) return;
+  COURSE_DATA.week2.pronouns.forEach(function(row) {
+    var tr = document.createElement('tr');
+    function makeBtn(word) {
+      return '<button class="pron-btn" onclick="speakPronoun(\'' + word + '\', this)">' + word + '</button>';
+    }
+    tr.innerHTML =
+      '<td class="ko-cell">' + row.ko + '</td>' +
+      '<td>' + makeBtn(row.subject)  + '</td>' +
+      '<td>' + makeBtn(row.object)   + '</td>' +
+      '<td>' + makeBtn(row.possAdj)  + '</td>' +
+      '<td>' + makeBtn(row.possPron) + '</td>';
+    tbody.appendChild(tr);
+  });
+}
+
+function speakPronoun(word, btn) { Speaker.speakWord(word, btn); }
+
+// ── PRONOUN FILL-IN ─────────────────────────────
+function buildPronounFill() {
+  var container = document.getElementById('pronoun-fill-exercise');
+  if (!container || !COURSE_DATA.week2) return;
+  container.innerHTML = '';
+  pfScore = 0; pfAnswered = 0;
+  COURSE_DATA.week2.pronounFill.forEach(function(item, i) {
+    var div = document.createElement('div');
+    div.className = 'fill-item';
+    var optBtns = item.options.map(function(opt) {
+      return '<button class="fill-opt-btn" onclick="checkFill(' + i + ',\'' + opt + '\',\'' + item.answer + '\',this)">' + opt + '</button>';
+    }).join('');
+    div.innerHTML =
+      '<div class="fill-sentence">' + item.sentence + '</div>' +
+      '<div class="fill-options">' + optBtns + '</div>' +
+      '<div class="fill-hint">' + item.hint + '</div>';
+    div.id = 'fill-item-' + i;
+    container.appendChild(div);
+  });
+}
+
+function checkFill(idx, chosen, correct, btn) {
+  var item = document.getElementById('fill-item-' + idx);
+  if (!item || item.dataset.answered) return;
+  item.dataset.answered = '1';
+  var allBtns = item.querySelectorAll('.fill-opt-btn');
+  allBtns.forEach(function(b) { b.disabled = true; });
+
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    pfScore++;
+  } else {
+    btn.classList.add('wrong');
+    allBtns.forEach(function(b) { if (b.textContent.trim() === correct) b.classList.add('correct'); });
+  }
+  item.classList.add('revealed');
+  pfAnswered++;
+
+  var badge = document.getElementById('pf-score-badge');
+  if (badge) badge.textContent = pfScore + ' / ' + COURSE_DATA.week2.pronounFill.length + ' 정답';
+  try { StudentDB.saveExercise(2, 'pronounFill', { score: pfScore }); } catch(e) {}
+}
+
+function resetPronounFill() {
+  pfScore = 0; pfAnswered = 0;
+  buildPronounFill();
+  var badge = document.getElementById('pf-score-badge');
+  if (badge) badge.textContent = '0 / 10 정답';
+}
+
+// ── FLASHCARDS ─────────────────────────────────
+function buildVocabTable() {
+  var tbody = document.getElementById('vocab-table-body');
+  if (!tbody || !COURSE_DATA.week2) return;
+  COURSE_DATA.week2.vocabulary.forEach(function(word) {
+    var safeEn = word.en.replace(/'/g,'');
+    var tr = document.createElement('tr');
+    tr.style.borderBottom = '1px solid var(--mist)';
+    tr.innerHTML =
+      '<td style="padding:0.55rem 0.75rem;font-weight:600;color:var(--ink);">' + word.en + '</td>' +
+      '<td style="padding:0.55rem 0.75rem;color:var(--text-mid);">' + word.ko + '</td>' +
+      '<td style="padding:0.55rem 0.75rem;color:var(--text-light);font-size:0.85em;font-style:italic;">' + word.example + '</td>' +
+      '<td style="padding:0.55rem 0.75rem;"><button onclick="Speaker.speakWord(\'' + safeEn + '\',this)" style="border:1px solid var(--mist);background:none;border-radius:100px;padding:3px 10px;cursor:pointer;font-size:0.8rem;color:var(--cobalt);">&#9654;</button></td>';
+    tbody.appendChild(tr);
+  });
+}
+
+function setCardMode(mode) {
+  cardMode = mode; cardFlipped = false;
+  var fc = document.getElementById('flashcard');
+  if (fc) fc.classList.remove('flipped');
+  var me = document.getElementById('mode-en-ko'), mk = document.getElementById('mode-ko-en');
+  if (me && mk) {
+    if (mode==='en-ko') { me.style.borderColor='var(--cobalt)'; me.style.color='var(--cobalt)'; mk.style.borderColor=''; mk.style.color=''; }
+    else { mk.style.borderColor='var(--cobalt)'; mk.style.color='var(--cobalt)'; me.style.borderColor=''; me.style.color=''; }
+  }
+  updateCard();
+}
+
+function updateCard() {
+  var vocab = COURSE_DATA.week2 ? COURSE_DATA.week2.vocabulary : [];
+  if (!vocab.length) return;
+  var word = vocab[cardIndex];
+  var ft = document.getElementById('card-front-text');
+  var bt = document.getElementById('card-back-text');
+  var et = document.getElementById('card-example-text');
+  var ct = document.getElementById('card-counter');
+  var pb = document.getElementById('vocab-progress-badge');
+  if (cardMode==='en-ko') { if(ft) ft.textContent=word.en; if(bt) bt.textContent=word.ko; }
+  else                    { if(ft) ft.textContent=word.ko; if(bt) bt.textContent=word.en; }
+  if (et) et.textContent = word.example ? '"' + word.example + '"' : '';
+  if (ct) ct.textContent = (cardIndex+1) + ' / ' + vocab.length;
+  if (pb) pb.textContent = cardKnown.size + ' / ' + vocab.length + ' 익힘';
+}
+
+function flipCard() {
+  cardFlipped = !cardFlipped;
+  var fc = document.getElementById('flashcard');
+  if (fc) fc.classList.toggle('flipped', cardFlipped);
+}
+
+function nextCard() {
+  cardFlipped = false;
+  var fc = document.getElementById('flashcard');
+  if (fc) fc.classList.remove('flipped');
+  cardIndex = (cardIndex+1) % COURSE_DATA.week2.vocabulary.length;
+  updateCard();
+}
+
+function prevCard() {
+  cardFlipped = false;
+  var fc = document.getElementById('flashcard');
+  if (fc) fc.classList.remove('flipped');
+  var len = COURSE_DATA.week2.vocabulary.length;
+  cardIndex = (cardIndex-1+len) % len;
+  updateCard();
+}
+
+function markCard(status) {
+  if (status==='know') {
+    cardKnown.add(cardIndex);
+    try { StudentDB.saveExercise(2,'flashcards',{known:Array.from(cardKnown),total:COURSE_DATA.week2.vocabulary.length}); } catch(e){}
+  }
+  nextCard();
+}
+
+function speakCurrentCard() {
+  var word = COURSE_DATA.week2.vocabulary[cardIndex];
+  if (word) Speaker.speakWord(word.en);
+}
+
+// ── SENTENCE SCRAMBLE ──────────────────────────
+function shuffle(arr) {
+  for (var i=arr.length-1;i>0;i--) { var j=Math.floor(Math.random()*(i+1)); var t=arr[i];arr[i]=arr[j];arr[j]=t; }
+  return arr;
+}
+
+function initScramble() {
+  scrIndex=0; scrCorrect=0; scrWrong=0;
+  document.getElementById('scramble-celebration').classList.remove('show');
+  document.getElementById('scr-correct').textContent='0';
+  document.getElementById('scr-wrong').textContent='0';
+  document.getElementById('scr-remain').textContent=COURSE_DATA.week2.scramble.length;
+  loadScrambleSentence();
+}
+
+function loadScrambleSentence() {
+  var data = COURSE_DATA.week2.scramble;
+  if (scrIndex >= data.length) { showScrambleCelebration(); return; }
+  var s = data[scrIndex];
+  scrPlaced = []; scrAvail = shuffle(s.correct.slice());
+  document.getElementById('scramble-ko').textContent = s.ko;
+  document.getElementById('scramble-hint').textContent = s.hint;
+  document.getElementById('scramble-counter').textContent = (scrIndex+1) + ' / ' + data.length;
+  renderScramble();
+  var r = document.getElementById('scramble-result');
+  if (r) { r.style.display='none'; }
+  var ansRow = document.getElementById('scramble-answer');
+  if (ansRow) { ansRow.classList.remove('correct','wrong'); }
+}
+
+function renderScramble() {
+  var ansRow  = document.getElementById('scramble-answer');
+  var chipsEl = document.getElementById('scramble-chips');
+  if (!ansRow || !chipsEl) return;
+
+  ansRow.innerHTML = '';
+  scrPlaced.forEach(function(word, i) {
+    var chip = document.createElement('span');
+    chip.className = 'word-chip placed';
+    chip.textContent = word;
+    chip.onclick = function() { scrAvail.push(word); scrPlaced.splice(i,1); renderScramble(); };
+    ansRow.appendChild(chip);
+  });
+
+  chipsEl.innerHTML = '';
+  scrAvail.forEach(function(word, i) {
+    var chip = document.createElement('span');
+    chip.className = 'word-chip available';
+    chip.textContent = word;
+    chip.onclick = function() { scrPlaced.push(word); scrAvail.splice(i,1); renderScramble(); };
+    chipsEl.appendChild(chip);
+  });
+}
+
+function clearScramble() {
+  var s = COURSE_DATA.week2.scramble[scrIndex];
+  scrAvail = shuffle(s.correct.slice());
+  scrPlaced = [];
+  renderScramble();
+  var r = document.getElementById('scramble-result');
+  if (r) r.style.display = 'none';
+  var ansRow = document.getElementById('scramble-answer');
+  if (ansRow) ansRow.classList.remove('correct','wrong');
+}
+
+function checkScramble() {
+  var s = COURSE_DATA.week2.scramble[scrIndex];
+  var isCorrect = scrPlaced.join(' ') === s.correct.join(' ');
+  var ansRow = document.getElementById('scramble-answer');
+  var resultEl = document.getElementById('scramble-result');
+
+  if (isCorrect) {
+    scrCorrect++;
+    if (ansRow) ansRow.classList.add('correct');
+    if (resultEl) {
+      resultEl.style.display='block';
+      resultEl.style.background='rgba(126,179,168,0.12)';
+      resultEl.style.color='var(--celadon)';
+      resultEl.textContent='정답! / Correct! — ' + s.correct.join(' ');
+    }
+    Speaker.speakText(s.correct.join(' '));
+    setTimeout(function() {
+      scrIndex++;
+      document.getElementById('scr-remain').textContent = Math.max(0, COURSE_DATA.week2.scramble.length - scrIndex);
+      loadScrambleSentence();
+    }, 1800);
+  } else {
+    scrWrong++;
+    if (ansRow) { ansRow.classList.add('wrong'); setTimeout(function(){ ansRow.classList.remove('wrong'); },600); }
+    if (resultEl) {
+      resultEl.style.display='block';
+      resultEl.style.background='rgba(192,57,43,0.08)';
+      resultEl.style.color='var(--crimson)';
+      resultEl.textContent='다시 해보세요! / Try again! Tip: ' + s.hint;
+    }
+  }
+
+  document.getElementById('scr-correct').textContent = scrCorrect;
+  document.getElementById('scr-wrong').textContent   = scrWrong;
+  try { StudentDB.saveExercise(2,'scramble',{correct:scrCorrect,wrong:scrWrong}); } catch(e){}
+}
+
+function showScrambleCelebration() {
+  var cel = document.getElementById('scramble-celebration');
+  var fin = document.getElementById('scramble-final');
+  if (cel) cel.classList.add('show');
+  if (fin) fin.textContent = '정답: ' + scrCorrect + '개  ·  오답: ' + scrWrong + '개';
+  Speaker.speakText('Excellent work! You completed all sentences!');
+}
+
+// ── DIALOGUE CARDS ─────────────────────────────
+function buildDialogueCards() {
+  var container = document.getElementById('dialogue-cards-w2');
+  if (!container || !COURSE_DATA.week2 || !COURSE_DATA.week2.dialogues) return;
+  container.innerHTML = '';
+  COURSE_DATA.week2.dialogues.forEach(function(dlg) {
+    var allLines = dlg.lines.map(function(l){ return l.en; }).join('. ').replace(/'/g,'');
+    var linesHtml = dlg.lines.map(function(line) {
+      var isB = (line.speaker==='J'||line.speaker==='B'||line.speaker==='C'||line.speaker==='Y');
+      return '<div class="dialogue-line">' +
+        '<span class="dl-speaker" style="color:' + (isB?'var(--cobalt)':'var(--crimson)') + ';">' + line.speaker + '</span>' +
+        '<div class="dl-bubble' + (isB?' b-student':'') + '">' +
+        '<span class="dl-text">' + line.en + '</span>' +
+        '<span class="dl-ko">' + line.ko + '</span></div></div>';
+    }).join('');
+    var card = document.createElement('div');
+    card.className = 'dialogue-scenario';
+    card.innerHTML =
+      '<div class="scenario-header">' +
+      '<div><span class="scenario-title">' + dlg.titleKo + '</span>' +
+      '<span class="scenario-sub">' + dlg.titleEn + '</span></div>' +
+      '<button onclick="Speaker.speakText(\'' + allLines + '\')" class="btn-card-action btn-speak" style="margin-left:auto;padding:0.4rem 1rem;font-size:0.8rem;">&#9654; 전체 듣기</button>' +
+      '</div>' +
+      '<div class="dialogue-lines">' + linesHtml + '</div>' +
+      '<div style="background:rgba(43,93,160,0.06);border-radius:var(--radius-md);padding:0.875rem;font-size:0.82rem;color:var(--text-mid);">' +
+      '&#128161; 역할을 바꿔가며 반복 연습하세요! <em>Switch roles and repeat for extra practice.</em></div>';
+    container.appendChild(card);
+  });
+}
+
+// ── TEACHER NOTES ──────────────────────────────
+function saveTeacherNotes() {
+  var notes = (document.getElementById('teacher-notes')||{}).value||'';
+  try { StudentDB.saveExercise(2,'teacher_notes',{notes:notes}); } catch(e){}
+  var msg = document.getElementById('notes-saved-msg');
+  if (msg) { msg.style.display='inline'; setTimeout(function(){ msg.style.display='none'; },2500); }
+}
+
+// ── COMPLETE WEEK ──────────────────────────────
+function completeWeek2() {
+  try { StudentDB.completeWeek(2); } catch(e){}
+  var btn = document.querySelector('.btn-complete-week');
+  var msg = document.getElementById('completion-msg');
+  if (btn) btn.style.display='none';
+  if (msg) msg.style.display='block';
+  Speaker.speakText('Congratulations! You completed Week 2. Excellent work!');
+}
+
+// ── RESTORE STATE ──────────────────────────────
+function restoreState() {
+  try {
+    var fcSaved = StudentDB.getExercise(2,'flashcards');
+    if (fcSaved && fcSaved.known) fcSaved.known.forEach(function(i){ cardKnown.add(i); });
+    var notesSaved = StudentDB.getExercise(2,'teacher_notes');
+    if (notesSaved && notesSaved.notes) {
+      var ta = document.getElementById('teacher-notes');
+      if (ta) ta.value = notesSaved.notes;
+    }
+  } catch(e){}
+}
+</script>
+</body>
+</html>

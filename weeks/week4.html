@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 4 — 현재 단순 시제 | 기초 영어</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .conj-table { width:100%; border-collapse:collapse; font-size:0.92rem; margin:1rem 0; }
+    .conj-table th { background:var(--cobalt-dark); color:var(--white); padding:0.65rem 0.875rem; text-align:left; font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; font-weight:700; }
+    .conj-table td { padding:0.65rem 0.875rem; border-bottom:1px solid var(--mist); }
+    .conj-table tr:last-child td { border-bottom:none; }
+    .conj-table tr:nth-child(even) td { background:var(--paper-warm); }
+    .conj-table .subj { font-family:var(--font-serif); font-weight:700; color:var(--cobalt-dark); }
+    .conj-table .form { font-family:var(--font-serif); font-weight:700; font-size:1.05rem; color:var(--ink); }
+    .conj-table .form .s-highlight { color:var(--crimson); }
+    .conj-table .note { font-size:0.78rem; color:var(--text-light); }
+    .conj-table .note.plus { color:var(--crimson); font-weight:700; }
+    .conj-table .ko-cell { font-size:0.8rem; color:var(--text-light); }
+    .conj-table .spk { background:none; border:1px solid var(--mist); border-radius:100px; padding:2px 9px; cursor:pointer; color:var(--cobalt); font-size:0.78rem; }
+    .conj-table .spk:hover { background:var(--cobalt); color:var(--white); }
+
+    .spell-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; margin:1rem 0; }
+    .spell-card { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:1.25rem; border-top:4px solid var(--gold); }
+    .spell-card .rule-ko { font-family:var(--font-serif); font-weight:700; font-size:0.95rem; color:var(--cobalt-dark); margin-bottom:0.25rem; }
+    .spell-card .rule-en { font-size:0.78rem; color:var(--text-light); font-style:italic; margin-bottom:0.75rem; }
+    .spell-card .transform { display:flex; align-items:center; gap:0.625rem; font-family:var(--font-serif); font-size:1.1rem; }
+    .spell-card .base { color:var(--text-mid); }
+    .spell-card .arrow { color:var(--gold); }
+    .spell-card .third { color:var(--crimson); font-weight:700; }
+
+    .fill-exercise { display:flex; flex-direction:column; gap:1rem; }
+    .fill-item { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:1rem 1.25rem; }
+    .fill-item .fill-sentence { font-family:var(--font-serif); font-size:1.02rem; color:var(--ink); margin-bottom:0.625rem; }
+    .fill-options { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.5rem; }
+    .fill-opt-btn { padding:0.4rem 1.25rem; border:2px solid var(--mist); border-radius:100px; background:var(--paper); font-family:var(--font-serif); font-size:1rem; font-weight:700; color:var(--ink); cursor:pointer; transition:all 0.15s; }
+    .fill-opt-btn:hover:not(:disabled) { border-color:var(--cobalt-light); color:var(--cobalt); }
+    .fill-opt-btn.correct { border-color:var(--celadon); background:rgba(126,179,168,0.12); color:var(--celadon); }
+    .fill-opt-btn.wrong { border-color:var(--crimson); background:rgba(192,57,43,0.08); color:var(--crimson); }
+    .fill-hint { font-size:0.78rem; color:var(--text-light); font-style:italic; display:none; }
+    .fill-item.revealed .fill-hint { display:block; }
+
+    .nq-items { display:flex; flex-direction:column; gap:1rem; }
+    .nq-item { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:1.25rem; }
+    .nq-positive { font-family:var(--font-serif); font-size:1rem; color:var(--ink); margin-bottom:0.625rem; display:flex; align-items:center; gap:0.625rem; flex-wrap:wrap; }
+    .nq-label { font-size:0.62rem; font-weight:700; letter-spacing:0.08em; padding:2px 8px; border-radius:100px; text-transform:uppercase; }
+    .nq-label.pos { background:rgba(43,93,160,0.1); color:var(--cobalt); }
+    .nq-label.neg { background:rgba(192,57,43,0.1); color:var(--crimson); }
+    .nq-label.qst { background:rgba(126,179,168,0.15); color:var(--celadon); }
+    .nq-reveal { display:none; }
+    .nq-item.revealed .nq-reveal { display:block; }
+    .nq-neg, .nq-qst { font-family:var(--font-serif); font-size:0.98rem; margin-top:0.5rem; display:flex; align-items:center; gap:0.625rem; flex-wrap:wrap; }
+    .nq-neg { color:var(--crimson); }
+    .nq-qst { color:var(--celadon); }
+
+    @media(max-width:600px){
+      .conj-table { font-size:0.82rem; }
+      .conj-table th,.conj-table td { padding:0.5rem 0.45rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="week-page-header">
+  <div class="week-header-pattern" aria-hidden="true"></div>
+  <div class="week-header-inner">
+    <a href="../index.html" class="week-back-link">← 과정 목록으로 / Back to Course</a>
+    <div class="week-number-badge">Week 04 &nbsp;·&nbsp; 06월 22일</div>
+    <h1 class="week-page-title">복습 + 현재 단순 시제</h1>
+    <p class="week-page-subtitle">Review + Present Simple Tense + Vocabulary</p>
+    <div id="w4-student-name" style="color:rgba(255,255,255,0.6);font-size:0.88rem;margin-top:0.5rem;"></div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchSection('review',this)"><span class="tab-ko">복습</span><span class="tab-en">Review</span></button>
+    <button class="tab-btn" onclick="switchSection('tense',this)"><span class="tab-ko">현재 시제</span><span class="tab-en">Present</span></button>
+    <button class="tab-btn" onclick="switchSection('negq',this)"><span class="tab-ko">부정 &amp; 질문</span><span class="tab-en">Neg &amp; Q</span></button>
+    <button class="tab-btn" onclick="switchSection('vocab',this)"><span class="tab-ko">어휘</span><span class="tab-en">Vocabulary</span></button>
+    <button class="tab-btn" onclick="switchSection('game',this)"><span class="tab-ko">동사 게임</span><span class="tab-en">Verb Game</span></button>
+    <button class="tab-btn" onclick="switchSection('dialogue',this)"><span class="tab-ko">대화 연습</span><span class="tab-en">Dialogue</span></button>
+  </div>
+</nav>
+
+<!-- ═══ SECTION A: REVIEW ═══ -->
+<section class="lesson-section active" id="sec-review">
+  <div class="section-banner">
+    <span class="section-num">Section A</span>
+    <h2>Week 3 복습</h2>
+    <span class="section-sub">Week 3 Review — Be Verbs &amp; Questions</span>
+    <div class="section-tip">
+      지난주에 배운 be 동사(am/is/are)와 질문을 복습해요.<br>
+      <em>Review last week's be-verbs and questions. Type the correct word in each blank.</em>
+    </div>
+  </div>
+  <div class="exercise-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem;">
+      <h3>Be 동사 &amp; 질문 복습 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Be Verbs &amp; Questions</span></h3>
+      <div class="progress-counter" id="review-score-badge">0 / 8 정답</div>
+    </div>
+    <div id="review-quiz" style="display:grid;gap:1rem;"></div>
+    <div style="margin-top:1.25rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="checkAllReview()">확인하기 / Check All</button>
+      <button class="btn-secondary" onclick="resetReview()">다시 하기 / Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION B: PRESENT TENSE ═══ -->
+<section class="lesson-section" id="sec-tense">
+  <div class="section-banner">
+    <span class="section-num">Section B</span>
+    <h2>현재 단순 시제</h2>
+    <span class="section-sub">Present Simple Tense — Habits, Routines &amp; Facts</span>
+    <div class="section-tip">
+      현재 단순 시제는 습관, 일상, 사실을 말할 때 써요. 가장 중요한 규칙: he/she/it 뒤의 동사에는 -s를 붙여요!<br>
+      <em>Use the present simple for habits, routines, and facts. The key rule: add -s after he/she/it!</em>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <h3>동사 변화표 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Conjugation Table — "to work"</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1rem;">각 형태를 클릭하면 발음을 들을 수 있어요. 빨간색 -s에 주목하세요!<br><em>Click any form to hear it. Notice the red -s on he/she/it!</em></p>
+    <div style="overflow-x:auto;">
+      <table class="conj-table" id="conj-table">
+        <thead><tr><th>주어 Subject</th><th>동사 Verb</th><th>규칙 Rule</th><th>한국어</th><th>듣기</th></tr></thead>
+        <tbody id="conj-tbody"></tbody>
+      </table>
+    </div>
+    <div style="margin-top:1rem;padding:0.875rem 1rem;background:rgba(192,57,43,0.07);border-left:4px solid var(--crimson);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:0.85rem;color:var(--text-mid);">
+      <strong>가장 흔한 실수:</strong> 한국어에는 이런 규칙이 없어서 -s를 자주 빠뜨려요. "He work" (X) → "He work<strong>s</strong>" (O)<br>
+      <em><strong>Most common mistake:</strong> Korean has no rule like this, so learners often forget the -s. Always check he/she/it!</em>
+    </div>
+  </div>
+
+  <div class="exercise-card" style="margin-top:1.25rem;">
+    <h3>-s 철자 규칙 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Spelling Rules for -s / -es</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1rem;">he/she/it와 함께 쓸 때 동사 끝이 어떻게 바뀌는지 보세요.<br><em>See how the verb ending changes with he/she/it. Click to hear each one.</em></p>
+    <div class="spell-grid" id="spell-grid"></div>
+  </div>
+
+  <div class="exercise-card" style="margin-top:1.25rem;">
+    <h3>동사 형태 고르기 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Choose the Correct Verb Form</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1.25rem;">주어에 맞는 올바른 동사 형태를 선택하세요.<br><em>Click the correct verb form for each subject.</em></p>
+    <div class="fill-exercise" id="conj-fill-exercise"></div>
+    <div style="margin-top:1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <div class="progress-counter" id="cf-score-badge">0 / 10 정답</div>
+      <button class="btn-secondary" onclick="resetConjFill()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">다시 하기 / Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION C: NEGATIVE & QUESTION ═══ -->
+<section class="lesson-section" id="sec-negq">
+  <div class="section-banner">
+    <span class="section-num">Section C</span>
+    <h2>부정문 &amp; 질문</h2>
+    <span class="section-sub">Negatives &amp; Questions — Using "do" and "does"</span>
+    <div class="section-tip">
+      현재 시제의 부정문과 질문에는 do/does를 써요. he/she/it에는 does, 나머지는 do를 써요.<br>
+      <em>Use do/does for negatives and questions. Use "does" with he/she/it, and "do" with everything else.</em>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <h3>do / does 규칙 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">The do / does Rule</span></h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.25rem 0;">
+      <div style="background:rgba(43,93,160,0.08);border-radius:var(--radius-md);padding:1.25rem;text-align:center;">
+        <div style="font-family:var(--font-serif);font-size:1.5rem;font-weight:700;color:var(--cobalt);margin-bottom:0.5rem;">do</div>
+        <div style="font-size:0.85rem;color:var(--text-mid);">I · You · We · They</div>
+        <div style="font-family:var(--font-serif);font-size:0.95rem;color:var(--ink);margin-top:0.75rem;">Do you work here?</div>
+        <div style="font-size:0.78rem;color:var(--text-light);font-style:italic;">여기서 일하세요?</div>
+      </div>
+      <div style="background:rgba(192,57,43,0.08);border-radius:var(--radius-md);padding:1.25rem;text-align:center;">
+        <div style="font-family:var(--font-serif);font-size:1.5rem;font-weight:700;color:var(--crimson);margin-bottom:0.5rem;">does</div>
+        <div style="font-size:0.85rem;color:var(--text-mid);">He · She · It</div>
+        <div style="font-family:var(--font-serif);font-size:0.95rem;color:var(--ink);margin-top:0.75rem;">Does she work here?</div>
+        <div style="font-size:0.78rem;color:var(--text-light);font-style:italic;">그녀는 여기서 일해요?</div>
+      </div>
+    </div>
+    <div style="padding:0.875rem 1rem;background:rgba(200,131,42,0.08);border-left:4px solid var(--gold);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:0.85rem;color:var(--text-mid);">
+      <strong>중요:</strong> does를 쓰면 동사는 기본형으로 돌아가요! "Does she work<strong>s</strong>?" (X) → "Does she work?" (O)<br>
+      <em><strong>Important:</strong> When you use "does," the main verb loses its -s and returns to the base form!</em>
+    </div>
+  </div>
+
+  <div class="exercise-card" style="margin-top:1.25rem;">
+    <h3>긍정 → 부정 → 질문 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Positive → Negative → Question</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1.25rem;">긍정문을 보고 부정문과 질문을 만들어 보세요. 그런 다음 정답을 확인하세요.<br><em>Look at the positive sentence. Make the negative and question, then reveal the answers.</em></p>
+    <div class="nq-items" id="nq-items"></div>
+  </div>
+</section>
+
+<!-- ═══ SECTION D: VOCABULARY ═══ -->
+<section class="lesson-section" id="sec-vocab">
+  <div class="section-banner">
+    <span class="section-num">Section D</span>
+    <h2>이번 주 어휘</h2>
+    <span class="section-sub">Week 4 Vocabulary — 25 Everyday Action Verbs</span>
+    <div class="section-tip">
+      이번 주 단어는 모두 일상 동사예요. 현재 시제 연습에 사용하세요!<br>
+      <em>This week's words are everyday action verbs. Use them to practice the present simple tense!</em>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+    <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+      <span style="font-size:0.78rem;font-weight:700;color:var(--text-light);letter-spacing:0.04em;">방향 / MODE:</span>
+      <button class="btn-card-action btn-flip" id="mode-en-ko" onclick="setCardMode('en-ko')" style="padding:0.4rem 1rem;font-size:0.8rem;border-color:var(--cobalt);color:var(--cobalt);">영 &rarr; 한</button>
+      <button class="btn-card-action btn-flip" id="mode-ko-en" onclick="setCardMode('ko-en')" style="padding:0.4rem 1rem;font-size:0.8rem;">한 &rarr; 영</button>
+    </div>
+    <div class="progress-counter" id="vocab-progress-badge">0 / 25 익힘</div>
+  </div>
+
+  <div class="flashcard-deck">
+    <div class="flashcard-container" id="flashcard" onclick="flipCard()">
+      <div class="flashcard-inner" id="flashcard-inner">
+        <div class="card-face card-front">
+          <span class="card-hint">클릭하면 뒤집어요 · Click to flip</span>
+          <span class="card-main-text" id="card-front-text">wake up</span>
+          <span class="card-pron" id="card-pron-text"></span>
+        </div>
+        <div class="card-face card-back">
+          <span class="card-hint">뜻 · Meaning</span>
+          <span class="card-main-text" id="card-back-text">일어나다</span>
+          <span class="card-example" id="card-example-text"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-nav">
+    <button class="btn-card-action btn-practice" onclick="markCard('practice')">&larr; 더 연습</button>
+    <button class="btn-card-action btn-flip" onclick="prevCard()">&larr; 이전</button>
+    <span class="card-counter" id="card-counter">1 / 25</span>
+    <button class="btn-card-action btn-flip" onclick="nextCard()">다음 &rarr;</button>
+    <button class="btn-card-action btn-know" onclick="markCard('know')">&#10003; 알아요!</button>
+  </div>
+  <div style="text-align:center;margin-top:1rem;">
+    <button class="btn-card-action btn-speak" onclick="speakCurrentCard()" style="padding:0.5rem 1.5rem;">&#9654; 발음 듣기</button>
+  </div>
+
+  <div class="exercise-card" style="margin-top:2rem;">
+    <h3>전체 단어 목록 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Full Vocabulary List</span></h3>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--cobalt);">
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">ENGLISH</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">한국어</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">예문 / Example</th>
+            <th style="padding:0.6rem 0.75rem;"></th>
+          </tr>
+        </thead>
+        <tbody id="vocab-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION E: VERB GAME ═══ -->
+<section class="lesson-section" id="sec-game">
+  <div class="section-banner">
+    <span class="section-num">Section E</span>
+    <h2>동사 변화 게임</h2>
+    <span class="section-sub">Conjugation Challenge — Build the Correct Sentence</span>
+    <div class="section-tip">
+      주어와 동사가 주어지면, 올바른 형태를 선택해 문장을 완성하세요!<br>
+      <em>Given a subject and verb, choose the correct form to complete the sentence!</em>
+    </div>
+  </div>
+
+  <div class="match-score-bar">
+    <div class="match-score"><span class="score-num" id="game-correct">0</span><span class="score-label">정답 Correct</span></div>
+    <div style="width:1px;height:40px;background:var(--mist);"></div>
+    <div class="match-score"><span class="score-num" id="game-wrong" style="color:var(--crimson);">0</span><span class="score-label">오답 Wrong</span></div>
+    <div style="width:1px;height:40px;background:var(--mist);"></div>
+    <div class="match-score"><span class="score-num" id="game-remain">10</span><span class="score-label">남음 Left</span></div>
+    <button class="btn-secondary" onclick="initVerbGame()" style="margin-left:auto;font-size:0.82rem;padding:0.5rem 1.25rem;">&#8635; 다시 시작</button>
+  </div>
+
+  <div class="exercise-card" id="game-area">
+    <div style="text-align:center;padding:1rem 0;">
+      <div style="font-size:0.75rem;font-weight:700;color:var(--text-light);letter-spacing:0.08em;margin-bottom:0.75rem;">이 문장을 완성하세요 / COMPLETE THE SENTENCE</div>
+      <div id="game-sentence" style="font-family:var(--font-serif);font-size:1.5rem;color:var(--ink);margin-bottom:0.5rem;line-height:1.5;"></div>
+      <div id="game-ko" style="font-size:0.9rem;color:var(--text-light);margin-bottom:1.5rem;"></div>
+      <div id="game-options" style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;"></div>
+      <div id="game-feedback" style="margin-top:1.25rem;font-family:var(--font-serif);font-size:1rem;min-height:1.5rem;"></div>
+    </div>
+  </div>
+
+  <div class="match-celebration" id="game-celebration">
+    <div style="font-size:2rem;margin-bottom:0.75rem;">&#11088;</div>
+    <h3>훌륭합니다! Excellent Work!</h3>
+    <p style="color:var(--text-mid);margin:0.75rem 0;">모든 문장을 완성했어요!<br><em>You completed all the sentences!</em></p>
+    <div style="font-family:var(--font-serif);font-size:1.1rem;color:var(--cobalt);margin:1rem 0;" id="game-final"></div>
+    <button class="btn-primary" onclick="initVerbGame()">&#8635; 다시 하기 / Play Again</button>
+  </div>
+</section>
+
+<!-- ═══ SECTION F: DIALOGUE ═══ -->
+<section class="lesson-section" id="sec-dialogue">
+  <div class="section-banner">
+    <span class="section-num">Section F</span>
+    <h2>대화 연습</h2>
+    <span class="section-sub">Dialogue Practice — Present Simple in Real Conversations</span>
+    <div class="section-tip">
+      대화 속에서 현재 시제 동사와 do/does 질문을 찾아보세요.<br>
+      <em>Find present simple verbs and do/does questions in each dialogue.</em>
+    </div>
+  </div>
+
+  <div style="margin-bottom:1.5rem;"><div class="teacher-badge">&#128203; 선생님 감독 구역 · Teacher Supervised</div></div>
+
+  <div id="dialogue-cards-w4"></div>
+
+  <div class="exercise-card" style="margin-top:1.5rem;">
+    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
+      <span style="font-size:1.1rem;">&#128221;</span>
+      <h3 style="margin:0;">선생님 관찰 메모 <em style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Teacher Notes</em></h3>
+    </div>
+    <textarea class="teacher-notes-area" id="teacher-notes" placeholder="오늘 수업 메모... / Today's class notes..." rows="5"></textarea>
+    <div style="margin-top:0.75rem;display:flex;gap:0.75rem;align-items:center;">
+      <button class="btn-secondary" onclick="saveTeacherNotes()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">저장 / Save Notes</button>
+      <span id="notes-saved-msg" style="display:none;font-size:0.8rem;color:var(--celadon);">&#10003; 저장됨</span>
+    </div>
+  </div>
+</section>
+
+<div class="complete-week-bar">
+  <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:1rem;">오늘 수업이 모두 끝났나요? Week 4를 완료로 표시하세요!<br><em>Done for today? Mark Week 4 as complete!</em></p>
+  <button class="btn-complete-week" onclick="completeWeek4()">Week 4 완료 / Mark Complete</button>
+  <div id="completion-msg" style="display:none;margin-top:1rem;font-family:var(--font-serif);font-size:1.1rem;color:var(--cobalt);">
+    훌륭합니다! Week 4를 완료했어요!<br>
+    <a href="../index.html" style="color:var(--cobalt);font-size:0.88rem;">&larr; 홈으로 / Back to Home</a>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script>
+'use strict';
+
+var cardIndex=0, cardMode='en-ko', cardFlipped=false, cardKnown=new Set();
+var cfScore=0, rvScore=0;
+var gameQueue=[], gameIdx=0, gameCorrect=0, gameWrong=0;
+
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    StudentDB.load();
+    var name=StudentDB.get('name');
+    var el=document.getElementById('w4-student-name');
+    if (el&&name) el.textContent='학생: '+name+'  ·  Student: '+name;
+    restoreState();
+  } catch(e){}
+  buildReviewQuiz();
+  buildConjTable();
+  buildSpellGrid();
+  buildConjFill();
+  buildNqItems();
+  buildVocabTable();
+  buildDialogueCards();
+  initVerbGame();
+  updateCard();
+});
+
+function switchSection(id, btn) {
+  document.querySelectorAll('.lesson-section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  var sec=document.getElementById('sec-'+id);
+  if (sec) sec.classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── REVIEW ──
+var reviewQs = [
+  { prompt:'I ___ a student. (am/is/are)',                 answer:'am',   ko:'저는 학생이에요.' },
+  { prompt:'She ___ very busy today. (am/is/are)',         answer:'is',   ko:'그녀는 오늘 매우 바빠요.' },
+  { prompt:'They ___ my coworkers. (am/is/are)',           answer:'are',  ko:'그들은 제 동료예요.' },
+  { prompt:'___ you ready? (질문: Are/Do)',                answer:'are',  ko:'준비됐어요?' },
+  { prompt:'___ she from Korea? (질문: Is/Does)',          answer:'is',   ko:'그녀는 한국에서 왔어요?' },
+  { prompt:'The store ___ closed on Sundays. (am/is/are)', answer:'is',   ko:'가게는 일요일에 닫혀 있어요.' },
+  { prompt:'Short answer: "Are you a teacher?" "Yes, I ___."', answer:'am', ko:'"선생님이세요?" "네, 그래요."' },
+  { prompt:'Wh-word for 어디: ___ are you from?',          answer:'where',ko:'어디에서 오셨어요?' }
+];
+
+function buildReviewQuiz() {
+  var c=document.getElementById('review-quiz');
+  if (!c) return; c.innerHTML='';
+  reviewQs.forEach(function(q,i){
+    var div=document.createElement('div');
+    div.style.cssText='background:var(--white);border:1.5px solid var(--mist);border-radius:var(--radius-md);padding:1rem 1.25rem;';
+    div.innerHTML =
+      '<div style="font-family:var(--font-serif);font-size:1.02rem;color:var(--ink);margin-bottom:0.5rem;">'+
+        q.prompt.replace('___','<input id="rq-'+i+'" style="border:2px solid var(--mist);border-radius:var(--radius-sm);padding:0.35rem 0.75rem;font-family:var(--font-serif);font-size:0.95rem;width:120px;outline:none;" autocomplete="off" spellcheck="false">')+
+      '</div>'+
+      '<div style="font-size:0.8rem;color:var(--text-light);">'+q.ko+'</div>'+
+      '<div id="rq-fb-'+i+'" style="font-size:0.8rem;margin-top:0.4rem;font-style:italic;display:none;"></div>';
+    c.appendChild(div);
+    var inp=div.querySelector('input');
+    if (inp) inp.addEventListener('keydown',function(e){ if(e.key==='Enter') checkAllReview(); });
+  });
+}
+
+function checkAllReview() {
+  rvScore=0;
+  reviewQs.forEach(function(q,i){
+    var inp=document.getElementById('rq-'+i), fb=document.getElementById('rq-fb-'+i);
+    if (!inp) return;
+    if (inp.value.trim().toLowerCase()===q.answer.toLowerCase()){
+      rvScore++; inp.style.borderColor='var(--celadon)'; inp.style.background='rgba(126,179,168,0.1)';
+      if (fb){ fb.textContent='정답! / Correct!'; fb.style.color='var(--celadon)'; fb.style.display='block'; }
+    } else {
+      inp.style.borderColor='var(--crimson)'; inp.style.background='rgba(192,57,43,0.06)';
+      if (fb){ fb.textContent='정답: '+q.answer; fb.style.color='var(--crimson)'; fb.style.display='block'; }
+    }
+  });
+  var b=document.getElementById('review-score-badge');
+  if (b) b.textContent=rvScore+' / '+reviewQs.length+' 정답';
+  try { StudentDB.saveExercise(4,'review',{score:rvScore}); } catch(e){}
+}
+
+function resetReview() {
+  reviewQs.forEach(function(q,i){
+    var inp=document.getElementById('rq-'+i), fb=document.getElementById('rq-fb-'+i);
+    if (inp){ inp.value=''; inp.style.borderColor='var(--mist)'; inp.style.background='var(--white)'; }
+    if (fb) fb.style.display='none';
+  });
+  var b=document.getElementById('review-score-badge'); if (b) b.textContent='0 / 8 정답';
+}
+
+// ── CONJUGATION TABLE ──
+function buildConjTable() {
+  var tb=document.getElementById('conj-tbody');
+  if (!tb||!COURSE_DATA.week4) return;
+  COURSE_DATA.week4.conjugation.forEach(function(r){
+    var formHtml = r.form.endsWith('s') && r.note==='+s'
+      ? r.form.slice(0,-1)+'<span class="s-highlight">s</span>'
+      : r.form;
+    var tr=document.createElement('tr');
+    tr.innerHTML =
+      '<td class="subj">'+r.subject+'</td>'+
+      '<td class="form">'+formHtml+'</td>'+
+      '<td class="note'+(r.note==='+s'?' plus':'')+'">'+r.note+'</td>'+
+      '<td class="ko-cell">'+r.ko+'</td>'+
+      '<td><button class="spk" onclick="Speaker.speakText(\''+r.subject+' '+r.form+'\')">&#9654;</button></td>';
+    tb.appendChild(tr);
+  });
+}
+
+// ── SPELLING RULES ──
+function buildSpellGrid() {
+  var g=document.getElementById('spell-grid');
+  if (!g||!COURSE_DATA.week4) return;
+  COURSE_DATA.week4.spellingRules.forEach(function(r){
+    var div=document.createElement('div');
+    div.className='spell-card';
+    div.innerHTML =
+      '<div class="rule-ko">'+r.rule+'</div>'+
+      '<div class="rule-en">'+r.ruleEn+'</div>'+
+      '<div class="transform"><span class="base">'+r.base+'</span><span class="arrow">&rarr;</span><span class="third">'+r.third+'</span>'+
+      '<button class="spk" style="margin-left:auto;background:none;border:1px solid var(--mist);border-radius:100px;padding:2px 9px;cursor:pointer;color:var(--cobalt);font-size:0.78rem;" onclick="Speaker.speakText(\''+r.base+'. '+r.third+'\')">&#9654;</button></div>';
+    g.appendChild(div);
+  });
+}
+
+// ── CONJUGATION FILL ──
+function buildConjFill() {
+  var c=document.getElementById('conj-fill-exercise');
+  if (!c||!COURSE_DATA.week4) return;
+  c.innerHTML=''; cfScore=0;
+  COURSE_DATA.week4.conjFill.forEach(function(item,i){
+    var div=document.createElement('div');
+    div.className='fill-item'; div.id='cf-item-'+i;
+    var btns=item.options.map(function(o){
+      return '<button class="fill-opt-btn" onclick="checkConjFill('+i+',\''+o+'\',\''+item.answer+'\',this)">'+o+'</button>';
+    }).join('');
+    div.innerHTML =
+      '<div class="fill-sentence">'+item.subject+' ___ ... <span style="color:var(--text-light);font-size:0.85em;">('+item.verb+')</span></div>'+
+      '<div class="fill-options">'+btns+'</div>'+
+      '<div class="fill-hint">'+item.hint+'</div>';
+    c.appendChild(div);
+  });
+}
+
+function checkConjFill(idx, chosen, correct, btn) {
+  var item=document.getElementById('cf-item-'+idx);
+  if (!item||item.dataset.answered) return;
+  item.dataset.answered='1';
+  item.querySelectorAll('.fill-opt-btn').forEach(function(b){ b.disabled=true; });
+  if (chosen===correct){ btn.classList.add('correct'); cfScore++; Speaker.speakWord(correct); }
+  else { btn.classList.add('wrong'); item.querySelectorAll('.fill-opt-btn').forEach(function(b){ if(b.textContent.trim()===correct) b.classList.add('correct'); }); }
+  item.classList.add('revealed');
+  var b=document.getElementById('cf-score-badge');
+  if (b) b.textContent=cfScore+' / '+COURSE_DATA.week4.conjFill.length+' 정답';
+  try { StudentDB.saveExercise(4,'conjFill',{score:cfScore}); } catch(e){}
+}
+
+function resetConjFill() {
+  buildConjFill();
+  var b=document.getElementById('cf-score-badge'); if (b) b.textContent='0 / 10 정답';
+}
+
+// ── NEGATIVE & QUESTION ──
+function buildNqItems() {
+  var c=document.getElementById('nq-items');
+  if (!c||!COURSE_DATA.week4) return; c.innerHTML='';
+  COURSE_DATA.week4.negQuestion.forEach(function(item,i){
+    var div=document.createElement('div');
+    div.className='nq-item';
+    div.innerHTML =
+      '<div class="nq-positive"><span class="nq-label pos">긍정 Positive</span>'+item.positive+'</div>'+
+      '<div class="nq-reveal">'+
+        '<div class="nq-neg"><span class="nq-label neg">부정 Negative</span>'+item.negative+'</div>'+
+        '<div class="nq-qst"><span class="nq-label qst">질문 Question</span>'+item.question+'</div>'+
+      '</div>'+
+      '<div style="display:flex;gap:0.5rem;margin-top:0.75rem;">'+
+        '<button class="btn-reveal" style="padding:0.4rem 1rem;border:1.5px solid var(--cobalt-light);border-radius:100px;background:none;font-size:0.8rem;font-weight:700;color:var(--cobalt);cursor:pointer;" onclick="revealNq(this)">정답 보기 / Reveal</button>'+
+        '<button class="btn-card-action btn-speak" style="padding:0.35rem 0.875rem;font-size:0.8rem;" onclick="Speaker.speakText(\''+(item.negative+'. '+item.question).replace(/'/g,'')+'\')">&#9654; 듣기</button>'+
+      '</div>';
+    c.appendChild(div);
+  });
+}
+
+function revealNq(btn) {
+  var item=btn.closest('.nq-item');
+  if (item){ item.classList.add('revealed'); btn.disabled=true; }
+}
+
+// ── FLASHCARDS ──
+function buildVocabTable() {
+  var tb=document.getElementById('vocab-table-body');
+  if (!tb||!COURSE_DATA.week4) return;
+  COURSE_DATA.week4.vocabulary.forEach(function(w){
+    var safe=w.en.replace(/'/g,'');
+    var tr=document.createElement('tr');
+    tr.style.borderBottom='1px solid var(--mist)';
+    tr.innerHTML =
+      '<td style="padding:0.55rem 0.75rem;font-weight:600;color:var(--ink);">'+w.en+'</td>'+
+      '<td style="padding:0.55rem 0.75rem;color:var(--text-mid);">'+w.ko+'</td>'+
+      '<td style="padding:0.55rem 0.75rem;color:var(--text-light);font-size:0.85em;font-style:italic;">'+w.example+'</td>'+
+      '<td style="padding:0.55rem 0.75rem;"><button onclick="Speaker.speakWord(\''+safe+'\',this)" style="border:1px solid var(--mist);background:none;border-radius:100px;padding:3px 10px;cursor:pointer;font-size:0.8rem;color:var(--cobalt);">&#9654;</button></td>';
+    tb.appendChild(tr);
+  });
+}
+
+function setCardMode(mode) {
+  cardMode=mode; cardFlipped=false;
+  var fc=document.getElementById('flashcard'); if (fc) fc.classList.remove('flipped');
+  var me=document.getElementById('mode-en-ko'), mk=document.getElementById('mode-ko-en');
+  if (me&&mk){ if(mode==='en-ko'){me.style.borderColor='var(--cobalt)';me.style.color='var(--cobalt)';mk.style.borderColor='';mk.style.color='';}else{mk.style.borderColor='var(--cobalt)';mk.style.color='var(--cobalt)';me.style.borderColor='';me.style.color='';} }
+  updateCard();
+}
+
+function updateCard() {
+  var v=COURSE_DATA.week4?COURSE_DATA.week4.vocabulary:[];
+  if (!v.length) return;
+  var w=v[cardIndex];
+  var ft=document.getElementById('card-front-text'),bt=document.getElementById('card-back-text'),et=document.getElementById('card-example-text'),ct=document.getElementById('card-counter'),pb=document.getElementById('vocab-progress-badge');
+  if (cardMode==='en-ko'){ if(ft)ft.textContent=w.en; if(bt)bt.textContent=w.ko; } else { if(ft)ft.textContent=w.ko; if(bt)bt.textContent=w.en; }
+  if (et) et.textContent=w.example?'"'+w.example+'"':'';
+  if (ct) ct.textContent=(cardIndex+1)+' / '+v.length;
+  if (pb) pb.textContent=cardKnown.size+' / '+v.length+' 익힘';
+}
+
+function flipCard(){ cardFlipped=!cardFlipped; var fc=document.getElementById('flashcard'); if(fc) fc.classList.toggle('flipped',cardFlipped); }
+function nextCard(){ cardFlipped=false; var fc=document.getElementById('flashcard'); if(fc)fc.classList.remove('flipped'); cardIndex=(cardIndex+1)%COURSE_DATA.week4.vocabulary.length; updateCard(); }
+function prevCard(){ cardFlipped=false; var fc=document.getElementById('flashcard'); if(fc)fc.classList.remove('flipped'); var l=COURSE_DATA.week4.vocabulary.length; cardIndex=(cardIndex-1+l)%l; updateCard(); }
+function markCard(s){ if(s==='know'){ cardKnown.add(cardIndex); try{ StudentDB.saveExercise(4,'flashcards',{known:Array.from(cardKnown),total:COURSE_DATA.week4.vocabulary.length}); }catch(e){} } nextCard(); }
+function speakCurrentCard(){ var w=COURSE_DATA.week4.vocabulary[cardIndex]; if(w) Speaker.speakWord(w.en); }
+
+// ── VERB GAME ──
+function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+
+var verbGameData = [
+  { subj:"She",  base:"work",  correct:"works",   ko:"그녀는 일해요." },
+  { subj:"I",    base:"study", correct:"study",   ko:"저는 공부해요." },
+  { subj:"He",   base:"watch", correct:"watches", ko:"그는 봐요." },
+  { subj:"They", base:"live",  correct:"live",    ko:"그들은 살아요." },
+  { subj:"We",   base:"eat",   correct:"eat",     ko:"우리는 먹어요." },
+  { subj:"It",   base:"start", correct:"starts",  ko:"그것은 시작해요." },
+  { subj:"My friend", base:"cook", correct:"cooks", ko:"제 친구는 요리해요." },
+  { subj:"You",  base:"speak", correct:"speak",   ko:"당신은 말해요." },
+  { subj:"He",   base:"have",  correct:"has",     ko:"그는 가지고 있어요." },
+  { subj:"She",  base:"finish",correct:"finishes",ko:"그녀는 끝내요." }
+];
+
+function buildOptions(base, correct) {
+  var opts=[base];
+  if (correct!==base) opts.push(correct);
+  // add a distractor
+  if (base==='have') { if(opts.indexOf('haves')<0) opts.push('haves'); }
+  else if (correct===base) { opts.push(base+'s'); }
+  else { opts.push(base==='study'?'studys':base+' s'); }
+  return shuffle(opts.slice(0,3).length<2?[base,correct]:shuffle([base,correct]));
+}
+
+function initVerbGame() {
+  gameQueue=shuffle(verbGameData.slice());
+  gameIdx=0; gameCorrect=0; gameWrong=0;
+  document.getElementById('game-celebration').classList.remove('show');
+  document.getElementById('game-correct').textContent='0';
+  document.getElementById('game-wrong').textContent='0';
+  document.getElementById('game-remain').textContent=gameQueue.length;
+  loadVerbQuestion();
+}
+
+function loadVerbQuestion() {
+  if (gameIdx>=gameQueue.length){ showGameCelebration(); return; }
+  var q=gameQueue[gameIdx];
+  document.getElementById('game-sentence').innerHTML = q.subj+' <span style="color:var(--stone);">______</span> <span style="font-size:0.9rem;color:var(--text-light);">('+q.base+')</span>';
+  document.getElementById('game-ko').textContent=q.ko;
+  document.getElementById('game-feedback').textContent='';
+  var opts=shuffle([q.base, q.correct].filter(function(v,idx,arr){ return arr.indexOf(v)===idx; }));
+  if (opts.length<2) opts=[q.base, q.correct];
+  var optEl=document.getElementById('game-options');
+  optEl.innerHTML='';
+  opts.forEach(function(o){
+    var b=document.createElement('button');
+    b.className='btn-card-action btn-flip';
+    b.style.cssText='padding:0.7rem 1.75rem;font-size:1.05rem;font-family:var(--font-serif);';
+    b.textContent=o;
+    b.onclick=function(){ answerVerb(o, q.correct, b); };
+    optEl.appendChild(b);
+  });
+}
+
+function answerVerb(chosen, correct, btn) {
+  var optEl=document.getElementById('game-options');
+  optEl.querySelectorAll('button').forEach(function(b){ b.disabled=true; });
+  var fb=document.getElementById('game-feedback');
+  if (chosen===correct){
+    gameCorrect++;
+    btn.style.borderColor='var(--celadon)'; btn.style.color='var(--celadon)';
+    fb.textContent='정답! / Correct!'; fb.style.color='var(--celadon)';
+    Speaker.speakText(gameQueue[gameIdx].subj+' '+correct);
+  } else {
+    gameWrong++;
+    btn.style.borderColor='var(--crimson)'; btn.style.color='var(--crimson)';
+    optEl.querySelectorAll('button').forEach(function(b){ if(b.textContent.trim()===correct){ b.style.borderColor='var(--celadon)'; b.style.color='var(--celadon)'; } });
+    fb.textContent='정답: '+correct+' / Answer: '+correct; fb.style.color='var(--crimson)';
+  }
+  document.getElementById('game-correct').textContent=gameCorrect;
+  document.getElementById('game-wrong').textContent=gameWrong;
+  try { StudentDB.saveExercise(4,'verbGame',{correct:gameCorrect,wrong:gameWrong}); } catch(e){}
+  setTimeout(function(){
+    gameIdx++;
+    document.getElementById('game-remain').textContent=Math.max(0,gameQueue.length-gameIdx);
+    loadVerbQuestion();
+  }, 1500);
+}
+
+function showGameCelebration() {
+  var cel=document.getElementById('game-celebration');
+  var fin=document.getElementById('game-final');
+  if (cel) cel.classList.add('show');
+  if (fin) fin.textContent='정답: '+gameCorrect+'개  ·  오답: '+gameWrong+'개';
+  Speaker.speakText('Excellent work! You completed all the sentences!');
+}
+
+// ── DIALOGUE ──
+function buildDialogueCards() {
+  var c=document.getElementById('dialogue-cards-w4');
+  if (!c||!COURSE_DATA.week4||!COURSE_DATA.week4.dialogues) return; c.innerHTML='';
+  COURSE_DATA.week4.dialogues.forEach(function(dlg){
+    var all=dlg.lines.map(function(l){return l.en;}).join('. ').replace(/'/g,'');
+    var lines=dlg.lines.map(function(line){
+      var isB=(line.speaker==='B'||line.speaker==='C');
+      return '<div class="dialogue-line"><span class="dl-speaker" style="color:'+(isB?'var(--cobalt)':'var(--crimson)')+';">'+line.speaker+'</span><div class="dl-bubble'+(isB?' b-student':'')+'"><span class="dl-text">'+line.en+'</span><span class="dl-ko">'+line.ko+'</span></div></div>';
+    }).join('');
+    var card=document.createElement('div');
+    card.className='dialogue-scenario';
+    card.innerHTML =
+      '<div class="scenario-header"><div><span class="scenario-title">'+dlg.titleKo+'</span><span class="scenario-sub">'+dlg.titleEn+'</span></div>'+
+      '<button onclick="Speaker.speakText(\''+all+'\')" class="btn-card-action btn-speak" style="margin-left:auto;padding:0.4rem 1rem;font-size:0.8rem;">&#9654; 전체 듣기</button></div>'+
+      '<div class="dialogue-lines">'+lines+'</div>'+
+      '<div style="background:rgba(43,93,160,0.06);border-radius:var(--radius-md);padding:0.875rem;font-size:0.82rem;color:var(--text-mid);">&#128161; 현재 시제 동사와 do/does 질문을 찾아보세요! 역할을 바꿔 연습하세요. <em>Find present simple verbs and do/does questions! Switch roles.</em></div>';
+    c.appendChild(card);
+  });
+}
+
+function saveTeacherNotes() {
+  var n=(document.getElementById('teacher-notes')||{}).value||'';
+  try { StudentDB.saveExercise(4,'teacher_notes',{notes:n}); } catch(e){}
+  var m=document.getElementById('notes-saved-msg');
+  if (m){ m.style.display='inline'; setTimeout(function(){m.style.display='none';},2500); }
+}
+
+function completeWeek4() {
+  try { StudentDB.completeWeek(4); } catch(e){}
+  var btn=document.querySelector('.btn-complete-week'), msg=document.getElementById('completion-msg');
+  if (btn) btn.style.display='none';
+  if (msg) msg.style.display='block';
+  Speaker.speakText('Congratulations! You completed Week 4. Excellent work!');
+}
+
+function restoreState() {
+  try {
+    var fc=StudentDB.getExercise(4,'flashcards');
+    if (fc&&fc.known) fc.known.forEach(function(i){ cardKnown.add(i); });
+    var n=StudentDB.getExercise(4,'teacher_notes');
+    if (n&&n.notes){ var ta=document.getElementById('teacher-notes'); if(ta) ta.value=n.notes; }
+  } catch(e){}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 5 — 관사 + 복수형 | 기초 영어</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .article-grid { display:grid; gap:1rem; margin:1rem 0; }
+    .article-card { display:flex; align-items:stretch; gap:0; border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-sm); border:1.5px solid var(--mist); }
+    .article-badge { display:flex; align-items:center; justify-content:center; min-width:80px; font-family:var(--font-serif); font-size:1.6rem; font-weight:700; color:var(--white); }
+    .article-badge.a   { background:var(--cobalt); }
+    .article-badge.an  { background:var(--crimson); }
+    .article-badge.the { background:var(--celadon); }
+    .article-badge.none{ background:var(--stone); color:var(--ink); font-size:0.95rem; }
+    .article-body { flex:1; padding:0.875rem 1.125rem; }
+    .article-body .rule-ko { font-family:var(--font-serif); font-weight:700; font-size:0.95rem; color:var(--cobalt-dark); margin-bottom:2px; }
+    .article-body .rule-en { font-size:0.78rem; color:var(--text-light); font-style:italic; margin-bottom:0.375rem; }
+    .article-body .example { font-size:0.85rem; color:var(--ink); }
+
+    .plural-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; margin:1rem 0; }
+    .plural-card { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:1.25rem; border-top:4px solid var(--gold); }
+    .plural-card .rule-ko { font-family:var(--font-serif); font-weight:700; font-size:0.92rem; color:var(--cobalt-dark); margin-bottom:0.25rem; }
+    .plural-card .rule-en { font-size:0.76rem; color:var(--text-light); font-style:italic; margin-bottom:0.75rem; }
+    .plural-card .transform { display:flex; align-items:center; gap:0.625rem; font-family:var(--font-serif); font-size:1.05rem; }
+    .plural-card .sing { color:var(--text-mid); }
+    .plural-card .arrow { color:var(--gold); }
+    .plural-card .plur { color:var(--crimson); font-weight:700; }
+
+    .irr-table { width:100%; border-collapse:collapse; font-size:0.92rem; margin:1rem 0; }
+    .irr-table th { background:var(--cobalt-dark); color:var(--white); padding:0.6rem 0.875rem; text-align:left; font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; }
+    .irr-table td { padding:0.6rem 0.875rem; border-bottom:1px solid var(--mist); }
+    .irr-table tr:last-child td { border-bottom:none; }
+    .irr-table tr:nth-child(even) td { background:var(--paper-warm); }
+    .irr-table .sing { font-family:var(--font-serif); color:var(--text-mid); }
+    .irr-table .plur { font-family:var(--font-serif); font-weight:700; color:var(--crimson); }
+    .irr-table .ko-cell { font-size:0.8rem; color:var(--text-light); }
+    .irr-table .spk { background:none; border:1px solid var(--mist); border-radius:100px; padding:2px 9px; cursor:pointer; color:var(--cobalt); font-size:0.78rem; }
+    .irr-table .spk:hover { background:var(--cobalt); color:var(--white); }
+
+    .fill-exercise { display:flex; flex-direction:column; gap:1rem; }
+    .fill-item { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:1rem 1.25rem; }
+    .fill-item .fill-sentence { font-family:var(--font-serif); font-size:1.02rem; color:var(--ink); margin-bottom:0.625rem; }
+    .fill-options { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.5rem; }
+    .fill-opt-btn { padding:0.4rem 1.25rem; border:2px solid var(--mist); border-radius:100px; background:var(--paper); font-family:var(--font-serif); font-size:1rem; font-weight:700; color:var(--ink); cursor:pointer; transition:all 0.15s; }
+    .fill-opt-btn:hover:not(:disabled) { border-color:var(--cobalt-light); color:var(--cobalt); }
+    .fill-opt-btn.correct { border-color:var(--celadon); background:rgba(126,179,168,0.12); color:var(--celadon); }
+    .fill-opt-btn.wrong { border-color:var(--crimson); background:rgba(192,57,43,0.08); color:var(--crimson); }
+    .fill-hint { font-size:0.78rem; color:var(--text-light); font-style:italic; display:none; }
+    .fill-item.revealed .fill-hint { display:block; }
+
+    @media(max-width:600px){
+      .irr-table { font-size:0.82rem; }
+      .irr-table th,.irr-table td { padding:0.5rem 0.45rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="week-page-header">
+  <div class="week-header-pattern" aria-hidden="true"></div>
+  <div class="week-header-inner">
+    <a href="../index.html" class="week-back-link">← 과정 목록으로 / Back to Course</a>
+    <div class="week-number-badge">Week 05 &nbsp;·&nbsp; 06월 29일</div>
+    <h1 class="week-page-title">복습 + 관사 + 복수형</h1>
+    <p class="week-page-subtitle">Review + Articles (a/an/the) + Plurals + Vocabulary</p>
+    <div id="w5-student-name" style="color:rgba(255,255,255,0.6);font-size:0.88rem;margin-top:0.5rem;"></div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchSection('review',this)"><span class="tab-ko">복습</span><span class="tab-en">Review</span></button>
+    <button class="tab-btn" onclick="switchSection('articles',this)"><span class="tab-ko">관사</span><span class="tab-en">Articles</span></button>
+    <button class="tab-btn" onclick="switchSection('plurals',this)"><span class="tab-ko">복수형</span><span class="tab-en">Plurals</span></button>
+    <button class="tab-btn" onclick="switchSection('vocab',this)"><span class="tab-ko">LA 여행 어휘</span><span class="tab-en">LA Travel</span></button>
+    <button class="tab-btn" onclick="switchSection('game',this)"><span class="tab-ko">게임</span><span class="tab-en">Game</span></button>
+    <button class="tab-btn" onclick="switchSection('dialogue',this)"><span class="tab-ko">대화 연습</span><span class="tab-en">Dialogue</span></button>
+  </div>
+</nav>
+
+<!-- ═══ SECTION A: REVIEW ═══ -->
+<section class="lesson-section active" id="sec-review">
+  <div class="section-banner">
+    <span class="section-num">Section A</span>
+    <h2>Week 4 복습</h2>
+    <span class="section-sub">Week 4 Review — Present Simple Tense</span>
+    <div class="section-tip">
+      지난주에 배운 현재 단순 시제를 복습해요. 특히 he/she/it의 -s를 기억하세요!<br>
+      <em>Review the present simple tense. Remember the -s on he/she/it!</em>
+    </div>
+  </div>
+  <div class="exercise-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem;">
+      <h3>현재 시제 복습 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Present Simple Review</span></h3>
+      <div class="progress-counter" id="review-score-badge">0 / 8 정답</div>
+    </div>
+    <div id="review-quiz" style="display:grid;gap:1rem;"></div>
+    <div style="margin-top:1.25rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="checkAllReview()">확인하기 / Check All</button>
+      <button class="btn-secondary" onclick="resetReview()">다시 하기 / Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION B: ARTICLES ═══ -->
+<section class="lesson-section" id="sec-articles">
+  <div class="section-banner">
+    <span class="section-num">Section B</span>
+    <h2>관사 (a / an / the)</h2>
+    <span class="section-sub">Articles — A Big Challenge for Korean Speakers</span>
+    <div class="section-tip">
+      한국어에는 관사가 없어서 영어 관사가 어려워요. 하지만 몇 가지 간단한 규칙만 알면 돼요!<br>
+      <em>Korean has no articles, so this is tricky. But a few simple rules will help you a lot!</em>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <h3>관사 규칙 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">The Article Rules</span></h3>
+    <div class="article-grid" id="article-grid"></div>
+    <div style="margin-top:1rem;padding:0.875rem 1rem;background:rgba(200,131,42,0.08);border-left:4px solid var(--gold);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:0.85rem;color:var(--text-mid);">
+      <strong>핵심:</strong> a/an은 <strong>소리</strong>로 결정해요, 철자가 아니에요! "an hour" (h는 묵음), "a university" (you 소리)<br>
+      <em><strong>Key:</strong> Choose a/an by the <strong>sound</strong>, not the spelling! "an hour" (silent h), "a university" (you-sound).</em>
+    </div>
+  </div>
+
+  <div class="exercise-card" style="margin-top:1.25rem;">
+    <h3>관사 채우기 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Choose a / an / the</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1.25rem;">LA 여행 상황에서 올바른 관사를 선택하세요.<br><em>Pick the correct article for each LA-travel sentence.</em></p>
+    <div class="fill-exercise" id="article-fill-exercise"></div>
+    <div style="margin-top:1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <div class="progress-counter" id="af-score-badge">0 / 10 정답</div>
+      <button class="btn-secondary" onclick="resetArticleFill()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">다시 하기 / Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION C: PLURALS ═══ -->
+<section class="lesson-section" id="sec-plurals">
+  <div class="section-banner">
+    <span class="section-num">Section C</span>
+    <h2>복수형</h2>
+    <span class="section-sub">Plurals — One Hotel, Two Hotels</span>
+    <div class="section-tip">
+      영어에서는 둘 이상일 때 명사 끝을 바꿔요. 한국어에는 이런 변화가 거의 없어서 연습이 필요해요.<br>
+      <em>In English, nouns change when there is more than one. Korean rarely does this, so it needs practice!</em>
+    </div>
+  </div>
+
+  <div class="exercise-card">
+    <h3>복수형 규칙 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Plural Spelling Rules</span></h3>
+    <div class="plural-grid" id="plural-grid"></div>
+  </div>
+
+  <div class="exercise-card" style="margin-top:1.25rem;">
+    <h3>불규칙 복수형 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Irregular Plurals — Memorize These!</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1rem;">이 단어들은 규칙을 따르지 않아요. 외워야 해요!<br><em>These words do not follow the rules. You must memorize them!</em></p>
+    <div style="overflow-x:auto;">
+      <table class="irr-table" id="irr-table">
+        <thead><tr><th>단수 Singular</th><th>복수 Plural</th><th>한국어</th><th>듣기</th></tr></thead>
+        <tbody id="irr-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="exercise-card" style="margin-top:1.25rem;">
+    <h3>복수형 만들기 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Make the Plural</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1.25rem;">올바른 복수형을 선택하세요.<br><em>Click the correct plural form.</em></p>
+    <div class="fill-exercise" id="plural-fill-exercise"></div>
+    <div style="margin-top:1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <div class="progress-counter" id="pf-score-badge">0 / 10 정답</div>
+      <button class="btn-secondary" onclick="resetPluralFill()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">다시 하기 / Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION D: LA TRAVEL VOCABULARY ═══ -->
+<section class="lesson-section" id="sec-vocab">
+  <div class="section-banner">
+    <span class="section-num">Section D</span>
+    <h2>LA 여행 어휘</h2>
+    <span class="section-sub">Los Angeles Travel Vocabulary — 25 Essential Words</span>
+    <div class="section-tip">
+      로스앤젤레스를 처음 여행할 때 꼭 필요한 단어들이에요. 공항, 호텔, 관광에 모두 사용해요!<br>
+      <em>Essential words for your first trip to LA — useful at the airport, hotel, and while sightseeing!</em>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+    <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+      <span style="font-size:0.78rem;font-weight:700;color:var(--text-light);letter-spacing:0.04em;">방향 / MODE:</span>
+      <button class="btn-card-action btn-flip" id="mode-en-ko" onclick="setCardMode('en-ko')" style="padding:0.4rem 1rem;font-size:0.8rem;border-color:var(--cobalt);color:var(--cobalt);">영 &rarr; 한</button>
+      <button class="btn-card-action btn-flip" id="mode-ko-en" onclick="setCardMode('ko-en')" style="padding:0.4rem 1rem;font-size:0.8rem;">한 &rarr; 영</button>
+    </div>
+    <div class="progress-counter" id="vocab-progress-badge">0 / 25 익힘</div>
+  </div>
+
+  <div class="flashcard-deck">
+    <div class="flashcard-container" id="flashcard" onclick="flipCard()">
+      <div class="flashcard-inner" id="flashcard-inner">
+        <div class="card-face card-front">
+          <span class="card-hint">클릭하면 뒤집어요 · Click to flip</span>
+          <span class="card-main-text" id="card-front-text">airport</span>
+          <span class="card-pron" id="card-pron-text"></span>
+        </div>
+        <div class="card-face card-back">
+          <span class="card-hint">뜻 · Meaning</span>
+          <span class="card-main-text" id="card-back-text">공항</span>
+          <span class="card-example" id="card-example-text"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-nav">
+    <button class="btn-card-action btn-practice" onclick="markCard('practice')">&larr; 더 연습</button>
+    <button class="btn-card-action btn-flip" onclick="prevCard()">&larr; 이전</button>
+    <span class="card-counter" id="card-counter">1 / 25</span>
+    <button class="btn-card-action btn-flip" onclick="nextCard()">다음 &rarr;</button>
+    <button class="btn-card-action btn-know" onclick="markCard('know')">&#10003; 알아요!</button>
+  </div>
+  <div style="text-align:center;margin-top:1rem;">
+    <button class="btn-card-action btn-speak" onclick="speakCurrentCard()" style="padding:0.5rem 1.5rem;">&#9654; 발음 듣기</button>
+  </div>
+
+  <div class="exercise-card" style="margin-top:2rem;">
+    <h3>전체 단어 목록 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Full Vocabulary List</span></h3>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--cobalt);">
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">ENGLISH</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">한국어</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">예문 / Example</th>
+            <th style="padding:0.6rem 0.75rem;"></th>
+          </tr>
+        </thead>
+        <tbody id="vocab-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION E: GAME ═══ -->
+<section class="lesson-section" id="sec-game">
+  <div class="section-banner">
+    <span class="section-num">Section E</span>
+    <h2>관사 &amp; 복수형 게임</h2>
+    <span class="section-sub">Article &amp; Plural Challenge</span>
+    <div class="section-tip">
+      문장을 보고 올바른 관사 또는 복수형을 선택하세요. LA 여행 상황으로 연습해요!<br>
+      <em>Choose the correct article or plural in each sentence. Practice with real LA-travel situations!</em>
+    </div>
+  </div>
+
+  <div class="match-score-bar">
+    <div class="match-score"><span class="score-num" id="game-correct">0</span><span class="score-label">정답 Correct</span></div>
+    <div style="width:1px;height:40px;background:var(--mist);"></div>
+    <div class="match-score"><span class="score-num" id="game-wrong" style="color:var(--crimson);">0</span><span class="score-label">오답 Wrong</span></div>
+    <div style="width:1px;height:40px;background:var(--mist);"></div>
+    <div class="match-score"><span class="score-num" id="game-remain">12</span><span class="score-label">남음 Left</span></div>
+    <button class="btn-secondary" onclick="initGame()" style="margin-left:auto;font-size:0.82rem;padding:0.5rem 1.25rem;">&#8635; 다시 시작</button>
+  </div>
+
+  <div class="exercise-card" id="game-area">
+    <div style="text-align:center;padding:1rem 0;">
+      <div id="game-tag" style="display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;padding:3px 12px;border-radius:100px;margin-bottom:1rem;"></div>
+      <div id="game-sentence" style="font-family:var(--font-serif);font-size:1.4rem;color:var(--ink);margin-bottom:0.5rem;line-height:1.5;"></div>
+      <div id="game-ko" style="font-size:0.9rem;color:var(--text-light);margin-bottom:1.5rem;"></div>
+      <div id="game-options" style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;"></div>
+      <div id="game-feedback" style="margin-top:1.25rem;font-family:var(--font-serif);font-size:1rem;min-height:1.5rem;"></div>
+    </div>
+  </div>
+
+  <div class="match-celebration" id="game-celebration">
+    <div style="font-size:2rem;margin-bottom:0.75rem;">&#11088;</div>
+    <h3>훌륭합니다! Excellent Work!</h3>
+    <p style="color:var(--text-mid);margin:0.75rem 0;">모든 문제를 완료했어요!<br><em>You completed all the questions!</em></p>
+    <div style="font-family:var(--font-serif);font-size:1.1rem;color:var(--cobalt);margin:1rem 0;" id="game-final"></div>
+    <button class="btn-primary" onclick="initGame()">&#8635; 다시 하기 / Play Again</button>
+  </div>
+</section>
+
+<!-- ═══ SECTION F: DIALOGUE ═══ -->
+<section class="lesson-section" id="sec-dialogue">
+  <div class="section-banner">
+    <span class="section-num">Section F</span>
+    <h2>대화 연습</h2>
+    <span class="section-sub">Dialogue Practice — Your First Trip to Los Angeles</span>
+    <div class="section-tip">
+      LA 여행 중 자주 일어나는 상황이에요. 관사와 복수형, 그리고 여행 어휘를 찾아보세요!<br>
+      <em>Common situations on an LA trip. Find articles, plurals, and travel vocabulary in each one!</em>
+    </div>
+  </div>
+
+  <div style="margin-bottom:1.5rem;"><div class="teacher-badge">&#128203; 선생님 감독 구역 · Teacher Supervised</div></div>
+
+  <div id="dialogue-cards-w5"></div>
+
+  <div class="exercise-card" style="margin-top:1.5rem;">
+    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
+      <span style="font-size:1.1rem;">&#128221;</span>
+      <h3 style="margin:0;">선생님 관찰 메모 <em style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Teacher Notes</em></h3>
+    </div>
+    <textarea class="teacher-notes-area" id="teacher-notes" placeholder="오늘 수업 메모... / Today's class notes..." rows="5"></textarea>
+    <div style="margin-top:0.75rem;display:flex;gap:0.75rem;align-items:center;">
+      <button class="btn-secondary" onclick="saveTeacherNotes()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">저장 / Save Notes</button>
+      <span id="notes-saved-msg" style="display:none;font-size:0.8rem;color:var(--celadon);">&#10003; 저장됨</span>
+    </div>
+  </div>
+</section>
+
+<div class="complete-week-bar">
+  <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:1rem;">오늘 수업이 모두 끝났나요? Week 5를 완료로 표시하세요!<br><em>Done for today? Mark Week 5 as complete!</em></p>
+  <button class="btn-complete-week" onclick="completeWeek5()">Week 5 완료 / Mark Complete</button>
+  <div id="completion-msg" style="display:none;margin-top:1rem;font-family:var(--font-serif);font-size:1.1rem;color:var(--cobalt);">
+    훌륭합니다! Week 5를 완료했어요!<br>
+    <a href="../index.html" style="color:var(--cobalt);font-size:0.88rem;">&larr; 홈으로 / Back to Home</a>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script>
+'use strict';
+
+var cardIndex=0, cardMode='en-ko', cardFlipped=false, cardKnown=new Set();
+var afScore=0, pfScore=0, rvScore=0;
+var gameQueue=[], gameIdx=0, gameCorrect=0, gameWrong=0;
+
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    StudentDB.load();
+    var name=StudentDB.get('name');
+    var el=document.getElementById('w5-student-name');
+    if (el&&name) el.textContent='학생: '+name+'  ·  Student: '+name;
+    restoreState();
+  } catch(e){}
+  buildReviewQuiz();
+  buildArticleGrid();
+  buildArticleFill();
+  buildPluralGrid();
+  buildIrrTable();
+  buildPluralFill();
+  buildVocabTable();
+  buildDialogueCards();
+  initGame();
+  updateCard();
+});
+
+function switchSection(id, btn) {
+  document.querySelectorAll('.lesson-section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  var sec=document.getElementById('sec-'+id);
+  if (sec) sec.classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── REVIEW ──
+var reviewQs = [
+  { prompt:'She ___ at a hospital. (work/works)',           answer:'works',  ko:'그녀는 병원에서 일해요.' },
+  { prompt:'I ___ English every day. (study/studies)',      answer:'study',  ko:'저는 매일 영어를 공부해요.' },
+  { prompt:'He ___ coffee in the morning. (drink/drinks)',  answer:'drinks', ko:'그는 아침에 커피를 마셔요.' },
+  { prompt:'They ___ in Norcross. (live/lives)',            answer:'live',   ko:'그들은 노크로스에 살아요.' },
+  { prompt:'Negative: She ___ not like tea. (do/does)',     answer:'does',   ko:'그녀는 차를 안 좋아해요.' },
+  { prompt:'Question: ___ you work on Sundays? (Do/Does)',  answer:'do',     ko:'일요일에 일하세요?' },
+  { prompt:'My mother ___ dinner. (cook/cooks)',            answer:'cooks',  ko:'어머니가 저녁을 요리하세요.' },
+  { prompt:'Question: ___ he study at night? (Do/Does)',    answer:'does',   ko:'그는 밤에 공부해요?' }
+];
+
+function buildReviewQuiz() {
+  var c=document.getElementById('review-quiz');
+  if (!c) return; c.innerHTML='';
+  reviewQs.forEach(function(q,i){
+    var div=document.createElement('div');
+    div.style.cssText='background:var(--white);border:1.5px solid var(--mist);border-radius:var(--radius-md);padding:1rem 1.25rem;';
+    div.innerHTML =
+      '<div style="font-family:var(--font-serif);font-size:1.02rem;color:var(--ink);margin-bottom:0.5rem;">'+
+        q.prompt.replace('___','<input id="rq-'+i+'" style="border:2px solid var(--mist);border-radius:var(--radius-sm);padding:0.35rem 0.75rem;font-family:var(--font-serif);font-size:0.95rem;width:120px;outline:none;" autocomplete="off" spellcheck="false">')+
+      '</div>'+
+      '<div style="font-size:0.8rem;color:var(--text-light);">'+q.ko+'</div>'+
+      '<div id="rq-fb-'+i+'" style="font-size:0.8rem;margin-top:0.4rem;font-style:italic;display:none;"></div>';
+    c.appendChild(div);
+    var inp=div.querySelector('input');
+    if (inp) inp.addEventListener('keydown',function(e){ if(e.key==='Enter') checkAllReview(); });
+  });
+}
+
+function checkAllReview() {
+  rvScore=0;
+  reviewQs.forEach(function(q,i){
+    var inp=document.getElementById('rq-'+i), fb=document.getElementById('rq-fb-'+i);
+    if (!inp) return;
+    if (inp.value.trim().toLowerCase()===q.answer.toLowerCase()){
+      rvScore++; inp.style.borderColor='var(--celadon)'; inp.style.background='rgba(126,179,168,0.1)';
+      if (fb){ fb.textContent='정답! / Correct!'; fb.style.color='var(--celadon)'; fb.style.display='block'; }
+    } else {
+      inp.style.borderColor='var(--crimson)'; inp.style.background='rgba(192,57,43,0.06)';
+      if (fb){ fb.textContent='정답: '+q.answer; fb.style.color='var(--crimson)'; fb.style.display='block'; }
+    }
+  });
+  var b=document.getElementById('review-score-badge');
+  if (b) b.textContent=rvScore+' / '+reviewQs.length+' 정답';
+  try { StudentDB.saveExercise(5,'review',{score:rvScore}); } catch(e){}
+}
+
+function resetReview() {
+  reviewQs.forEach(function(q,i){
+    var inp=document.getElementById('rq-'+i), fb=document.getElementById('rq-fb-'+i);
+    if (inp){ inp.value=''; inp.style.borderColor='var(--mist)'; inp.style.background='var(--white)'; }
+    if (fb) fb.style.display='none';
+  });
+  var b=document.getElementById('review-score-badge'); if (b) b.textContent='0 / 8 정답';
+}
+
+// ── ARTICLE GRID ──
+function buildArticleGrid() {
+  var g=document.getElementById('article-grid');
+  if (!g||!COURSE_DATA.week5) return; g.innerHTML='';
+  COURSE_DATA.week5.articleRules.forEach(function(r){
+    var cls = r.article==='a'?'a':r.article==='an'?'an':r.article==='the'?'the':'none';
+    var label = r.article==='(none)'?'&#8709;':r.article;
+    var div=document.createElement('div');
+    div.className='article-card';
+    div.innerHTML =
+      '<div class="article-badge '+cls+'">'+label+'</div>'+
+      '<div class="article-body"><div class="rule-ko">'+r.ruleKo+'</div>'+
+      '<div class="rule-en">'+r.ruleEn+'</div>'+
+      '<div class="example">'+r.example+'</div></div>';
+    g.appendChild(div);
+  });
+}
+
+// ── ARTICLE FILL ──
+function buildArticleFill() {
+  var c=document.getElementById('article-fill-exercise');
+  if (!c||!COURSE_DATA.week5) return; c.innerHTML=''; afScore=0;
+  COURSE_DATA.week5.articleFill.forEach(function(item,i){
+    var div=document.createElement('div');
+    div.className='fill-item'; div.id='af-item-'+i;
+    var btns=item.options.map(function(o){
+      return '<button class="fill-opt-btn" onclick="checkArticleFill('+i+',\''+o+'\',\''+item.answer+'\',this)">'+o+'</button>';
+    }).join('');
+    div.innerHTML =
+      '<div class="fill-sentence">'+item.sentence+'</div>'+
+      '<div class="fill-options">'+btns+'</div>'+
+      '<div class="fill-hint">'+item.hint+'</div>';
+    c.appendChild(div);
+  });
+}
+
+function checkArticleFill(idx, chosen, correct, btn) {
+  var item=document.getElementById('af-item-'+idx);
+  if (!item||item.dataset.answered) return;
+  item.dataset.answered='1';
+  item.querySelectorAll('.fill-opt-btn').forEach(function(b){ b.disabled=true; });
+  if (chosen===correct){ btn.classList.add('correct'); afScore++; }
+  else { btn.classList.add('wrong'); item.querySelectorAll('.fill-opt-btn').forEach(function(b){ if(b.textContent.trim()===correct) b.classList.add('correct'); }); }
+  item.classList.add('revealed');
+  var b=document.getElementById('af-score-badge');
+  if (b) b.textContent=afScore+' / '+COURSE_DATA.week5.articleFill.length+' 정답';
+  try { StudentDB.saveExercise(5,'articleFill',{score:afScore}); } catch(e){}
+}
+
+function resetArticleFill() {
+  buildArticleFill();
+  var b=document.getElementById('af-score-badge'); if (b) b.textContent='0 / 10 정답';
+}
+
+// ── PLURAL GRID ──
+function buildPluralGrid() {
+  var g=document.getElementById('plural-grid');
+  if (!g||!COURSE_DATA.week5) return; g.innerHTML='';
+  COURSE_DATA.week5.pluralRules.forEach(function(r){
+    var div=document.createElement('div');
+    div.className='plural-card';
+    div.innerHTML =
+      '<div class="rule-ko">'+r.ruleKo+'</div>'+
+      '<div class="rule-en">'+r.ruleEn+'</div>'+
+      '<div class="transform"><span class="sing">'+r.singular+'</span><span class="arrow">&rarr;</span><span class="plur">'+r.plural+'</span>'+
+      '<button class="spk" style="margin-left:auto;background:none;border:1px solid var(--mist);border-radius:100px;padding:2px 9px;cursor:pointer;color:var(--cobalt);font-size:0.78rem;" onclick="Speaker.speakText(\''+r.singular+'. '+r.plural+'\')">&#9654;</button></div>';
+    g.appendChild(div);
+  });
+}
+
+// ── IRREGULAR PLURALS ──
+function buildIrrTable() {
+  var tb=document.getElementById('irr-tbody');
+  if (!tb||!COURSE_DATA.week5) return;
+  COURSE_DATA.week5.irregularPlurals.forEach(function(r){
+    var tr=document.createElement('tr');
+    tr.innerHTML =
+      '<td class="sing">'+r.singular+'</td>'+
+      '<td class="plur">'+r.plural+'</td>'+
+      '<td class="ko-cell">'+r.ko+'</td>'+
+      '<td><button class="spk" onclick="Speaker.speakText(\''+r.singular+'. '+r.plural+'\')">&#9654;</button></td>';
+    tb.appendChild(tr);
+  });
+}
+
+// ── PLURAL FILL ──
+function buildPluralFill() {
+  var c=document.getElementById('plural-fill-exercise');
+  if (!c||!COURSE_DATA.week5) return; c.innerHTML=''; pfScore=0;
+  COURSE_DATA.week5.pluralFill.forEach(function(item,i){
+    var div=document.createElement('div');
+    div.className='fill-item'; div.id='pf-item-'+i;
+    var btns=item.options.map(function(o){
+      return '<button class="fill-opt-btn" onclick="checkPluralFill('+i+',\''+o+'\',\''+item.answer+'\',this)">'+o+'</button>';
+    }).join('');
+    div.innerHTML =
+      '<div class="fill-sentence">one '+item.singular+' &rarr; two ___</div>'+
+      '<div class="fill-options">'+btns+'</div>'+
+      '<div class="fill-hint">'+item.hint+'</div>';
+    c.appendChild(div);
+  });
+}
+
+function checkPluralFill(idx, chosen, correct, btn) {
+  var item=document.getElementById('pf-item-'+idx);
+  if (!item||item.dataset.answered) return;
+  item.dataset.answered='1';
+  item.querySelectorAll('.fill-opt-btn').forEach(function(b){ b.disabled=true; });
+  if (chosen===correct){ btn.classList.add('correct'); pfScore++; Speaker.speakWord(correct); }
+  else { btn.classList.add('wrong'); item.querySelectorAll('.fill-opt-btn').forEach(function(b){ if(b.textContent.trim()===correct) b.classList.add('correct'); }); }
+  item.classList.add('revealed');
+  var b=document.getElementById('pf-score-badge');
+  if (b) b.textContent=pfScore+' / '+COURSE_DATA.week5.pluralFill.length+' 정답';
+  try { StudentDB.saveExercise(5,'pluralFill',{score:pfScore}); } catch(e){}
+}
+
+function resetPluralFill() {
+  buildPluralFill();
+  var b=document.getElementById('pf-score-badge'); if (b) b.textContent='0 / 10 정답';
+}
+
+// ── FLASHCARDS ──
+function buildVocabTable() {
+  var tb=document.getElementById('vocab-table-body');
+  if (!tb||!COURSE_DATA.week5) return;
+  COURSE_DATA.week5.vocabulary.forEach(function(w){
+    var safe=w.en.replace(/'/g,'');
+    var tr=document.createElement('tr');
+    tr.style.borderBottom='1px solid var(--mist)';
+    tr.innerHTML =
+      '<td style="padding:0.55rem 0.75rem;font-weight:600;color:var(--ink);">'+w.en+'</td>'+
+      '<td style="padding:0.55rem 0.75rem;color:var(--text-mid);">'+w.ko+'</td>'+
+      '<td style="padding:0.55rem 0.75rem;color:var(--text-light);font-size:0.85em;font-style:italic;">'+w.example+'</td>'+
+      '<td style="padding:0.55rem 0.75rem;"><button onclick="Speaker.speakWord(\''+safe+'\',this)" style="border:1px solid var(--mist);background:none;border-radius:100px;padding:3px 10px;cursor:pointer;font-size:0.8rem;color:var(--cobalt);">&#9654;</button></td>';
+    tb.appendChild(tr);
+  });
+}
+
+function setCardMode(mode) {
+  cardMode=mode; cardFlipped=false;
+  var fc=document.getElementById('flashcard'); if (fc) fc.classList.remove('flipped');
+  var me=document.getElementById('mode-en-ko'), mk=document.getElementById('mode-ko-en');
+  if (me&&mk){ if(mode==='en-ko'){me.style.borderColor='var(--cobalt)';me.style.color='var(--cobalt)';mk.style.borderColor='';mk.style.color='';}else{mk.style.borderColor='var(--cobalt)';mk.style.color='var(--cobalt)';me.style.borderColor='';me.style.color='';} }
+  updateCard();
+}
+
+function updateCard() {
+  var v=COURSE_DATA.week5?COURSE_DATA.week5.vocabulary:[];
+  if (!v.length) return;
+  var w=v[cardIndex];
+  var ft=document.getElementById('card-front-text'),bt=document.getElementById('card-back-text'),et=document.getElementById('card-example-text'),ct=document.getElementById('card-counter'),pb=document.getElementById('vocab-progress-badge');
+  if (cardMode==='en-ko'){ if(ft)ft.textContent=w.en; if(bt)bt.textContent=w.ko; } else { if(ft)ft.textContent=w.ko; if(bt)bt.textContent=w.en; }
+  if (et) et.textContent=w.example?'"'+w.example+'"':'';
+  if (ct) ct.textContent=(cardIndex+1)+' / '+v.length;
+  if (pb) pb.textContent=cardKnown.size+' / '+v.length+' 익힘';
+}
+
+function flipCard(){ cardFlipped=!cardFlipped; var fc=document.getElementById('flashcard'); if(fc) fc.classList.toggle('flipped',cardFlipped); }
+function nextCard(){ cardFlipped=false; var fc=document.getElementById('flashcard'); if(fc)fc.classList.remove('flipped'); cardIndex=(cardIndex+1)%COURSE_DATA.week5.vocabulary.length; updateCard(); }
+function prevCard(){ cardFlipped=false; var fc=document.getElementById('flashcard'); if(fc)fc.classList.remove('flipped'); var l=COURSE_DATA.week5.vocabulary.length; cardIndex=(cardIndex-1+l)%l; updateCard(); }
+function markCard(s){ if(s==='know'){ cardKnown.add(cardIndex); try{ StudentDB.saveExercise(5,'flashcards',{known:Array.from(cardKnown),total:COURSE_DATA.week5.vocabulary.length}); }catch(e){} } nextCard(); }
+function speakCurrentCard(){ var w=COURSE_DATA.week5.vocabulary[cardIndex]; if(w) Speaker.speakWord(w.en); }
+
+// ── GAME (articles + plurals mixed) ──
+function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+
+var gameData = [
+  { type:'관사 Article', sentence:'I need ___ taxi.',                opts:['a','an'],        correct:'a',        ko:'택시가 필요해요.' },
+  { type:'관사 Article', sentence:'LAX is ___ airport.',             opts:['a','an'],        correct:'an',       ko:'LAX는 공항이에요.' },
+  { type:'관사 Article', sentence:'Show me ___ way to the beach.',   opts:['a','the'],       correct:'the',      ko:'해변으로 가는 길을 알려 주세요.' },
+  { type:'관사 Article', sentence:'I want ___ umbrella.',            opts:['a','an'],        correct:'an',       ko:'우산이 필요해요.' },
+  { type:'관사 Article', sentence:'We have ___ reservation.',        opts:['a','an'],        correct:'a',        ko:'예약이 있어요.' },
+  { type:'관사 Article', sentence:'Let us visit ___ Getty Museum.',  opts:['a','the'],       correct:'the',      ko:'게티 미술관을 방문해요.' },
+  { type:'복수형 Plural', sentence:'There are many ___ in LA.',      opts:['beach','beaches'], correct:'beaches', ko:'LA에는 해변이 많아요.' },
+  { type:'복수형 Plural', sentence:'We visit two ___.',              opts:['museum','museums'],correct:'museums', ko:'우리는 박물관 두 곳을 방문해요.' },
+  { type:'복수형 Plural', sentence:'Many ___ visit Hollywood.',      opts:['tourist','tourists'],correct:'tourists',ko:'많은 관광객이 할리우드를 방문해요.' },
+  { type:'복수형 Plural', sentence:'There are big ___ in California.',opts:['city','cities'], correct:'cities',   ko:'캘리포니아에는 큰 도시들이 있어요.' },
+  { type:'복수형 Plural', sentence:'I see three ___ over there.',     opts:['person','people'],correct:'people',  ko:'저기 사람 세 명이 보여요.' },
+  { type:'복수형 Plural', sentence:'I buy two ___ for my family.',    opts:['souvenir','souvenirs'],correct:'souvenirs',ko:'가족을 위해 기념품 두 개를 사요.' }
+];
+
+function initGame() {
+  gameQueue=shuffle(gameData.slice());
+  gameIdx=0; gameCorrect=0; gameWrong=0;
+  document.getElementById('game-celebration').classList.remove('show');
+  document.getElementById('game-correct').textContent='0';
+  document.getElementById('game-wrong').textContent='0';
+  document.getElementById('game-remain').textContent=gameQueue.length;
+  loadGameQuestion();
+}
+
+function loadGameQuestion() {
+  if (gameIdx>=gameQueue.length){ showGameCelebration(); return; }
+  var q=gameQueue[gameIdx];
+  var tag=document.getElementById('game-tag');
+  var isArticle = q.type.indexOf('Article')>=0;
+  tag.textContent=q.type;
+  tag.style.background = isArticle?'rgba(43,93,160,0.1)':'rgba(200,131,42,0.12)';
+  tag.style.color = isArticle?'var(--cobalt)':'var(--gold)';
+  document.getElementById('game-sentence').innerHTML=q.sentence.replace('___','<span style="color:var(--stone);">______</span>');
+  document.getElementById('game-ko').textContent=q.ko;
+  document.getElementById('game-feedback').textContent='';
+  var optEl=document.getElementById('game-options');
+  optEl.innerHTML='';
+  shuffle(q.opts.slice()).forEach(function(o){
+    var b=document.createElement('button');
+    b.className='btn-card-action btn-flip';
+    b.style.cssText='padding:0.7rem 1.75rem;font-size:1.05rem;font-family:var(--font-serif);';
+    b.textContent=o;
+    b.onclick=function(){ answerGame(o, q.correct, b, q.sentence); };
+    optEl.appendChild(b);
+  });
+}
+
+function answerGame(chosen, correct, btn, sentence) {
+  var optEl=document.getElementById('game-options');
+  optEl.querySelectorAll('button').forEach(function(b){ b.disabled=true; });
+  var fb=document.getElementById('game-feedback');
+  if (chosen===correct){
+    gameCorrect++;
+    btn.style.borderColor='var(--celadon)'; btn.style.color='var(--celadon)';
+    fb.textContent='정답! / Correct!'; fb.style.color='var(--celadon)';
+    Speaker.speakText(sentence.replace('___', correct));
+  } else {
+    gameWrong++;
+    btn.style.borderColor='var(--crimson)'; btn.style.color='var(--crimson)';
+    optEl.querySelectorAll('button').forEach(function(b){ if(b.textContent.trim()===correct){ b.style.borderColor='var(--celadon)'; b.style.color='var(--celadon)'; } });
+    fb.textContent='정답: '+correct+' / Answer: '+correct; fb.style.color='var(--crimson)';
+  }
+  document.getElementById('game-correct').textContent=gameCorrect;
+  document.getElementById('game-wrong').textContent=gameWrong;
+  try { StudentDB.saveExercise(5,'game',{correct:gameCorrect,wrong:gameWrong}); } catch(e){}
+  setTimeout(function(){
+    gameIdx++;
+    document.getElementById('game-remain').textContent=Math.max(0,gameQueue.length-gameIdx);
+    loadGameQuestion();
+  }, 1500);
+}
+
+function showGameCelebration() {
+  var cel=document.getElementById('game-celebration');
+  var fin=document.getElementById('game-final');
+  if (cel) cel.classList.add('show');
+  if (fin) fin.textContent='정답: '+gameCorrect+'개  ·  오답: '+gameWrong+'개';
+  Speaker.speakText('Excellent work! You completed all the questions!');
+}
+
+// ── DIALOGUE ──
+function buildDialogueCards() {
+  var c=document.getElementById('dialogue-cards-w5');
+  if (!c||!COURSE_DATA.week5||!COURSE_DATA.week5.dialogues) return; c.innerHTML='';
+  COURSE_DATA.week5.dialogues.forEach(function(dlg){
+    var all=dlg.lines.map(function(l){return l.en;}).join('. ').replace(/'/g,'');
+    var lines=dlg.lines.map(function(line){
+      var isB=(line.speaker==='T'||line.speaker==='G');
+      return '<div class="dialogue-line"><span class="dl-speaker" style="color:'+(isB?'var(--cobalt)':'var(--crimson)')+';">'+line.speaker+'</span><div class="dl-bubble'+(isB?' b-student':'')+'"><span class="dl-text">'+line.en+'</span><span class="dl-ko">'+line.ko+'</span></div></div>';
+    }).join('');
+    var card=document.createElement('div');
+    card.className='dialogue-scenario';
+    card.innerHTML =
+      '<div class="scenario-header"><div><span class="scenario-title">'+dlg.titleKo+'</span><span class="scenario-sub">'+dlg.titleEn+'</span></div>'+
+      '<button onclick="Speaker.speakText(\''+all+'\')" class="btn-card-action btn-speak" style="margin-left:auto;padding:0.4rem 1rem;font-size:0.8rem;">&#9654; 전체 듣기</button></div>'+
+      '<div class="dialogue-lines">'+lines+'</div>'+
+      '<div style="background:rgba(43,93,160,0.06);border-radius:var(--radius-md);padding:0.875rem;font-size:0.82rem;color:var(--text-mid);">&#128161; 관사(a/an/the), 복수형, 여행 어휘를 찾아보세요! 역할을 바꿔 연습하세요. <em>Find the articles, plurals, and travel words! Switch roles.</em></div>';
+    c.appendChild(card);
+  });
+}
+
+function saveTeacherNotes() {
+  var n=(document.getElementById('teacher-notes')||{}).value||'';
+  try { StudentDB.saveExercise(5,'teacher_notes',{notes:n}); } catch(e){}
+  var m=document.getElementById('notes-saved-msg');
+  if (m){ m.style.display='inline'; setTimeout(function(){m.style.display='none';},2500); }
+}
+
+function completeWeek5() {
+  try { StudentDB.completeWeek(5); } catch(e){}
+  var btn=document.querySelector('.btn-complete-week'), msg=document.getElementById('completion-msg');
+  if (btn) btn.style.display='none';
+  if (msg) msg.style.display='block';
+  Speaker.speakText('Congratulations! You completed Week 5. Excellent work!');
+}
+
+function restoreState() {
+  try {
+    var fc=StudentDB.getExercise(5,'flashcards');
+    if (fc&&fc.known) fc.known.forEach(function(i){ cardKnown.add(i); });
+    var n=StudentDB.getExercise(5,'teacher_notes');
+    if (n&&n.notes){ var ta=document.getElementById('teacher-notes'); if(ta) ta.value=n.notes; }
+  } catch(e){}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 6 — 숫자/시간/날짜 | 기초 영어</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .num-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:0.625rem; margin:1rem 0; }
+    .num-tile { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:0.875rem 0.5rem; text-align:center; cursor:pointer; transition:all 0.15s; }
+    .num-tile:hover { border-color:var(--cobalt-light); transform:translateY(-2px); box-shadow:var(--shadow-sm); }
+    .num-tile.speaking { background:rgba(43,93,160,0.08); border-color:var(--cobalt); }
+    .num-tile .digit { font-family:var(--font-serif); font-size:1.5rem; font-weight:700; color:var(--cobalt-dark); line-height:1; }
+    .num-tile .word { font-size:0.8rem; color:var(--cobalt); font-weight:600; display:block; margin-top:4px; }
+    .num-tile .ko { font-size:0.7rem; color:var(--text-light); display:block; }
+
+    .clock-wrap { display:flex; flex-direction:column; align-items:center; gap:1.25rem; margin:1rem 0; }
+    .clock { width:200px; height:200px; border-radius:50%; border:6px solid var(--cobalt-dark); position:relative; background:var(--white); box-shadow:var(--shadow-md); }
+    .clock-num { position:absolute; font-family:var(--font-serif); font-weight:700; font-size:1rem; color:var(--ink); }
+    .hand { position:absolute; left:50%; bottom:50%; transform-origin:bottom center; border-radius:4px; }
+    .hand.hour { width:6px; height:50px; background:var(--ink); margin-left:-3px; }
+    .hand.minute { width:4px; height:72px; background:var(--cobalt); margin-left:-2px; }
+    .clock-center { position:absolute; top:50%; left:50%; width:14px; height:14px; background:var(--crimson); border-radius:50%; transform:translate(-50%,-50%); }
+
+    .time-table { width:100%; border-collapse:collapse; font-size:0.92rem; margin:1rem 0; }
+    .time-table th { background:var(--cobalt-dark); color:var(--white); padding:0.6rem 0.875rem; text-align:left; font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; }
+    .time-table td { padding:0.6rem 0.875rem; border-bottom:1px solid var(--mist); }
+    .time-table tr:last-child td { border-bottom:none; }
+    .time-table tr:nth-child(even) td { background:var(--paper-warm); }
+    .time-table .time-val { font-family:var(--font-serif); font-weight:700; color:var(--crimson); font-size:1.05rem; }
+    .time-table .say { font-family:var(--font-serif); color:var(--ink); }
+    .time-table .ko-cell { font-size:0.8rem; color:var(--text-light); }
+    .time-table .spk { background:none; border:1px solid var(--mist); border-radius:100px; padding:2px 9px; cursor:pointer; color:var(--cobalt); font-size:0.78rem; }
+    .time-table .spk:hover { background:var(--cobalt); color:var(--white); }
+
+    .chips-row { display:flex; flex-wrap:wrap; gap:0.5rem; margin:0.75rem 0; }
+    .day-chip, .month-chip { display:inline-flex; align-items:center; gap:6px; padding:0.45rem 1rem; border-radius:100px; border:1.5px solid var(--mist); background:var(--white); font-family:var(--font-serif); font-size:0.92rem; font-weight:600; color:var(--ink); cursor:pointer; transition:all 0.15s; }
+    .day-chip:hover, .month-chip:hover { border-color:var(--cobalt); color:var(--cobalt); transform:translateY(-1px); }
+    .day-chip .ko, .month-chip .ko { font-size:0.72rem; color:var(--text-light); font-weight:400; }
+
+    .fill-exercise { display:flex; flex-direction:column; gap:1rem; }
+    .fill-item { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:1rem 1.25rem; }
+    .fill-item .fill-sentence { font-family:var(--font-serif); font-size:1.02rem; color:var(--ink); margin-bottom:0.625rem; }
+    .fill-options { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.5rem; }
+    .fill-opt-btn { padding:0.4rem 1.25rem; border:2px solid var(--mist); border-radius:100px; background:var(--paper); font-family:var(--font-serif); font-size:1rem; font-weight:700; color:var(--ink); cursor:pointer; transition:all 0.15s; }
+    .fill-opt-btn:hover:not(:disabled) { border-color:var(--cobalt-light); color:var(--cobalt); }
+    .fill-opt-btn.correct { border-color:var(--celadon); background:rgba(126,179,168,0.12); color:var(--celadon); }
+    .fill-opt-btn.wrong { border-color:var(--crimson); background:rgba(192,57,43,0.08); color:var(--crimson); }
+    .fill-hint { font-size:0.78rem; color:var(--text-light); font-style:italic; display:none; }
+    .fill-item.revealed .fill-hint { display:block; }
+  </style>
+</head>
+<body>
+
+<header class="week-page-header">
+  <div class="week-header-pattern" aria-hidden="true"></div>
+  <div class="week-header-inner">
+    <a href="../index.html" class="week-back-link">← 과정 목록으로 / Back to Course</a>
+    <div class="week-number-badge">Week 06 &nbsp;·&nbsp; 07월 06일</div>
+    <h1 class="week-page-title">복습 + 숫자 / 시간 / 날짜</h1>
+    <p class="week-page-subtitle">Review + Numbers / Time / Dates + Vocabulary</p>
+    <div id="w6-student-name" style="color:rgba(255,255,255,0.6);font-size:0.88rem;margin-top:0.5rem;"></div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchSection('review',this)"><span class="tab-ko">복습</span><span class="tab-en">Review</span></button>
+    <button class="tab-btn" onclick="switchSection('numbers',this)"><span class="tab-ko">숫자</span><span class="tab-en">Numbers</span></button>
+    <button class="tab-btn" onclick="switchSection('time',this)"><span class="tab-ko">시간</span><span class="tab-en">Time</span></button>
+    <button class="tab-btn" onclick="switchSection('dates',this)"><span class="tab-ko">날짜</span><span class="tab-en">Dates</span></button>
+    <button class="tab-btn" onclick="switchSection('vocab',this)"><span class="tab-ko">어휘</span><span class="tab-en">Vocabulary</span></button>
+    <button class="tab-btn" onclick="switchSection('dialogue',this)"><span class="tab-ko">대화 연습</span><span class="tab-en">Dialogue</span></button>
+  </div>
+</nav>
+
+<!-- REVIEW -->
+<section class="lesson-section active" id="sec-review">
+  <div class="section-banner">
+    <span class="section-num">Section A</span><h2>Week 5 복습</h2>
+    <span class="section-sub">Review — Articles &amp; Plurals</span>
+    <div class="section-tip">지난주에 배운 관사와 복수형을 복습해요.<br><em>Review last week's articles and plurals.</em></div>
+  </div>
+  <div class="exercise-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem;">
+      <h3>관사 &amp; 복수형 복습 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Articles &amp; Plurals</span></h3>
+      <div class="progress-counter" id="review-score-badge">0 / 6 정답</div>
+    </div>
+    <div id="review-quiz" style="display:grid;gap:1rem;"></div>
+    <div style="margin-top:1.25rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="checkAllReview()">확인하기 / Check All</button>
+      <button class="btn-secondary" onclick="resetReview()">다시 하기 / Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="lesson-section" id="sec-numbers">
+  <div class="section-banner">
+    <span class="section-num">Section B</span><h2>숫자</h2>
+    <span class="section-sub">Numbers — Click to Hear Each One</span>
+    <div class="section-tip">각 숫자를 클릭하면 영어 발음을 들을 수 있어요.<br><em>Click any number to hear how to say it in English.</em></div>
+  </div>
+  <div class="exercise-card">
+    <h3>숫자 익히기 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Learn the Numbers</span></h3>
+    <div class="num-grid" id="num-grid"></div>
+  </div>
+</section>
+
+<!-- TIME -->
+<section class="lesson-section" id="sec-time">
+  <div class="section-banner">
+    <span class="section-num">Section C</span><h2>시간 말하기</h2>
+    <span class="section-sub">Telling Time — o'clock, half past, quarter</span>
+    <div class="section-tip">영어로 시간을 말하는 방법을 배워요. 시계를 보고 연습하세요!<br><em>Learn how to tell time in English. Use the clock to practice!</em></div>
+  </div>
+  <div class="exercise-card">
+    <h3>시계 연습 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Interactive Clock</span></h3>
+    <div class="clock-wrap">
+      <div class="clock" id="clock">
+        <div class="hand hour" id="hand-hour"></div>
+        <div class="hand minute" id="hand-minute"></div>
+        <div class="clock-center"></div>
+      </div>
+      <div style="text-align:center;">
+        <div id="clock-time" style="font-family:var(--font-serif);font-size:1.5rem;font-weight:700;color:var(--cobalt);">3:00</div>
+        <div id="clock-say" style="font-family:var(--font-serif);color:var(--ink);margin-top:0.25rem;">It is three o'clock.</div>
+        <div id="clock-ko" style="font-size:0.85rem;color:var(--text-light);">3시예요.</div>
+      </div>
+      <button class="btn-primary" onclick="randomTime()">&#8635; 다른 시간 / New Time</button>
+    </div>
+  </div>
+  <div class="exercise-card" style="margin-top:1.25rem;">
+    <h3>시간 표현 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Time Expressions</span></h3>
+    <div style="overflow-x:auto;">
+      <table class="time-table" id="time-table">
+        <thead><tr><th>시간 Time</th><th>영어 표현 English</th><th>한국어</th><th>듣기</th></tr></thead>
+        <tbody id="time-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- DATES -->
+<section class="lesson-section" id="sec-dates">
+  <div class="section-banner">
+    <span class="section-num">Section D</span><h2>요일 &amp; 날짜</h2>
+    <span class="section-sub">Days, Months &amp; Dates</span>
+    <div class="section-tip">요일과 월을 영어로 배워요. 각 단어를 클릭해 발음을 들으세요.<br><em>Learn the days and months in English. Click each one to hear it.</em></div>
+  </div>
+  <div class="exercise-card">
+    <h3>요일 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Days of the Week</span></h3>
+    <div class="chips-row" id="days-row"></div>
+  </div>
+  <div class="exercise-card" style="margin-top:1.25rem;">
+    <h3>월 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Months of the Year</span></h3>
+    <div class="chips-row" id="months-row"></div>
+  </div>
+  <div class="exercise-card" style="margin-top:1.25rem;">
+    <h3>전치사 연습 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">in / on / at with Time</span></h3>
+    <div style="background:rgba(43,93,160,0.06);border-radius:var(--radius-md);padding:1rem;margin-bottom:1.25rem;font-size:0.9rem;color:var(--text-mid);">
+      <strong>at</strong> + 시각 (at 3:00) &nbsp;·&nbsp; <strong>on</strong> + 요일/날짜 (on Monday) &nbsp;·&nbsp; <strong>in</strong> + 월/년 (in July)
+    </div>
+    <div class="fill-exercise" id="time-fill-exercise"></div>
+    <div style="margin-top:1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <div class="progress-counter" id="tf-score-badge">0 / 6 정답</div>
+      <button class="btn-secondary" onclick="resetTimeFill()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">다시 하기 / Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- VOCAB -->
+<section class="lesson-section" id="sec-vocab">
+  <div class="section-banner">
+    <span class="section-num">Section E</span><h2>이번 주 어휘</h2>
+    <span class="section-sub">Week 6 Vocabulary — 25 Time &amp; Date Words</span>
+    <div class="section-tip">시간과 날짜에 관한 단어들이에요.<br><em>Words about time and dates.</em></div>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+    <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+      <span style="font-size:0.78rem;font-weight:700;color:var(--text-light);letter-spacing:0.04em;">방향 / MODE:</span>
+      <button class="btn-card-action btn-flip" id="mode-en-ko" onclick="setCardMode('en-ko')" style="padding:0.4rem 1rem;font-size:0.8rem;border-color:var(--cobalt);color:var(--cobalt);">영 &rarr; 한</button>
+      <button class="btn-card-action btn-flip" id="mode-ko-en" onclick="setCardMode('ko-en')" style="padding:0.4rem 1rem;font-size:0.8rem;">한 &rarr; 영</button>
+    </div>
+    <div class="progress-counter" id="vocab-progress-badge">0 / 25 익힘</div>
+  </div>
+  <div class="flashcard-deck">
+    <div class="flashcard-container" id="flashcard" onclick="flipCard()">
+      <div class="flashcard-inner" id="flashcard-inner">
+        <div class="card-face card-front">
+          <span class="card-hint">클릭하면 뒤집어요 · Click to flip</span>
+          <span class="card-main-text" id="card-front-text">o'clock</span>
+          <span class="card-pron" id="card-pron-text"></span>
+        </div>
+        <div class="card-face card-back">
+          <span class="card-hint">뜻 · Meaning</span>
+          <span class="card-main-text" id="card-back-text">정각</span>
+          <span class="card-example" id="card-example-text"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-nav">
+    <button class="btn-card-action btn-practice" onclick="markCard('practice')">&larr; 더 연습</button>
+    <button class="btn-card-action btn-flip" onclick="prevCard()">&larr; 이전</button>
+    <span class="card-counter" id="card-counter">1 / 25</span>
+    <button class="btn-card-action btn-flip" onclick="nextCard()">다음 &rarr;</button>
+    <button class="btn-card-action btn-know" onclick="markCard('know')">&#10003; 알아요!</button>
+  </div>
+  <div style="text-align:center;margin-top:1rem;">
+    <button class="btn-card-action btn-speak" onclick="speakCurrentCard()" style="padding:0.5rem 1.5rem;">&#9654; 발음 듣기</button>
+  </div>
+  <div class="exercise-card" style="margin-top:2rem;">
+    <h3>전체 단어 목록 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Full Vocabulary List</span></h3>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+        <thead><tr style="border-bottom:2px solid var(--cobalt);">
+          <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">ENGLISH</th>
+          <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">한국어</th>
+          <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">예문 / Example</th>
+          <th style="padding:0.6rem 0.75rem;"></th>
+        </tr></thead>
+        <tbody id="vocab-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- DIALOGUE -->
+<section class="lesson-section" id="sec-dialogue">
+  <div class="section-banner">
+    <span class="section-num">Section F</span><h2>대화 연습</h2>
+    <span class="section-sub">Dialogue Practice — Numbers, Time &amp; Dates in Use</span>
+    <div class="section-tip">시간, 날짜, 숫자가 대화에서 어떻게 쓰이는지 보세요.<br><em>See how times, dates, and numbers work in real conversations.</em></div>
+  </div>
+  <div style="margin-bottom:1.5rem;"><div class="teacher-badge">&#128203; 선생님 감독 구역 · Teacher Supervised</div></div>
+  <div id="dialogue-cards"></div>
+  <div class="exercise-card" style="margin-top:1.5rem;">
+    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
+      <span style="font-size:1.1rem;">&#128221;</span>
+      <h3 style="margin:0;">선생님 관찰 메모 <em style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Teacher Notes</em></h3>
+    </div>
+    <textarea class="teacher-notes-area" id="teacher-notes" placeholder="오늘 수업 메모... / Today's class notes..." rows="5"></textarea>
+    <div style="margin-top:0.75rem;display:flex;gap:0.75rem;align-items:center;">
+      <button class="btn-secondary" onclick="saveTeacherNotes()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">저장 / Save Notes</button>
+      <span id="notes-saved-msg" style="display:none;font-size:0.8rem;color:var(--celadon);">&#10003; 저장됨</span>
+    </div>
+  </div>
+</section>
+
+<div class="complete-week-bar">
+  <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:1rem;">오늘 수업이 모두 끝났나요? Week 6을 완료로 표시하세요!<br><em>Done for today? Mark Week 6 as complete!</em></p>
+  <button class="btn-complete-week" onclick="completeWeek(6)">Week 6 완료 / Mark Complete</button>
+  <div id="completion-msg" style="display:none;margin-top:1rem;font-family:var(--font-serif);font-size:1.1rem;color:var(--cobalt);">
+    훌륭합니다! Week 6을 완료했어요!<br><a href="../index.html" style="color:var(--cobalt);font-size:0.88rem;">&larr; 홈으로 / Back to Home</a>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/week-common.js"></script>
+<script>
+var WK = 6;
+document.addEventListener('DOMContentLoaded', function() {
+  initWeekPage(WK, 'w6-student-name');
+  buildReviewQuiz(reviewQs6, 'review-quiz', 'review-score-badge', 6);
+  buildNumbers();
+  buildTimeTable();
+  buildDaysMonths();
+  buildTimeFill();
+  buildVocab(6);
+  buildDialogues(6, 'dialogue-cards', ['B','C','P']);
+  randomTime();
+});
+
+var reviewQs6 = [
+  { prompt:'LAX is ___ airport. (a/an)',           answer:'an',       ko:'LAX는 공항이에요.' },
+  { prompt:'I need ___ taxi. (a/an)',              answer:'a',        ko:'택시가 필요해요.' },
+  { prompt:'one beach, two ___. (복수)',           answer:'beaches',  ko:'해변 하나, 둘은 beaches' },
+  { prompt:'one child, two ___. (복수, 불규칙)',   answer:'children', ko:'아이 하나, 둘은 children' },
+  { prompt:'Show me ___ way to the beach. (관사)', answer:'the',      ko:'해변 가는 길을 알려 주세요.' },
+  { prompt:'one city, two ___. (복수)',            answer:'cities',   ko:'도시 하나, 둘은 cities' }
+];
+
+function buildNumbers() {
+  var g=document.getElementById('num-grid'); if(!g||!COURSE_DATA.week6) return;
+  COURSE_DATA.week6.numbers.forEach(function(n){
+    var t=document.createElement('div'); t.className='num-tile';
+    t.innerHTML='<div class="digit">'+n.num+'</div><span class="word">'+n.word+'</span><span class="ko">'+n.ko+'</span>';
+    t.onclick=function(){ t.classList.add('speaking'); Speaker.speakWord(n.word); setTimeout(function(){t.classList.remove('speaking');},800); };
+    g.appendChild(t);
+  });
+}
+
+function buildTimeTable() {
+  var tb=document.getElementById('time-tbody'); if(!tb||!COURSE_DATA.week6) return;
+  COURSE_DATA.week6.timeExamples.forEach(function(r){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td class="time-val">'+r.time+'</td><td class="say">'+r.say+'</td><td class="ko-cell">'+r.ko+'</td><td><button class="spk" onclick="Speaker.speakText(\''+r.say.replace(/'/g,'')+'\')">&#9654;</button></td>';
+    tb.appendChild(tr);
+  });
+}
+
+function buildDaysMonths() {
+  var dr=document.getElementById('days-row'), mr=document.getElementById('months-row');
+  if (dr&&COURSE_DATA.week6) COURSE_DATA.week6.days.forEach(function(d){
+    var c=document.createElement('button'); c.className='day-chip';
+    c.innerHTML=d.en+' <span class="ko">'+d.ko+'</span>';
+    c.onclick=function(){ Speaker.speakWord(d.en); };
+    dr.appendChild(c);
+  });
+  if (mr&&COURSE_DATA.week6) COURSE_DATA.week6.months.forEach(function(m){
+    var c=document.createElement('button'); c.className='month-chip';
+    c.innerHTML=m.en+' <span class="ko">'+m.ko+'</span>';
+    c.onclick=function(){ Speaker.speakWord(m.en); };
+    mr.appendChild(c);
+  });
+}
+
+var timeFillData = [
+  { sentence:"The meeting is ___ 3 o'clock.", options:["in","on","at"], answer:"at", hint:"정확한 시각 -> at" },
+  { sentence:"My birthday is ___ October.",   options:["in","on","at"], answer:"in", hint:"월 -> in" },
+  { sentence:"We have class ___ Monday.",     options:["in","on","at"], answer:"on", hint:"요일 -> on" },
+  { sentence:"The store opens ___ the morning.", options:["in","on","at"], answer:"in", hint:"in the morning -> in" },
+  { sentence:"My appointment is ___ July 5th.", options:["in","on","at"], answer:"on", hint:"날짜 -> on" },
+  { sentence:"The party starts ___ noon.",    options:["in","on","at"], answer:"at", hint:"noon(시점) -> at" }
+];
+
+function buildTimeFill() {
+  buildGenericFill(timeFillData, 'time-fill-exercise', 'tf-score-badge', 'tf', 6, 'timeFill');
+}
+function resetTimeFill() { buildTimeFill(); var b=document.getElementById('tf-score-badge'); if(b) b.textContent='0 / 6 정답'; }
+
+// Clock
+var clockTimes = [
+  { h:3, m:0,  time:"3:00", say:"It is three o'clock.",       ko:"3시예요." },
+  { h:3, m:15, time:"3:15", say:"It is a quarter past three.", ko:"3시 15분이에요." },
+  { h:3, m:30, time:"3:30", say:"It is half past three.",      ko:"3시 30분이에요." },
+  { h:6, m:45, time:"6:45", say:"It is a quarter to seven.",   ko:"7시 15분 전이에요." },
+  { h:9, m:10, time:"9:10", say:"It is ten past nine.",        ko:"9시 10분이에요." },
+  { h:12,m:0,  time:"12:00",say:"It is twelve o'clock.",       ko:"12시예요." },
+  { h:7, m:30, time:"7:30", say:"It is half past seven.",      ko:"7시 30분이에요." },
+  { h:5, m:15, time:"5:15", say:"It is a quarter past five.",  ko:"5시 15분이에요." }
+];
+var clockIdx = 0;
+
+function setupClockNumbers() {
+  var clock=document.getElementById('clock');
+  if (!clock || clock.dataset.built) return;
+  clock.dataset.built='1';
+  for (var i=1;i<=12;i++){
+    var angle=(i*30)*Math.PI/180;
+    var x=100+80*Math.sin(angle)-8;
+    var y=100-80*Math.cos(angle)-10;
+    var n=document.createElement('div'); n.className='clock-num';
+    n.style.left=x+'px'; n.style.top=y+'px'; n.textContent=i;
+    clock.appendChild(n);
+  }
+}
+
+function randomTime() {
+  setupClockNumbers();
+  clockIdx=Math.floor(Math.random()*clockTimes.length);
+  var t=clockTimes[clockIdx];
+  var hourAngle=(t.h%12)*30 + t.m*0.5;
+  var minAngle=t.m*6;
+  document.getElementById('hand-hour').style.transform='rotate('+hourAngle+'deg)';
+  document.getElementById('hand-minute').style.transform='rotate('+minAngle+'deg)';
+  document.getElementById('clock-time').textContent=t.time;
+  document.getElementById('clock-say').textContent=t.say;
+  document.getElementById('clock-ko').textContent=t.ko;
+  Speaker.speakText(t.say);
+}
+</script>
+</body>
+</html>

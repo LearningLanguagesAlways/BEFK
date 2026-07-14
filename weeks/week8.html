@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 8 — 전치사 | 기초 영어</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    /* Concept cards */
+    .concept-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.25rem; margin:1rem 0; }
+    .concept-card { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:1.25rem; box-shadow:var(--shadow-sm); }
+    .concept-card h4 { font-family:var(--font-serif); font-size:1.1rem; color:var(--cobalt-dark); margin:0 0 0.25rem; }
+    .concept-card .c-en { font-size:0.82rem; color:var(--cobalt); font-style:italic; margin-bottom:0.75rem; }
+    .concept-card .c-body { font-size:0.88rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.875rem; }
+    .concept-card .c-body .en { display:block; color:var(--text-light); font-style:italic; margin-top:0.35rem; }
+    .cmp-row { display:flex; flex-direction:column; gap:0.5rem; }
+    .cmp { display:flex; align-items:center; gap:0.625rem; padding:0.6rem 0.875rem; border-radius:var(--radius-sm); font-family:var(--font-serif); font-size:0.95rem; }
+    .cmp.bad { background:rgba(192,57,43,0.07); color:var(--crimson); }
+    .cmp.good { background:rgba(126,179,168,0.12); color:#2f7d6e; }
+    .cmp .mk { font-weight:700; flex-shrink:0; }
+    .cmp .play-mini { margin-left:auto; border:none; background:none; cursor:pointer; color:inherit; font-size:0.8rem; opacity:0.7; }
+    .cmp .play-mini:hover { opacity:1; }
+
+    /* Particle map table */
+    .pmap-table { width:100%; border-collapse:collapse; font-size:0.9rem; margin:1rem 0; }
+    .pmap-table th { background:var(--cobalt-dark); color:var(--white); padding:0.6rem 0.75rem; text-align:left; font-size:0.7rem; letter-spacing:0.05em; text-transform:uppercase; }
+    .pmap-table td { padding:0.6rem 0.75rem; border-bottom:1px solid var(--mist); vertical-align:middle; }
+    .pmap-table tr:nth-child(even) td { background:var(--paper-warm); }
+    .pmap-table .particle { font-family:var(--font-serif); font-weight:700; color:var(--crimson); font-size:1.05rem; }
+    .pmap-table .prep-pill { display:inline-block; font-family:var(--font-serif); font-weight:700; color:var(--white); background:var(--cobalt); border-radius:100px; padding:2px 12px; font-size:0.92rem; }
+    .pmap-table .ko-ex { font-size:0.8rem; color:var(--text-light); }
+    .pmap-table .en-ex { font-family:var(--font-serif); color:var(--ink); }
+    .pmap-table .spk { background:none; border:1px solid var(--mist); border-radius:100px; padding:2px 9px; cursor:pointer; color:var(--cobalt); font-size:0.78rem; }
+    .pmap-table .spk:hover { background:var(--cobalt); color:var(--white); }
+
+    /* in/on/at big three cards */
+    .prep-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; margin:1rem 0; }
+    .prep-card { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-sm); }
+    .prep-header { padding:0.75rem 1.25rem; color:var(--white); font-family:var(--font-serif); font-size:1.6rem; font-weight:700; text-align:center; }
+    .prep-card.at .prep-header { background:var(--cobalt); }
+    .prep-card.on .prep-header { background:var(--crimson); }
+    .prep-card.in .prep-header { background:var(--celadon); }
+    .prep-body { padding:1.25rem; }
+    .prep-section { margin-bottom:0.875rem; }
+    .prep-section .lbl { font-size:0.68rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-light); margin-bottom:2px; }
+    .prep-section .desc { font-size:0.85rem; color:var(--cobalt-dark); font-weight:600; margin-bottom:2px; }
+    .prep-section .ex { font-size:0.82rem; color:var(--text-mid); font-style:italic; }
+    .prep-konote { font-size:0.78rem; color:var(--crimson); background:rgba(192,57,43,0.06); border-radius:var(--radius-sm); padding:0.4rem 0.6rem; margin-bottom:0.875rem; }
+
+    /* Visual scene */
+    .visual-scene { background:var(--paper-warm); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:1.5rem; margin:1rem 0; text-align:center; }
+    .visual-row { display:flex; flex-wrap:wrap; gap:0.625rem; justify-content:center; margin-top:1rem; }
+    .visual-btn { display:inline-flex; flex-direction:column; align-items:center; padding:0.5rem 1.125rem; border-radius:100px; border:2px solid var(--mist); background:var(--white); cursor:pointer; transition:all 0.15s; }
+    .visual-btn:hover { border-color:var(--cobalt); transform:translateY(-2px); }
+    .visual-btn .vb-en { font-family:var(--font-serif); font-size:0.95rem; font-weight:600; color:var(--ink); }
+    .visual-btn .vb-ko { font-size:0.72rem; color:var(--text-light); }
+
+    /* Collocation chunk cards */
+    .colloc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:0.875rem; margin:1rem 0; }
+    .colloc-card { background:var(--white); border:1.5px solid var(--mist); border-left:5px solid var(--gold); border-radius:var(--radius-md); padding:1rem 1.125rem; cursor:pointer; transition:all 0.15s; }
+    .colloc-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-sm); border-left-color:var(--cobalt); }
+    .colloc-card .cc-chunk { font-family:var(--font-serif); font-size:1.15rem; font-weight:700; color:var(--cobalt-dark); }
+    .colloc-card .cc-chunk .prep-hi { color:var(--crimson); }
+    .colloc-card .cc-ko { font-size:0.8rem; color:var(--text-light); margin:2px 0 0.5rem; }
+    .colloc-card .cc-ex { font-size:0.82rem; color:var(--text-mid); font-style:italic; }
+    .colloc-card .cc-why { font-size:0.72rem; color:var(--gold-dark,#9a6a15); margin-top:0.4rem; }
+
+    /* Korean error cards */
+    .err-card { background:var(--white); border:1.5px solid var(--mist); border-left:5px solid var(--crimson); border-radius:var(--radius-md); padding:1.125rem 1.25rem; margin-bottom:1rem; }
+    .err-line { display:flex; align-items:center; gap:0.625rem; font-family:var(--font-serif); font-size:1rem; margin-bottom:0.4rem; }
+    .err-line .x { color:var(--crimson); font-weight:700; flex-shrink:0; }
+    .err-line .check { color:var(--celadon); font-weight:700; flex-shrink:0; }
+    .err-line.bad { color:var(--crimson); text-decoration:line-through; text-decoration-color:rgba(192,57,43,0.4); }
+    .err-line.fix { color:#2f7d6e; }
+    .err-line .play-mini { margin-left:auto; border:1px solid var(--mist); background:var(--white); border-radius:100px; padding:2px 9px; cursor:pointer; color:var(--cobalt); font-size:0.75rem; }
+    .err-tip { font-size:0.82rem; color:var(--text-mid); background:var(--paper-warm); border-radius:var(--radius-sm); padding:0.6rem 0.875rem; margin-top:0.625rem; line-height:1.5; }
+
+    /* Fill exercises */
+    .fill-exercise { display:flex; flex-direction:column; gap:1rem; }
+    .fill-item { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:1rem 1.25rem; }
+    .fill-item .fill-sentence { font-family:var(--font-serif); font-size:1.02rem; color:var(--ink); margin-bottom:0.625rem; }
+    .fill-options { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.5rem; }
+    .fill-opt-btn { padding:0.4rem 1.25rem; border:2px solid var(--mist); border-radius:100px; background:var(--paper); font-family:var(--font-serif); font-size:1rem; font-weight:700; color:var(--ink); cursor:pointer; transition:all 0.15s; }
+    .fill-opt-btn:hover:not(:disabled) { border-color:var(--cobalt-light); color:var(--cobalt); }
+    .fill-opt-btn.correct { border-color:var(--celadon); background:rgba(126,179,168,0.12); color:var(--celadon); }
+    .fill-opt-btn.wrong { border-color:var(--crimson); background:rgba(192,57,43,0.08); color:var(--crimson); }
+    .fill-hint { font-size:0.78rem; color:var(--text-light); font-style:italic; display:none; }
+    .fill-item.revealed .fill-hint { display:block; }
+
+    /* Match columns */
+    .match-columns { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1rem 0; }
+    .match-col-header { font-size:0.72rem; font-weight:700; letter-spacing:0.08em; color:var(--text-light); text-align:center; padding-bottom:0.5rem; border-bottom:1px solid var(--mist); margin-bottom:0.5rem; }
+    @media(max-width:600px){ .match-columns{grid-template-columns:1fr;} .pmap-table{font-size:0.8rem;} .pmap-table th,.pmap-table td{padding:0.45rem 0.4rem;} }
+  </style>
+</head>
+<body>
+
+<header class="week-page-header">
+  <div class="week-header-pattern" aria-hidden="true"></div>
+  <div class="week-header-inner">
+    <a href="../index.html" class="week-back-link">← 과정 목록으로 / Back to Course</a>
+    <div class="week-number-badge">Week 08 &nbsp;·&nbsp; 07월 20일</div>
+    <h1 class="week-page-title">복습 + 전치사 (in / on / at)</h1>
+    <p class="week-page-subtitle">Review + Prepositions + Vocabulary</p>
+    <div id="w8-student-name" style="color:rgba(255,255,255,0.6);font-size:0.88rem;margin-top:0.5rem;"></div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchSection('review',this)"><span class="tab-ko">복습</span><span class="tab-en">Review</span></button>
+    <button class="tab-btn" onclick="switchSection('concept',this)"><span class="tab-ko">핵심 개념</span><span class="tab-en">Big Idea</span></button>
+    <button class="tab-btn" onclick="switchSection('prep',this)"><span class="tab-ko">in/on/at</span><span class="tab-en">Big Three</span></button>
+    <button class="tab-btn" onclick="switchSection('place',this)"><span class="tab-ko">위치</span><span class="tab-en">Place</span></button>
+    <button class="tab-btn" onclick="switchSection('chunks',this)"><span class="tab-ko">고정 표현</span><span class="tab-en">Chunks</span></button>
+    <button class="tab-btn" onclick="switchSection('mistakes',this)"><span class="tab-ko">흔한 실수</span><span class="tab-en">Fix Mistakes</span></button>
+    <button class="tab-btn" onclick="switchSection('vocab',this)"><span class="tab-ko">어휘</span><span class="tab-en">Vocabulary</span></button>
+    <button class="tab-btn" onclick="switchSection('game',this)"><span class="tab-ko">게임</span><span class="tab-en">Games</span></button>
+    <button class="tab-btn" onclick="switchSection('dialogue',this)"><span class="tab-ko">대화</span><span class="tab-en">Dialogue</span></button>
+  </div>
+</nav>
+
+<!-- REVIEW -->
+<section class="lesson-section active" id="sec-review">
+  <div class="section-banner">
+    <span class="section-num">Section A</span><h2>Week 7 복습</h2>
+    <span class="section-sub">Review — Past Tense</span>
+    <div class="section-tip">지난주에 배운 과거 시제를 복습해요.<br><em>Review the past tense.</em></div>
+  </div>
+  <div class="exercise-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem;">
+      <h3>과거 시제 복습 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Past Tense</span></h3>
+      <div class="progress-counter" id="review-score-badge">0 / 6 정답</div>
+    </div>
+    <div id="review-quiz" style="display:grid;gap:1rem;"></div>
+    <div style="margin-top:1.25rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="checkAllReview()">확인하기 / Check All</button>
+      <button class="btn-secondary" onclick="resetReview()">다시 하기 / Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section class="lesson-section" id="sec-concept">
+  <div class="section-banner">
+    <span class="section-num">Section B</span><h2>핵심 개념: 하나의 '에'가 여러 전치사로</h2>
+    <span class="section-sub">The Big Idea — One Korean 에 Becomes Many English Prepositions</span>
+    <div class="section-tip">
+      한국어는 시간과 장소를 대부분 '에' 하나로 표현해요. 하지만 영어는 상황마다 <strong>at, in, on, to</strong> 중에서 골라야 해요. 이 표를 보면 왜 헷갈리는지, 그리고 어떻게 구별하는지 알 수 있어요.<br>
+      <em>Korean uses one particle 에 for most time and place. English makes you choose at, in, on, or to. This is the core challenge.</em>
+    </div>
+  </div>
+  <div class="concept-grid" id="concept-grid"></div>
+
+  <div class="exercise-card" style="margin-top:1.5rem;">
+    <h3>'에' → 여러 전치사 지도 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">The 에 → Preposition Map</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:0.5rem;">같은 '에'가 영어에서는 다르게 바뀌어요. 각 줄을 들어보세요.<br><em>The same 에 becomes different prepositions in English. Listen to each row.</em></p>
+    <div style="overflow-x:auto;">
+      <table class="pmap-table" id="pmap-table">
+        <thead><tr><th>한국어 조사</th><th>영어 전치사</th><th>쓰임</th><th>예 Example</th><th>듣기</th></tr></thead>
+        <tbody id="pmap-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- BIG THREE -->
+<section class="lesson-section" id="sec-prep">
+  <div class="section-banner">
+    <span class="section-num">Section C</span><h2>전치사 in / on / at</h2>
+    <span class="section-sub">The Big Three — Time &amp; Place</span>
+    <div class="section-tip">in, on, at은 가장 많이 쓰는 전치사예요. 시간과 장소 모두에 써요. 각 카드에 한국어 '에'와의 연결도 나와 있어요.<br><em>The three most common prepositions, for both time and place. Each card shows the link to Korean 에.</em></div>
+  </div>
+  <div class="exercise-card">
+    <h3>in / on / at 규칙 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">When to Use Each</span></h3>
+    <div class="prep-grid" id="prep-grid"></div>
+  </div>
+</section>
+
+<!-- PLACE -->
+<section class="lesson-section" id="sec-place">
+  <div class="section-banner">
+    <span class="section-num">Section D</span><h2>위치 전치사</h2>
+    <span class="section-sub">Prepositions of Place — Where Things Are</span>
+    <div class="section-tip">사물의 위치를 설명하는 전치사예요. 영어는 전치사가 <strong>명사 앞</strong>에 온다는 점을 기억하세요! 각 단어를 클릭해 들어보세요.<br><em>Prepositions that describe where things are. Remember: in English the preposition comes BEFORE the noun! Click each to hear it.</em></div>
+  </div>
+  <div class="exercise-card">
+    <h3>위치 표현 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Location Words</span></h3>
+    <div class="visual-scene">
+      <div style="font-family:var(--font-serif);font-size:1.05rem;color:var(--ink);">Where is the cafe? &nbsp;<span style="color:var(--text-light);font-size:0.85rem;">카페가 어디에 있나요?</span></div>
+      <div class="visual-row" id="place-row"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHUNKS -->
+<section class="lesson-section" id="sec-chunks">
+  <div class="section-banner">
+    <span class="section-num">Section E</span><h2>고정 표현 (동사 + 전치사)</h2>
+    <span class="section-sub">Fixed Chunks — Learn Them as Whole Units</span>
+    <div class="section-tip">
+      어떤 전치사는 규칙이 아니라 <strong>통째로 외워야</strong> 해요. 한국어에서 예측할 수 없기 때문이에요. "arrive AT", "good AT", "interested IN"처럼 짝으로 기억하세요. 카드를 클릭해 들어보세요.<br>
+      <em>Some prepositions can't be guessed — memorize them as chunks. Korean doesn't predict them. Click any card to hear it.</em>
+    </div>
+  </div>
+  <div class="colloc-grid" id="colloc-grid"></div>
+</section>
+
+<!-- MISTAKES -->
+<section class="lesson-section" id="sec-mistakes">
+  <div class="section-banner">
+    <span class="section-num">Section F</span><h2>한국어 화자의 흔한 실수</h2>
+    <span class="section-sub">Common Korean-Speaker Mistakes — And How to Fix Them</span>
+    <div class="section-tip">한국어 화자들이 전치사에서 자주 하는 실수예요. 틀린 문장과 맞는 문장을 비교하고, 이유를 이해하세요.<br><em>The preposition mistakes Korean speakers make most. Compare wrong and right, and learn why.</em></div>
+  </div>
+  <div id="error-cards"></div>
+</section>
+
+<!-- VOCAB -->
+<section class="lesson-section" id="sec-vocab">
+  <div class="section-banner">
+    <span class="section-num">Section G</span><h2>이번 주 어휘</h2>
+    <span class="section-sub">Week 8 Vocabulary — Location &amp; Direction Words</span>
+    <div class="section-tip">위치와 방향에 관한 단어들이에요.<br><em>Words about location and directions.</em></div>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+    <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+      <span style="font-size:0.78rem;font-weight:700;color:var(--text-light);letter-spacing:0.04em;">방향 / MODE:</span>
+      <button class="btn-card-action btn-flip" id="mode-en-ko" onclick="setCardMode('en-ko')" style="padding:0.4rem 1rem;font-size:0.8rem;border-color:var(--cobalt);color:var(--cobalt);">영 &rarr; 한</button>
+      <button class="btn-card-action btn-flip" id="mode-ko-en" onclick="setCardMode('ko-en')" style="padding:0.4rem 1rem;font-size:0.8rem;">한 &rarr; 영</button>
+    </div>
+    <div class="progress-counter" id="vocab-progress-badge">0 / 26 익힘</div>
+  </div>
+  <div class="flashcard-deck">
+    <div class="flashcard-container" id="flashcard" onclick="flipCard()">
+      <div class="flashcard-inner" id="flashcard-inner">
+        <div class="card-face card-front">
+          <span class="card-hint">클릭하면 뒤집어요 · Click to flip</span>
+          <span class="card-main-text" id="card-front-text">next to</span>
+          <span class="card-pron" id="card-pron-text"></span>
+        </div>
+        <div class="card-face card-back">
+          <span class="card-hint">뜻 · Meaning</span>
+          <span class="card-main-text" id="card-back-text">~옆에</span>
+          <span class="card-example" id="card-example-text"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-nav">
+    <button class="btn-card-action btn-practice" onclick="markCard('practice')">&larr; 더 연습</button>
+    <button class="btn-card-action btn-flip" onclick="prevCard()">&larr; 이전</button>
+    <span class="card-counter" id="card-counter">1 / 26</span>
+    <button class="btn-card-action btn-flip" onclick="nextCard()">다음 &rarr;</button>
+    <button class="btn-card-action btn-know" onclick="markCard('know')">&#10003; 알아요!</button>
+  </div>
+  <div style="text-align:center;margin-top:1rem;">
+    <button class="btn-card-action btn-speak" onclick="speakCurrentCard()" style="padding:0.5rem 1.5rem;">&#9654; 발음 듣기</button>
+  </div>
+  <div class="exercise-card" style="margin-top:2rem;">
+    <h3>전체 단어 목록 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Full Vocabulary List</span></h3>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+        <thead><tr style="border-bottom:2px solid var(--cobalt);">
+          <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">ENGLISH</th>
+          <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">한국어</th>
+          <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--cobalt-dark);font-size:0.75rem;letter-spacing:0.05em;">예문 / Example</th>
+          <th style="padding:0.6rem 0.75rem;"></th>
+        </tr></thead>
+        <tbody id="vocab-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- GAMES -->
+<section class="lesson-section" id="sec-game">
+  <div class="section-banner">
+    <span class="section-num">Section H</span><h2>게임</h2>
+    <span class="section-sub">Games — Fill Practice &amp; Chunk Matching</span>
+    <div class="section-tip">두 가지로 연습해요: in/on/at 채우기, 그리고 동사-전치사 짝 맞추기.<br><em>Two games: fill in in/on/at, and match verbs to their prepositions.</em></div>
+  </div>
+
+  <div class="exercise-card">
+    <h3>게임 1: in / on / at 채우기 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Game 1 — Fill in the Preposition</span></h3>
+    <div class="fill-exercise" id="prep-fill-exercise"></div>
+    <div style="margin-top:1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <div class="progress-counter" id="prepf-score-badge">0 / 12 정답</div>
+      <button class="btn-secondary" onclick="resetPrepFill()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">다시 하기 / Reset</button>
+    </div>
+  </div>
+
+  <div class="exercise-card" style="margin-top:1.5rem;">
+    <h3>게임 2: 동사 - 전치사 짝 맞추기 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Game 2 — Match Verb to Preposition</span></h3>
+    <p style="font-size:0.88rem;color:var(--text-mid);margin-bottom:1rem;">동사를 클릭하고, 맞는 전치사를 클릭하세요!<br><em>Click a verb, then its correct preposition!</em></p>
+    <div class="match-score-bar">
+      <div class="match-score"><span class="score-num" id="match-correct">0</span><span class="score-label">정답 Correct</span></div>
+      <div style="width:1px;height:40px;background:var(--mist);"></div>
+      <div class="match-score"><span class="score-num" id="match-wrong" style="color:var(--crimson);">0</span><span class="score-label">오답 Wrong</span></div>
+      <div style="width:1px;height:40px;background:var(--mist);"></div>
+      <div class="match-score"><span class="score-num" id="match-remaining">8</span><span class="score-label">남음 Left</span></div>
+      <button class="btn-secondary" onclick="initMatch()" style="margin-left:auto;font-size:0.82rem;padding:0.5rem 1.25rem;">&#8635; 다시</button>
+    </div>
+    <div class="match-columns">
+      <div><div class="match-col-header">동사 VERB</div><div id="match-col-base"></div></div>
+      <div><div class="match-col-header">전치사 PREPOSITION</div><div id="match-col-past"></div></div>
+    </div>
+    <div class="match-celebration" id="match-celebration">
+      <div style="font-size:2rem;margin-bottom:0.75rem;">&#11088;</div>
+      <h3>훌륭합니다! Excellent!</h3>
+      <p style="color:var(--text-mid);margin:0.75rem 0;">모든 짝을 찾았어요!<br><em>You matched all the chunks!</em></p>
+      <button class="btn-primary" onclick="initMatch()">&#8635; 다시 하기 / Play Again</button>
+    </div>
+  </div>
+</section>
+
+<!-- DIALOGUE -->
+<section class="lesson-section" id="sec-dialogue">
+  <div class="section-banner">
+    <span class="section-num">Section I</span><h2>대화 연습</h2>
+    <span class="section-sub">Dialogue Practice — Directions &amp; Locations</span>
+    <div class="section-tip">대화 속에서 전치사를 찾아보세요.<br><em>Find the prepositions in each dialogue.</em></div>
+  </div>
+  <div style="margin-bottom:1.5rem;"><div class="teacher-badge">&#128203; 선생님 감독 구역 · Teacher Supervised</div></div>
+  <div id="dialogue-cards"></div>
+  <div class="exercise-card" style="margin-top:1.5rem;">
+    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
+      <span style="font-size:1.1rem;">&#128221;</span>
+      <h3 style="margin:0;">선생님 관찰 메모 <em style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Teacher Notes</em></h3>
+    </div>
+    <textarea class="teacher-notes-area" id="teacher-notes" placeholder="오늘 수업 메모..." rows="5"></textarea>
+    <div style="margin-top:0.75rem;display:flex;gap:0.75rem;align-items:center;">
+      <button class="btn-secondary" onclick="saveTeacherNotes()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">저장 / Save Notes</button>
+      <span id="notes-saved-msg" style="display:none;font-size:0.8rem;color:var(--celadon);">&#10003; 저장됨</span>
+    </div>
+  </div>
+</section>
+
+<div class="complete-week-bar">
+  <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:1rem;">Week 8을 완료로 표시하세요!<br><em>Mark Week 8 as complete!</em></p>
+  <button class="btn-complete-week" onclick="completeWeek(8)">Week 8 완료 / Mark Complete</button>
+  <div id="completion-msg" style="display:none;margin-top:1rem;font-family:var(--font-serif);font-size:1.1rem;color:var(--cobalt);">
+    훌륭합니다! Week 8을 완료했어요!<br><a href="../index.html" style="color:var(--cobalt);font-size:0.88rem;">&larr; 홈으로 / Back to Home</a>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/week-common.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  initWeekPage(8, 'w8-student-name');
+  buildReviewQuiz(reviewQs8, 'review-quiz', 'review-score-badge', 8);
+  buildConceptCards();
+  buildParticleMap();
+  buildPrepGrid();
+  buildPlaceRow();
+  buildCollocations();
+  buildErrorCards();
+  buildPrepFill();
+  buildVocab(8);
+  initMatch();
+  buildDialogues(8, 'dialogue-cards', ['T','G','A']);
+});
+
+var reviewQs8 = [
+  { prompt:'Yesterday I ___ to the beach. (go)',  answer:'went',    ko:'어제 해변에 갔어요.' },
+  { prompt:'She ___ a souvenir. (buy)',           answer:'bought',  ko:'그녀는 기념품을 샀어요.' },
+  { prompt:'We ___ the museum. (visit)',          answer:'visited', ko:'우리는 박물관을 방문했어요.' },
+  { prompt:'Did you ___ lunch? (eat, did 뒤 원형)', answer:'eat',    ko:'점심 먹었어요?' },
+  { prompt:'I ___ my friend yesterday. (meet)',   answer:'met',     ko:'저는 어제 친구를 만났어요.' },
+  { prompt:'The plane ___ on time. (arrive)',     answer:'arrived', ko:'비행기가 제시간에 도착했어요.' }
+];
+
+/* Concept cards */
+function buildConceptCards() {
+  var c=document.getElementById('concept-grid'); if(!c||!COURSE_DATA.week8) return;
+  COURSE_DATA.week8.conceptCards.forEach(function(cc){
+    var goodSafe=cc.good.replace(/'/g,''), badSafe=cc.bad.replace(/'/g,'');
+    var div=document.createElement('div'); div.className='concept-card';
+    div.innerHTML =
+      '<h4>'+cc.titleKo+'</h4>'+
+      '<div class="c-en">'+cc.titleEn+'</div>'+
+      '<div class="c-body">'+cc.ko+'<span class="en">'+cc.en+'</span></div>'+
+      '<div class="cmp-row">'+
+        '<div class="cmp bad"><span class="mk">&#10007;</span> '+cc.bad+'<button class="play-mini" onclick="Speaker.speakText(\''+badSafe+'\')">&#9654;</button></div>'+
+        '<div class="cmp good"><span class="mk">&#10003;</span> '+cc.good+'<button class="play-mini" onclick="Speaker.speakText(\''+goodSafe+'\')">&#9654;</button></div>'+
+      '</div>';
+    c.appendChild(div);
+  });
+}
+
+/* Particle map table */
+function buildParticleMap() {
+  var tb=document.getElementById('pmap-tbody'); if(!tb||!COURSE_DATA.week8) return;
+  COURSE_DATA.week8.particleMap.forEach(function(m){
+    var safe=m.full.replace(/'/g,'');
+    var tr=document.createElement('tr');
+    tr.innerHTML =
+      '<td class="particle">'+m.koParticle+'</td>'+
+      '<td><span class="prep-pill">'+m.prep+'</span></td>'+
+      '<td class="ko-ex">'+m.useKo+'</td>'+
+      '<td><span class="en-ex">'+m.en+'</span><br><span class="ko-ex">'+m.ko+'</span></td>'+
+      '<td><button class="spk" onclick="Speaker.speakText(\''+safe+'\')">&#9654;</button></td>';
+    tb.appendChild(tr);
+  });
+}
+
+/* in/on/at big three */
+function buildPrepGrid() {
+  var g=document.getElementById('prep-grid'); if(!g||!COURSE_DATA.week8) return;
+  COURSE_DATA.week8.prepRules.forEach(function(r){
+    var div=document.createElement('div'); div.className='prep-card '+r.prep;
+    div.innerHTML =
+      '<div class="prep-header">'+r.prep+'</div>'+
+      '<div class="prep-body">'+
+        (r.koNote?'<div class="prep-konote">&#128161; '+r.koNote+'</div>':'')+
+        '<div class="prep-section"><div class="lbl">시간 TIME</div><div class="desc">'+r.timeKo+'</div><div class="ex">'+r.timeEx+'</div></div>'+
+        '<div class="prep-section"><div class="lbl">장소 PLACE</div><div class="desc">'+r.placeKo+'</div><div class="ex">'+r.placeEx+'</div></div>'+
+        '<button class="btn-card-action btn-speak" style="width:100%;padding:0.4rem;font-size:0.8rem;" onclick="Speaker.speakText(\''+(r.timeEx+'. '+r.placeEx).replace(/'/g,'')+'\')">&#9654; 듣기</button>'+
+      '</div>';
+    g.appendChild(div);
+  });
+}
+
+/* Place prepositions */
+function buildPlaceRow() {
+  var r=document.getElementById('place-row'); if(!r||!COURSE_DATA.week8) return;
+  COURSE_DATA.week8.placePreps.forEach(function(p){
+    var safe=p.say.replace(/'/g,'');
+    var b=document.createElement('button'); b.className='visual-btn';
+    b.innerHTML='<span class="vb-en">'+p.en+'</span><span class="vb-ko">'+p.ko+'</span>';
+    b.onclick=function(){ Speaker.speakText(safe); };
+    r.appendChild(b);
+  });
+}
+
+/* Collocation chunks */
+function buildCollocations() {
+  var g=document.getElementById('colloc-grid'); if(!g||!COURSE_DATA.week8) return;
+  COURSE_DATA.week8.collocations.forEach(function(c){
+    var safe=c.example.replace(/'/g,'');
+    var parts=c.chunk.split(' ');
+    var chunkHtml=parts[0]+' <span class="prep-hi">'+parts.slice(1).join(' ')+'</span>';
+    var div=document.createElement('div'); div.className='colloc-card';
+    div.innerHTML =
+      '<div class="cc-chunk">'+chunkHtml+'</div>'+
+      '<div class="cc-ko">'+c.ko+'</div>'+
+      '<div class="cc-ex">"'+c.example+'"</div>'+
+      '<div class="cc-why">&#128161; '+c.why+'</div>';
+    div.onclick=function(){ Speaker.speakText(safe); };
+    g.appendChild(div);
+  });
+}
+
+/* Korean error cards */
+function buildErrorCards() {
+  var c=document.getElementById('error-cards'); if(!c||!COURSE_DATA.week8) return;
+  COURSE_DATA.week8.koreanErrors.forEach(function(e){
+    var errSafe=e.errorEn.replace(/'/g,''), fixSafe=e.fixEn.replace(/'/g,'');
+    var div=document.createElement('div'); div.className='err-card';
+    div.innerHTML =
+      '<div class="err-line bad"><span class="x">&#10007;</span>'+e.errorEn+'<button class="play-mini" onclick="Speaker.speakText(\''+errSafe+'\')">&#9654; 듣기</button></div>'+
+      '<div class="err-line fix"><span class="check">&#10003;</span>'+e.fixEn+'<button class="play-mini" onclick="Speaker.speakText(\''+fixSafe+'\')">&#9654; 듣기</button></div>'+
+      '<div class="err-tip">&#128161; '+e.tipKo+'</div>';
+    c.appendChild(div);
+  });
+}
+
+function buildPrepFill() {
+  buildGenericFill(COURSE_DATA.week8.prepFill, 'prep-fill-exercise', 'prepf-score-badge', 'prepf', 8, 'prepFill');
+}
+function resetPrepFill() { buildPrepFill(); var b=document.getElementById('prepf-score-badge'); if(b) b.textContent='0 / 12 정답'; }
+
+/* Match game: verb -> preposition (from collocations) */
+var matchSel=null, matchCorrect=0, matchWrong=0;
+function initMatch() {
+  matchSel=null; matchCorrect=0; matchWrong=0;
+  var cols=COURSE_DATA.week8.collocations.slice(0,8);
+  var data=cols.map(function(c,i){
+    var parts=c.chunk.split(' ');
+    return { base:parts[0], past:parts.slice(1).join(' '), id:i };
+  });
+  document.getElementById('match-correct').textContent='0';
+  document.getElementById('match-wrong').textContent='0';
+  document.getElementById('match-remaining').textContent=data.length;
+  document.getElementById('match-celebration').classList.remove('show');
+  var bc=document.getElementById('match-col-base'), pc=document.getElementById('match-col-past');
+  bc.innerHTML=''; pc.innerHTML='';
+  window._matchData=data;
+  shuffle(data.slice()).forEach(function(x){
+    var b=document.createElement('button'); b.className='match-word-btn'; b.textContent=x.base; b.dataset.id=x.id; b.dataset.type='base';
+    b.onclick=function(){ matchClick(b,'base'); }; bc.appendChild(b);
+  });
+  shuffle(data.slice()).forEach(function(x){
+    var b=document.createElement('button'); b.className='match-word-btn'; b.textContent=x.past; b.dataset.id=x.id; b.dataset.type='past';
+    b.onclick=function(){ matchClick(b,'past'); }; pc.appendChild(b);
+  });
+}
+function matchClick(btn,type) {
+  if (btn.classList.contains('matched')) return;
+  if (!matchSel){ document.querySelectorAll('.match-word-btn.selected').forEach(function(b){b.classList.remove('selected');}); btn.classList.add('selected'); matchSel=btn; return; }
+  if (matchSel===btn){ btn.classList.remove('selected'); matchSel=null; return; }
+  if (matchSel.dataset.type===type){ matchSel.classList.remove('selected'); btn.classList.add('selected'); matchSel=btn; return; }
+  if (matchSel.dataset.id===btn.dataset.id){
+    [matchSel,btn].forEach(function(b){ b.classList.remove('selected'); b.classList.add('matched'); b.disabled=true; });
+    matchCorrect++;
+    var d=window._matchData[parseInt(btn.dataset.id)];
+    Speaker.speakText(d.base+' '+d.past);
+    var rem=document.querySelectorAll('.match-word-btn:not(.matched)').length/2;
+    document.getElementById('match-remaining').textContent=Math.round(rem);
+    if (matchCorrect>=8) setTimeout(function(){ document.getElementById('match-celebration').classList.add('show'); Speaker.speakText('Excellent! You matched all the chunks!'); },400);
+  } else {
+    matchWrong++;
+    [matchSel,btn].forEach(function(b){ b.classList.remove('selected'); b.classList.add('wrong'); setTimeout(function(){b.classList.remove('wrong');},500); });
+  }
+  matchSel=null;
+  document.getElementById('match-correct').textContent=matchCorrect;
+  document.getElementById('match-wrong').textContent=matchWrong;
+  try { StudentDB.saveExercise(8,'match',{correct:matchCorrect,wrong:matchWrong}); } catch(e){}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 9 — 전체 복습 | 기초 영어</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    /* Grammar summary cards */
+    .grammar-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; margin:1rem 0; }
+    .gc { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:1.25rem; border-left:5px solid var(--cobalt); }
+    .gc .gc-week { font-size:0.68rem; font-weight:700; letter-spacing:0.1em; color:var(--gold); text-transform:uppercase; }
+    .gc h4 { font-family:var(--font-serif); font-size:1.05rem; color:var(--ink); margin:0.25rem 0; }
+    .gc .gc-en { font-size:0.8rem; color:var(--cobalt); font-style:italic; margin-bottom:0.625rem; }
+    .gc .gc-point { font-size:0.85rem; color:var(--text-mid); line-height:1.6; }
+    .gc .gc-watch { font-size:0.8rem; color:var(--crimson); background:rgba(192,57,43,0.06); border-radius:var(--radius-sm); padding:0.5rem 0.75rem; margin-top:0.75rem; line-height:1.5; }
+
+    /* Error pattern cards (the centerpiece) */
+    .err-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1rem; margin:1rem 0; }
+    .err-card { background:var(--white); border:1.5px solid var(--mist); border-left:5px solid var(--crimson); border-radius:var(--radius-md); padding:1.125rem 1.25rem; }
+    .err-top { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.75rem; }
+    .err-rank { flex-shrink:0; width:26px; height:26px; border-radius:50%; background:var(--crimson); color:var(--white); font-size:0.8rem; font-weight:700; display:inline-flex; align-items:center; justify-content:center; }
+    .err-titles { flex:1; }
+    .err-titles .et-ko { font-family:var(--font-serif); font-weight:700; color:var(--ink); font-size:0.98rem; }
+    .err-titles .et-en { font-size:0.72rem; color:var(--text-light); }
+    .err-week-tag { font-size:0.62rem; font-weight:700; color:var(--gold); letter-spacing:0.06em; background:rgba(200,131,42,0.1); border-radius:100px; padding:2px 8px; }
+    .err-line { display:flex; align-items:center; gap:0.5rem; font-family:var(--font-serif); font-size:0.95rem; margin-bottom:0.35rem; }
+    .err-line .x { color:var(--crimson); font-weight:700; flex-shrink:0; }
+    .err-line .check { color:var(--celadon); font-weight:700; flex-shrink:0; }
+    .err-line.bad { color:var(--crimson); text-decoration:line-through; text-decoration-color:rgba(192,57,43,0.4); }
+    .err-line.fix { color:#2f7d6e; }
+    .err-line .play-mini { margin-left:auto; border:1px solid var(--mist); background:var(--white); border-radius:100px; padding:2px 9px; cursor:pointer; color:var(--cobalt); font-size:0.72rem; }
+    .err-tip { font-size:0.8rem; color:var(--text-mid); background:var(--paper-warm); border-radius:var(--radius-sm); padding:0.55rem 0.8rem; margin-top:0.5rem; line-height:1.5; }
+
+    /* Vocab review grid */
+    .vocab-review-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:0.625rem; margin:1rem 0; }
+    .vr-tile { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:0.875rem; text-align:center; cursor:pointer; transition:all 0.15s; position:relative; }
+    .vr-tile:hover { border-color:var(--cobalt-light); transform:translateY(-2px); box-shadow:var(--shadow-sm); }
+    .vr-tile .vr-en { font-family:var(--font-serif); font-weight:700; color:var(--cobalt-dark); }
+    .vr-tile .vr-ko { font-size:0.78rem; color:var(--text-light); display:block; margin-top:2px; }
+    .vr-tile .vr-week { position:absolute; top:4px; right:6px; font-size:0.6rem; color:var(--gold); font-weight:700; }
+
+    /* Word-order game */
+    .wo-item { background:var(--white); border:1.5px solid var(--mist); border-radius:var(--radius-md); padding:1.25rem; margin-bottom:1.125rem; }
+    .wo-ko { font-size:0.85rem; color:var(--text-light); margin-bottom:0.75rem; }
+    .wo-tokens { display:flex; flex-wrap:wrap; gap:0.5rem; min-height:44px; padding:0.75rem; background:var(--paper-warm); border-radius:var(--radius-sm); margin-bottom:0.75rem; }
+    .wo-slot { display:flex; flex-wrap:wrap; gap:0.5rem; min-height:44px; padding:0.75rem; border:2px dashed var(--cobalt-light); border-radius:var(--radius-sm); margin-bottom:0.75rem; }
+    .wo-token { padding:0.45rem 1rem; border-radius:100px; border:2px solid var(--cobalt-light); background:var(--white); font-family:var(--font-serif); font-weight:600; color:var(--cobalt-dark); cursor:pointer; transition:all 0.12s; font-size:0.95rem; }
+    .wo-token:hover { background:var(--cobalt); color:var(--white); }
+    .wo-controls { display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; }
+    .wo-feedback { font-size:0.85rem; font-weight:600; }
+    .wo-feedback.ok { color:var(--celadon); }
+    .wo-feedback.no { color:var(--crimson); }
+
+    /* Review quiz inputs (inherit from week-common builder) */
+    @media(max-width:600px){ .err-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+
+<header class="week-page-header">
+  <div class="week-header-pattern" aria-hidden="true"></div>
+  <div class="week-header-inner">
+    <a href="../index.html" class="week-back-link">← 과정 목록으로 / Back to Course</a>
+    <div class="week-number-badge">Week 09 &nbsp;·&nbsp; 07월 27일</div>
+    <h1 class="week-page-title">전체 내용 복습</h1>
+    <p class="week-page-subtitle">Full Content Review — Weeks 1 through 8</p>
+    <div id="w9-student-name" style="color:rgba(255,255,255,0.6);font-size:0.88rem;margin-top:0.5rem;"></div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchSection('grammar',this)"><span class="tab-ko">문법 정리</span><span class="tab-en">Grammar</span></button>
+    <button class="tab-btn" onclick="switchSection('errors',this)"><span class="tab-ko">최다 실수</span><span class="tab-en">Top Errors</span></button>
+    <button class="tab-btn" onclick="switchSection('quiz',this)"><span class="tab-ko">종합 퀴즈</span><span class="tab-en">Mega Quiz</span></button>
+    <button class="tab-btn" onclick="switchSection('wordorder',this)"><span class="tab-ko">문장 순서</span><span class="tab-en">Word Order</span></button>
+    <button class="tab-btn" onclick="switchSection('vocabrev',this)"><span class="tab-ko">어휘 복습</span><span class="tab-en">Vocab</span></button>
+    <button class="tab-btn" onclick="switchSection('dialogue',this)"><span class="tab-ko">종합 대화</span><span class="tab-en">Dialogue</span></button>
+  </div>
+</nav>
+
+<!-- GRAMMAR SUMMARY -->
+<section class="lesson-section active" id="sec-grammar">
+  <div class="section-banner">
+    <span class="section-num">Section A</span><h2>8주 문법 총정리</h2>
+    <span class="section-sub">8 Weeks of Grammar — Quick Reference</span>
+    <div class="section-tip">지금까지 배운 모든 문법을 한눈에 정리했어요. 각 카드에는 한국어 화자가 <strong>주의할 점</strong>도 있어요.<br><em>Everything you have learned, summarized — with a "watch out" note for Korean speakers on each card.</em></div>
+  </div>
+  <div class="grammar-cards" id="grammar-cards"></div>
+</section>
+
+<!-- TOP ERRORS (centerpiece) -->
+<section class="lesson-section" id="sec-errors">
+  <div class="section-banner">
+    <span class="section-num">Section B</span><h2>한국어 화자 최다 실수 총정리</h2>
+    <span class="section-sub">Top Korean-Speaker Errors — All 8 Weeks in One Place</span>
+    <div class="section-tip">
+      연구에 따르면 한국어 화자가 영어에서 가장 자주 틀리는 것들이에요. 관사와 3인칭 -s가 1·2위예요. 틀린 문장과 맞는 문장을 비교하고, 소리 내어 연습하세요.<br>
+      <em>Research shows these are the errors Korean speakers make most. Articles and third-person -s rank first. Compare wrong vs. right, and practice aloud.</em>
+    </div>
+  </div>
+  <div class="err-grid" id="error-grid"></div>
+</section>
+
+<!-- MEGA QUIZ -->
+<section class="lesson-section" id="sec-quiz">
+  <div class="section-banner">
+    <span class="section-num">Section C</span><h2>종합 퀴즈</h2>
+    <span class="section-sub">Mega Review Quiz — All 8 Weeks</span>
+    <div class="section-tip">8주 동안 배운 모든 내용을 테스트해요. 빈칸을 채우고 점수를 확인하세요!<br><em>Test everything from all 8 weeks. Fill in the blanks and check your score!</em></div>
+  </div>
+  <div class="exercise-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem;">
+      <h3>16문제 종합 테스트 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">16-Question Test</span></h3>
+      <div class="progress-counter" id="review-score-badge">0 / 16 정답</div>
+    </div>
+    <div id="review-quiz" style="display:grid;gap:1rem;"></div>
+    <div style="margin-top:1.25rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="checkAllReview()">확인하기 / Check All</button>
+      <button class="btn-secondary" onclick="resetReview()">다시 하기 / Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- WORD ORDER GAME -->
+<section class="lesson-section" id="sec-wordorder">
+  <div class="section-banner">
+    <span class="section-num">Section D</span><h2>문장 순서 맞추기</h2>
+    <span class="section-sub">Word-Order Builder — Practice English SVO</span>
+    <div class="section-tip">
+      한국어는 동사가 맨 뒤에 와요(SOV). 영어는 동사가 주어 바로 뒤에 와요(SVO). 조각을 순서대로 클릭해 올바른 영어 문장을 만드세요!<br>
+      <em>Korean puts the verb last (SOV). English puts the verb right after the subject (SVO). Tap the pieces in order to build the correct English sentence!</em>
+    </div>
+  </div>
+  <div class="exercise-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem;">
+      <h3>문장을 만드세요 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Build the Sentence</span></h3>
+      <div class="progress-counter" id="wo-score-badge">0 / 6 완성</div>
+    </div>
+    <div id="word-order-list"></div>
+    <div style="margin-top:0.5rem;"><button class="btn-secondary" onclick="buildWordOrder()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">&#8635; 다시 하기 / Reset</button></div>
+  </div>
+</section>
+
+<!-- VOCAB REVIEW -->
+<section class="lesson-section" id="sec-vocabrev">
+  <div class="section-banner">
+    <span class="section-num">Section E</span><h2>어휘 복습</h2>
+    <span class="section-sub">Vocabulary Review — Highlights from Each Week</span>
+    <div class="section-tip">각 단어를 클릭하면 발음을 들을 수 있어요.<br><em>Click any word to hear it spoken.</em></div>
+  </div>
+  <div class="exercise-card">
+    <h3>주요 단어 <span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Key Words from Weeks 1-8</span></h3>
+    <div class="vocab-review-grid" id="vocab-review-grid"></div>
+  </div>
+</section>
+
+<!-- DIALOGUE -->
+<section class="lesson-section" id="sec-dialogue">
+  <div class="section-banner">
+    <span class="section-num">Section F</span><h2>종합 대화</h2>
+    <span class="section-sub">Review Dialogues — Putting It All Together</span>
+    <div class="section-tip">지금까지 배운 모든 것이 들어 있는 대화예요. 자신 있게 연습하세요!<br><em>These dialogues use everything you have learned. Practice with confidence!</em></div>
+  </div>
+  <div style="margin-bottom:1.5rem;"><div class="teacher-badge">&#128203; 선생님 감독 구역 · Teacher Supervised</div></div>
+  <div id="dialogue-cards"></div>
+  <div class="exercise-card" style="margin-top:1.5rem;">
+    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
+      <span style="font-size:1.1rem;">&#128221;</span>
+      <h3 style="margin:0;">선생님 관찰 메모 <em style="font-size:0.8rem;font-weight:400;color:var(--text-light);">Teacher Notes</em></h3>
+    </div>
+    <textarea class="teacher-notes-area" id="teacher-notes" placeholder="오늘 수업 메모..." rows="5"></textarea>
+    <div style="margin-top:0.75rem;display:flex;gap:0.75rem;align-items:center;">
+      <button class="btn-secondary" onclick="saveTeacherNotes()" style="font-size:0.82rem;padding:0.5rem 1.25rem;">저장 / Save Notes</button>
+      <span id="notes-saved-msg" style="display:none;font-size:0.8rem;color:var(--celadon);">&#10003; 저장됨</span>
+    </div>
+  </div>
+</section>
+
+<div class="complete-week-bar">
+  <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:1rem;">전체 복습을 완료했나요? Week 9를 완료로 표시하세요!<br><em>Finished the full review? Mark Week 9 as complete!</em></p>
+  <button class="btn-complete-week" onclick="completeWeek(9)">Week 9 완료 / Mark Complete</button>
+  <div id="completion-msg" style="display:none;margin-top:1rem;font-family:var(--font-serif);font-size:1.1rem;color:var(--cobalt);">
+    훌륭합니다! 다음 주는 회화의 날이에요!<br><a href="../index.html" style="color:var(--cobalt);font-size:0.88rem;">&larr; 홈으로 / Back to Home</a>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/week-common.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  initWeekPage(9, 'w9-student-name');
+  buildGrammarCards();
+  buildErrorGrid();
+  buildMegaQuiz();
+  buildWordOrder();
+  buildVocabReview();
+  buildDialogues(9, 'dialogue-cards', ['B']);
+});
+
+function buildGrammarCards() {
+  var c=document.getElementById('grammar-cards'); if(!c||!COURSE_DATA.week9) return;
+  COURSE_DATA.week9.grammarCards.forEach(function(g){
+    var div=document.createElement('div'); div.className='gc';
+    div.innerHTML =
+      '<div class="gc-week">'+g.week+'</div>'+
+      '<h4>'+g.titleKo+'</h4>'+
+      '<div class="gc-en">'+g.titleEn+'</div>'+
+      '<div class="gc-point">'+g.point+'</div>'+
+      (g.watchout?'<div class="gc-watch">&#9888; '+g.watchout+'</div>':'')+
+      '<button class="btn-card-action btn-speak" style="margin-top:0.75rem;padding:0.35rem 0.875rem;font-size:0.78rem;" onclick="Speaker.speakText(\''+g.point.replace(/'/g,'')+'\')">&#9654; 듣기</button>';
+    c.appendChild(div);
+  });
+}
+
+function buildErrorGrid() {
+  var c=document.getElementById('error-grid'); if(!c||!COURSE_DATA.week9) return;
+  COURSE_DATA.week9.errorPatterns.forEach(function(e){
+    var errSafe=e.errorEn.replace(/'/g,''), fixSafe=e.fixEn.replace(/'/g,'');
+    var div=document.createElement('div'); div.className='err-card';
+    div.innerHTML =
+      '<div class="err-top">'+
+        '<span class="err-rank">'+e.rank+'</span>'+
+        '<div class="err-titles"><span class="et-ko">'+e.titleKo+'</span><br><span class="et-en">'+e.titleEn+'</span></div>'+
+        '<span class="err-week-tag">'+e.week+'</span>'+
+      '</div>'+
+      '<div class="err-line bad"><span class="x">&#10007;</span>'+e.errorEn+'<button class="play-mini" onclick="Speaker.speakText(\''+errSafe+'\')">&#9654;</button></div>'+
+      '<div class="err-line fix"><span class="check">&#10003;</span>'+e.fixEn+'<button class="play-mini" onclick="Speaker.speakText(\''+fixSafe+'\')">&#9654;</button></div>'+
+      '<div class="err-tip">&#128161; '+e.tipKo+'</div>';
+    c.appendChild(div);
+  });
+}
+
+function buildMegaQuiz() {
+  if (!COURSE_DATA.week9) return;
+  var qs = COURSE_DATA.week9.reviewMixed.map(function(item){
+    return { prompt: '['+item.week+'] '+item.q, answer:item.answer, ko:item.ko };
+  });
+  buildReviewQuiz(qs, 'review-quiz', 'review-score-badge', 9);
+}
+
+function buildVocabReview() {
+  var g=document.getElementById('vocab-review-grid'); if(!g||!COURSE_DATA.week9) return;
+  COURSE_DATA.week9.vocabReview.forEach(function(v){
+    var safe=v.en.replace(/'/g,'');
+    var t=document.createElement('div'); t.className='vr-tile';
+    t.innerHTML='<span class="vr-week">'+v.week+'</span><span class="vr-en">'+v.en+'</span><span class="vr-ko">'+v.ko+'</span>';
+    t.onclick=function(){ Speaker.speakWord(safe); };
+    g.appendChild(t);
+  });
+}
+
+/* ── Word-order game ── */
+var woCompleted=0, woTotal=0;
+function buildWordOrder() {
+  var c=document.getElementById('word-order-list'); if(!c||!COURSE_DATA.week9) return;
+  c.innerHTML=''; woCompleted=0;
+  var items=COURSE_DATA.week9.wordOrderGame;
+  woTotal=items.length;
+  updateWoBadge();
+  items.forEach(function(item, idx){
+    var div=document.createElement('div'); div.className='wo-item'; div.id='wo-'+idx;
+    div.innerHTML =
+      '<div class="wo-ko">한국어: '+item.ko+'</div>'+
+      '<div class="wo-slot" id="wo-slot-'+idx+'" data-answer="'+item.answer.replace(/"/g,'&quot;')+'"></div>'+
+      '<div class="wo-tokens" id="wo-pool-'+idx+'"></div>'+
+      '<div class="wo-controls">'+
+        '<button class="btn-secondary" style="font-size:0.78rem;padding:0.4rem 1rem;" onclick="checkWordOrder('+idx+')">확인 / Check</button>'+
+        '<button class="btn-card-action btn-flip" style="font-size:0.78rem;padding:0.4rem 1rem;" onclick="clearWordOrder('+idx+')">지우기 / Clear</button>'+
+        '<span class="wo-feedback" id="wo-fb-'+idx+'"></span>'+
+      '</div>';
+    c.appendChild(div);
+    var pool=div.querySelector('#wo-pool-'+idx);
+    shuffle(item.tokens.slice()).forEach(function(tok){
+      var b=document.createElement('button'); b.className='wo-token'; b.textContent=tok;
+      b.onclick=function(){ moveToken(b, idx); };
+      pool.appendChild(b);
+    });
+  });
+}
+function moveToken(btn, idx) {
+  var slot=document.getElementById('wo-slot-'+idx), pool=document.getElementById('wo-pool-'+idx);
+  if (btn.parentNode===pool) slot.appendChild(btn); else pool.appendChild(btn);
+}
+function clearWordOrder(idx) {
+  var slot=document.getElementById('wo-slot-'+idx), pool=document.getElementById('wo-pool-'+idx);
+  Array.prototype.slice.call(slot.children).forEach(function(b){ pool.appendChild(b); });
+  document.getElementById('wo-fb-'+idx).textContent='';
+}
+function checkWordOrder(idx) {
+  var slot=document.getElementById('wo-slot-'+idx), fb=document.getElementById('wo-fb-'+idx);
+  var built=Array.prototype.slice.call(slot.children).map(function(b){return b.textContent;}).join(' ');
+  var answer=slot.dataset.answer;
+  if (built===answer){
+    fb.textContent='\u2713 정답! Correct!'; fb.className='wo-feedback ok';
+    if (!slot.dataset.done){ slot.dataset.done='1'; woCompleted++; updateWoBadge(); }
+    Speaker.speakText(answer);
+    try { StudentDB.saveExercise(9,'wordOrder',{completed:woCompleted,total:woTotal}); } catch(e){}
+  } else {
+    fb.textContent='\u2717 다시 시도하세요 / Try again'; fb.className='wo-feedback no';
+  }
+}
+function updateWoBadge() {
+  var b=document.getElementById('wo-score-badge'); if(b) b.textContent=woCompleted+' / '+woTotal+' 완성';
+}
+</script>
+</body>
+</html>
